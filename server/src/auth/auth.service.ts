@@ -1,15 +1,12 @@
-import {
-  ConflictException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { ExistingUserDTO } from 'src/user/dtos/existing-user.dto';
+import { ConflictException, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
+import { ExistingUserDTO } from 'src/user/dtos/existing-user.dto';
 import { NewUserDTO } from 'src/user/dtos/new-user.dto';
 import { UserDetails } from 'src/user/user-details.interface';
 import { UserService } from 'src/user/user.service';
+import { AuthUserDTO, AuthUserWithTokenDTO } from './auth-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +19,7 @@ export class AuthService {
     return bcrypt.hash(password, 12);
   }
 
-  async register(user: Readonly<NewUserDTO>): Promise<UserDetails | any> {
+  async register(user: Readonly<NewUserDTO>): Promise<AuthUserWithTokenDTO> {
     const { name, email, password } = user;
 
     const existingUser = await this.userService.findByEmail(email);
@@ -35,7 +32,12 @@ export class AuthService {
 
     const newUser = await this.userService.create(name, email, hashedPassword);
 
-    return this.userService._getUserDetails(newUser);
+    const jwt = await this.jwtService.signAsync(user, {
+      secret: process.env.JWT_SECRET,
+    });
+
+    const registredUser = this.userService._getUserDetails(newUser);
+    return { registredUser, token: jwt };
   }
 
   async doesPasswordMatch(
@@ -69,9 +71,7 @@ export class AuthService {
     return this.userService._getUserDetails(user);
   }
 
-  async login(
-    existingUser: ExistingUserDTO,
-  ): Promise<{ email: string; token: string }> {
+  async login(existingUser: ExistingUserDTO): Promise<AuthUserDTO> {
     const { email, password } = existingUser;
 
     const user = await this.validateUser(email, password);
@@ -83,6 +83,10 @@ export class AuthService {
     const jwt = await this.jwtService.signAsync(user, {
       secret: process.env.JWT_SECRET,
     });
-    return { email, token: jwt };
+    return this.toAuthUserDTO(email, jwt);
+  }
+
+  toAuthUserDTO(email: string, token: string): AuthUserDTO {
+    return { token, email };
   }
 }
