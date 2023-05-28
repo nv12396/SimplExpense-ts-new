@@ -3,6 +3,15 @@ import Modal from "react-modal";
 
 import { Form } from "../../../components/Form/Form";
 import { InputField } from "../../../components/Form/InputField";
+import { SelectField } from "../../../components/Form/SelectField";
+import { useGetCategories } from "../../categories/api/getCategories";
+import { useCreateTransaction } from "../api/createTransaction";
+import { useDeleteTransaction } from "../api/deleteTransaction";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+
+import { Category } from "../../categories/types";
+import { CreateTransactionDTO } from "../types";
+import { UseEditTransaction } from "../api/editTransaction";
 
 const customStyles = {
   overlay: {
@@ -20,63 +29,158 @@ const customStyles = {
   },
 };
 const schema = z.object({
-  email: z.string().min(1, "Email is required").email(),
-  password: z
-    .string({ required_error: "Password is required" })
-    .min(8, "Password must be 8 characters long"),
+  name: z.string().min(1, "Name is required"),
+  type: z.string().min(1, "Name is required"),
+  amount: z.number().min(1, "Please enter amount"),
+  category: z.string().min(1, "Category is required"),
+  date: z.date({ required_error: "Date is required" }),
 });
 
-type AddTransactionsValues = {
-  email: string;
-  password: string;
+export type AddTransactionsValues = {
+  id?: string | undefined;
+  name: string;
+  amount: number;
+  category: Category;
+  date: string;
 };
 
 type AddTransactionModalPropsType = {
   addTransactionModalIsOpen: boolean;
   AddTransactionCloseModal: () => void;
+  existingTransaction?: AddTransactionsValues | null;
 };
 
 export const AddTransactionModal = ({
   addTransactionModalIsOpen,
   AddTransactionCloseModal,
+  existingTransaction,
 }: AddTransactionModalPropsType) => {
+  const { data: categories } = useGetCategories();
+
+  const createTransactionMutation = useCreateTransaction();
+
+  const { mutateAsync: deleteTransaction } = useDeleteTransaction();
+
+  const { mutateAsync: editTransaction } = UseEditTransaction();
+
+  const transactionType = [
+    {
+      _id: "1",
+      name: "EXPENSE",
+    },
+    {
+      _id: "2",
+      name: "INCOME",
+    },
+  ];
+
   return (
     <Modal
       isOpen={addTransactionModalIsOpen}
       onRequestClose={AddTransactionCloseModal}
       style={customStyles}
-      contentLabel="Example Modal"
+      ariaHideApp={false}
     >
-      <button onClick={AddTransactionCloseModal}>close</button>
-      <div>I am a modal</div>
+      <div className="flex justify-between items-center mb-4 border-round">
+        {existingTransaction ? <p>Edit Transaction</p> : <p>Add Transaction</p>}
+        <div className="w-5 cursor-pointer" onClick={AddTransactionCloseModal}>
+          <XMarkIcon />
+        </div>
+      </div>
       <div>
-        <Form<AddTransactionsValues, typeof schema>
-          onSubmit={() => console.log("")}
+        <Form<CreateTransactionDTO["data"], typeof schema>
+          onSubmit={async (values) => {
+            if (!existingTransaction) {
+              await createTransactionMutation.mutateAsync({ data: values });
+            } else {
+              await editTransaction({
+                id: existingTransaction.id,
+                transaction: values,
+              });
+            }
+          }}
           schema={schema}
         >
           {({ register, formState }) => (
             <div className="flex flex-col gap-4">
               <InputField
                 type="text"
-                placeholder="Please enter your email"
-                className="w-full max-w-xs"
-                registration={register("email")}
-                error={formState.errors["email"]}
+                placeholder="Please enter transaction name"
+                className="w-full"
+                registration={register("name")}
+                error={formState.errors["name"]}
+                defaultValue={existingTransaction?.name}
               />
-              <InputField
-                type="password"
-                placeholder="Please enter your password"
-                className="w-full max-w-xs"
-                registration={register("password")}
-                error={formState.errors["password"]}
-              />
-              <p className="text-end text-sm font-bold text-secondaryGreen mt-2 cursor-pointer">
-                Forgot password?
-              </p>
-              <div>
-                <button className="btn w-full bg-secondaryGreen text-black hover:bg-green-400 my-4">
-                  LOG IN
+
+              <div className="flex justify-between w-full min-w-full gap-4 items-center">
+                <div className="basis-1/2">
+                  <SelectField
+                    options={categories}
+                    placeholder="Category"
+                    error={formState.errors["category"]}
+                    registration={register("category")}
+                    className="mb-3 h-[45px] basis-1/2"
+                    type="CATEGORY"
+                    defaultValue={existingTransaction?.category.name}
+                  />
+                </div>
+                <div className="basis-1/2">
+                  <SelectField
+                    options={transactionType}
+                    placeholder="Type"
+                    error={formState.errors["type"]}
+                    registration={register("type")}
+                    className="mb-3 h-[45px] basis-1/2"
+                    type="TYPE"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-between items-center gap-4">
+                <div className="basis-1/2">
+                  <InputField
+                    type="tel"
+                    placeholder="Amount"
+                    className="w-full"
+                    registration={register("amount", { valueAsNumber: true })}
+                    error={formState.errors["amount"]}
+                    defaultValue={existingTransaction?.amount}
+                  />
+                </div>
+                <div className="basis-1/2">
+                  <InputField
+                    type="date"
+                    placeholder="Date"
+                    className="w-full"
+                    registration={register("date", { valueAsDate: true })}
+                    error={formState.errors["date"]}
+                    defaultValue={existingTransaction?.date?.slice(1, 10)}
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-around gap-4">
+                <button
+                  className="btn bg-secondaryGreen text-black hover:bg-green-400 my-4 basis-2/5"
+                  type="submit"
+                >
+                  {existingTransaction ? (
+                    <p>Edit Transaction</p>
+                  ) : (
+                    <p>Add Transaction</p>
+                  )}
                 </button>
+                {existingTransaction && (
+                  <button
+                    className="btn bg-[red] text-black hover:bg-green-400 my-4 basis-2/5"
+                    onClick={() =>
+                      deleteTransaction({
+                        transactionId: existingTransaction.id,
+                      })
+                    }
+                  >
+                    Delete TRANSACTION
+                  </button>
+                )}
               </div>
             </div>
           )}

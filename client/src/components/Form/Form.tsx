@@ -34,6 +34,7 @@ export const Form = <
 }: FormProps<TFormValues, Schema>) => {
   const methods = useForm<TFormValues>({
     ...options,
+
     resolver: schema && zodResolver(schema),
   });
 

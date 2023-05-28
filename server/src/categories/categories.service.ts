@@ -13,12 +13,21 @@ export class CategoriesService {
     private categoriesModel: Model<CategoriesDocument>,
   ) {}
 
-  async findCategoryById(id: string): Promise<CategoriesDocument> {
-    return await this.categoriesModel.findById(id);
+  getCategoryDetails(category: CategoriesDocument): CategoriesDTO {
+    return {
+      _id: category._id,
+      name: category.name,
+    };
   }
 
-  async findAllCategories(): Promise<CategoriesDocument[]> {
-    return await this.categoriesModel.find({});
+  async findCategoryById(id: string): Promise<CategoriesDTO> {
+    const category = await this.categoriesModel.findById(id);
+    return this.getCategoryDetails(category);
+  }
+
+  async findAllCategories(): Promise<CategoriesDTO[]> {
+    const categories = await this.categoriesModel.find({});
+    return categories.map((category) => this.getCategoryDetails(category));
   }
 
   async createCategory(category: CategoriesDTO): Promise<CategoriesDocument> {

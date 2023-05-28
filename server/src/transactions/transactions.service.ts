@@ -23,6 +23,7 @@ export class TransactionsService {
       type: transaction.type,
       category: transaction.category,
       user: transaction.user,
+      date: transaction.date,
     };
   }
 
@@ -31,8 +32,13 @@ export class TransactionsService {
     return this.getTransactionDetails(transactions);
   }
 
-  async findAllTransactions(): Promise<TransactionDetailsDTO[]> {
-    const transactions = await this.transactionsModel.find({});
+  async findAllTransactions(
+    userId: MongoIdDTO,
+  ): Promise<TransactionDetailsDTO[]> {
+    const transactions = await this.transactionsModel
+      .find({ user: userId })
+      .populate('category')
+      .exec();
     return transactions.map((transaction) =>
       this.getTransactionDetails(transaction),
     );
@@ -40,14 +46,16 @@ export class TransactionsService {
 
   async createTransaction(
     transactions: TransactionsDTO,
+    userId,
   ): Promise<TransactionsDocument> {
-    const { name, amount, category, user, type } = transactions;
+    const { name, amount, category, type, date } = transactions;
     const newTransaction = await this.transactionsModel.create({
       name,
       amount,
       category,
-      user,
+      user: userId,
       type,
+      date,
     });
     return await newTransaction.save();
   }

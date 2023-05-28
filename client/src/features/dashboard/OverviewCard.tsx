@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { AiOutlineWallet } from "react-icons/ai";
 
 type OverviewCardPropsType = {
   title: string;
@@ -14,7 +15,7 @@ export const OverviewCard = ({
   return (
     <div
       className={clsx(
-        "flex flex-col  p-4 basis-1/3 ml-8 items-center my-2",
+        "flex flex-col p-4 basis-1/5 ml-8 items-center my-2 bg-primary gap-4 rounded-md",
         className
       )}
     >

@@ -102,7 +102,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
     <div className="flex max-h-screen bg-primary">
       <Sidebar />
       <div className="flex rounded-xl bg-secondary w-full m-4">
-        <ContentSidebar />
+        {/* <ContentSidebar /> */}
         <div className="w-full">{children}</div>
       </div>
     </div>

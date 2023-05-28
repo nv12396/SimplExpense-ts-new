@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { Document, Types, SchemaTypes } from 'mongoose';
+import { Document, Types, SchemaTypes, Date } from 'mongoose';
 import { User } from 'src/user/user.schema';
 import { Categories } from 'src/categories/categories.schema';
 
@@ -27,6 +27,9 @@ export class Transactions {
 
   @Prop({ required: true, type: SchemaTypes.ObjectId, ref: User.name })
   user: Types.ObjectId;
+
+  @Prop({ required: true, type: Date })
+  date: Date;
 }
 
 export const TransactionsSchema = SchemaFactory.createForClass(Transactions);

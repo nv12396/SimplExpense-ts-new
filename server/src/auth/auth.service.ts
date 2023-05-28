@@ -71,7 +71,7 @@ export class AuthService {
     return this.userService._getUserDetails(user);
   }
 
-  async login(existingUser: ExistingUserDTO): Promise<AuthUserDTO> {
+  async login(existingUser: ExistingUserDTO): Promise<AuthUserWithTokenDTO> {
     const { email, password } = existingUser;
 
     const user = await this.validateUser(email, password);
@@ -83,10 +83,10 @@ export class AuthService {
     const jwt = await this.jwtService.signAsync(user, {
       secret: process.env.JWT_SECRET,
     });
-    return this.toAuthUserDTO(email, jwt);
+    return this.toAuthUserDTO(user, jwt);
   }
 
-  toAuthUserDTO(email: string, token: string): AuthUserDTO {
-    return { token, email };
+  toAuthUserDTO(user: UserDetails, token: string): AuthUserWithTokenDTO {
+    return { token, registredUser: user };
   }
 }

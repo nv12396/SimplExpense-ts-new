@@ -6,17 +6,19 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 type TransactionsCardTypeProps = {
   name: string;
   amount: number;
-  description: string;
-  date: Date;
+  category: string;
+  date: string;
   type: string;
+  AddTransactionModalIsOpen: () => void;
 };
 
 export const TransactionsCard = ({
   name,
   amount,
-  description,
+  category,
   date,
   type,
+  AddTransactionModalIsOpen,
 }: TransactionsCardTypeProps) => {
   return (
     <div className="w-full min-w-full flex border-b-2 border-gray-700 py-4 text-base">
@@ -33,7 +35,7 @@ export const TransactionsCard = ({
           <p>{amount}</p>
         </div>
       </div>
-      <div className="basis-2/5">{description}</div>
+      <div className="basis-2/5">{category}</div>
       <div className="basis-1/5 flex justify-between px-4">
         <div className="flex gap-2">
           <div className="w-4 mt-1 text-secondaryGreen">
@@ -41,7 +43,10 @@ export const TransactionsCard = ({
           </div>
           <p>{moment(date).format("D. MMMM YYYY.")}</p>
         </div>
-        <div className="mt-1 text-secondaryGreen cursor-pointer">
+        <div
+          className="mt-1 text-secondaryGreen cursor-pointer"
+          onClick={AddTransactionModalIsOpen}
+        >
           <BiDotsVerticalRounded />
         </div>
       </div>

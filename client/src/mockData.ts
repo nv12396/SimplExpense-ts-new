@@ -70,3 +70,10 @@ export const transactions = [
     type: "INCOME",
   },
 ];
+
+export const categories = [
+  { id: 1, value: "Groceries" },
+  { id: 2, value: "Entertainment" },
+  { id: 3, value: "Transportation" },
+  { id: 4, value: "Utilities" },
+];

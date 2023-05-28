@@ -1,5 +1,5 @@
 import { MongoIdDTO } from 'src/dtos/dtos';
-import { Types } from 'mongoose';
+import { Date, Types } from 'mongoose';
 
 export class TransactionsDTO {
   name: string;
@@ -7,6 +7,7 @@ export class TransactionsDTO {
   category: MongoIdDTO;
   user: MongoIdDTO;
   type: 'EXPENSE' | 'INCOME';
+  date: Date;
 }
 
 export class TransactionDetailsDTO {
@@ -16,4 +17,5 @@ export class TransactionDetailsDTO {
   category: Types.ObjectId;
   user: Types.ObjectId;
   type: 'EXPENSE' | 'INCOME';
+  date: Date;
 }
