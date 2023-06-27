@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { FunnelIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 
 import { TransactionsCard } from "./TransactionsCard";
 import { AddTransactionModal } from "../modals/AddTransactionModal";
 import { useGetTransactions } from "../api/getTransactions";
-import { Transaction } from "../types";
 
-export const TransactionTable = () => {
+import { Transaction, TransactionTableProps } from "../types";
+
+export const TransactionTable = ({ className }: TransactionTableProps) => {
+  const [sort, setSort] = useState("newest");
   const [addTransactionModalIsOpen, setAddTransactionModalIsOpen] =
     useState(false);
   const [transactionToEdit, setTransactionToEdit] =
@@ -20,34 +23,79 @@ export const TransactionTable = () => {
     setAddTransactionModalIsOpen(false);
   };
 
-  const { data: transactions } = useGetTransactions();
+  const { data: transactions, refetch } = useGetTransactions({
+    sortBy: sort,
+  });
 
-  console.log("transactionsss are", transactions);
-
+  console.log("transactions to edit", transactions);
   return (
-    <div className="flex items-center justify-center">
-      <div className="min-w-full w-full flex flex-col mt-8">
+    <div className="flex items-center justify-center mt-16 md:mt-12">
+      <div className="min-w-full w-full flex flex-col md:mt-8 md:h-[60vh] md:min-h-[60vh]">
         <div className="flex justify-between">
           <div className="flex gap-2 cursor-pointer items-center justify-center">
-            <div className="w-4 text-secondaryGreen">
-              <FunnelIcon />
+            <div className="dropdown">
+              <label
+                tabIndex={0}
+                className="btn m-1 bg-[#f7f7f7] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f7f7f7]"
+              >
+                <div className="w-5 text-blue-400">
+                  <FunnelIcon />
+                </div>
+                <p className="text-sm md:text-base text-gray-500">FILTERS</p>
+              </label>
+              <ul className="p-2 shadow-xl menu dropdown-content bg-white rounded-box w-52 text-blue-400 text-sm md:text-base">
+                <li>
+                  <button
+                    className="text-start"
+                    onClick={() => {
+                      setSort("lowestAmount");
+                    }}
+                  >
+                    <p>Amount Lowest to Highest</p>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="text-start"
+                    onClick={() => {
+                      setSort("highestAmount");
+                    }}
+                  >
+                    Amount Highest to Lowest
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      setSort("oldest");
+                    }}
+                  >
+                    Oldest
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      setSort("newest");
+                    }}
+                  >
+                    Newest
+                  </button>
+                </li>
+              </ul>
             </div>
-            <p className="text-base text-gray-500">FILTERS</p>
-          </div>
-          <div
-            onClick={() => {
-              setTransactionToEdit(null);
-              AddTransactionModalIsOpen();
-            }}
-            className="btn w-32 min-w-32 bg-secondaryGreen text-black hover:bg-primaryGreen"
-          >
-            + ADD
           </div>
         </div>
-        <div className="min-h-64 h-64 max-h-64 overflow-y-scroll mt-4 3xl:h-72 3xl:min-h-72 3xl:max-h-72">
+        <div
+          className={clsx(
+            "md:min-h-[50vh] md:h-[50vh] md:max-h-[50vh] min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto md:items-stretch",
+            className
+          )}
+        >
           {transactions?.map((transaction) => (
             <div onClick={() => setTransactionToEdit(transaction)}>
               <TransactionsCard
+                key={transaction.id}
                 name={transaction.name}
                 amount={transaction.amount}
                 category={transaction.category.name}
@@ -64,6 +112,17 @@ export const TransactionTable = () => {
             addTransactionModalIsOpen={addTransactionModalIsOpen}
             existingTransaction={transactionToEdit}
           />
+        </div>
+        <div className="items-center justify-center mt-6 hidden md:flex">
+          <div
+            onClick={() => {
+              setTransactionToEdit(null);
+              AddTransactionModalIsOpen();
+            }}
+            className="btn w-28 border-blue-400 text-blue-400 hover:bg-[#eff6ff] hover:border-blue-400 bg-white"
+          >
+            + ADD
+          </div>
         </div>
       </div>
     </div>

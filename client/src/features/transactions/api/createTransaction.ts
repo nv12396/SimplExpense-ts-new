@@ -1,3 +1,4 @@
+import { TRANSACTION_KEYS } from "./getTransactions";
 import { useMutation } from "@tanstack/react-query";
 
 import { axios } from "../../../lib/axios";
@@ -18,22 +19,8 @@ export const useCreateTransaction = ({
   config,
 }: UseCreateTransactionOptions = {}) => {
   return useMutation({
-    onMutate: async (newTransaction) => {
-      await queryClient.cancelQueries(["transactions"]);
-
-      const previousTransactions = queryClient.getQueryData<Transaction[]>([
-        "transactions",
-      ]);
-
-      queryClient.setQueryData(
-        ["transactions"],
-        [...(previousTransactions || []), newTransaction.data]
-      );
-
-      return { previousTransactions };
-    },
     onSuccess: () => {
-      queryClient.invalidateQueries(["transactions"]);
+      queryClient.invalidateQueries([TRANSACTION_KEYS.fetchTransactions()]);
     },
     ...config,
     mutationFn: createTransaction,

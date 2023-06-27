@@ -1,0 +1,21 @@
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+.rdrMonthsVertical {
+  font-size: 14px;
+}
+.rdrSelected,
+.rdrInRange,
+.rdrStartEdge,
+.rdrEndEdge {
+  background-color: #afd2fc;
+  color: #afd2fc;
+  border: 0px;
+}
+
+@media screen and (max-width: 390px) {
+  .rdrMonthsVertical {
+    font-size: 10px;
+  }
+}

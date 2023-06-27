@@ -7,22 +7,31 @@ import { Transaction } from "../types";
 
 export const TRANSACTION_KEYS = {
   fetchTransactions: () => ["transactions", "transaction"],
+  sortBy: () => ["newest", "oldest"],
 };
 
-export const getTransactions = (): Promise<Transaction[]> => {
-  return axios.get("transactions");
+export const getTransactions = (sortBy = "newest"): Promise<Transaction[]> => {
+  return axios.get(`transactions/get-transactions/${sortBy}`);
 };
 
 type QueryFnType = typeof getTransactions;
 
 type UseTransactionsOptions = {
   config?: QueryConfig<QueryFnType>;
+  sortBy?: string;
 };
 
-export const useGetTransactions = ({ config }: UseTransactionsOptions = {}) => {
+export const useGetTransactions = ({
+  config,
+  sortBy,
+}: UseTransactionsOptions = {}) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    queryKey: TRANSACTION_KEYS.fetchTransactions(),
-    queryFn: () => getTransactions(),
+    queryKey: [
+      TRANSACTION_KEYS.fetchTransactions(),
+      TRANSACTION_KEYS.sortBy(),
+      sortBy,
+    ],
+    queryFn: () => getTransactions(sortBy),
   });
 };

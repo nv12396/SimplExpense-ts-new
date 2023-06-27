@@ -8,10 +8,18 @@ import { Transaction } from "./../types/index";
 
 const deleteTransaction = ({
   transactionId,
+  amount,
+  categoryId,
+  type,
 }: {
   transactionId: string | undefined;
+  amount: number;
+  categoryId: string;
+  type: "INCOME" | "EXPENSE";
 }) => {
-  return axios.delete(`transactions/delete/${transactionId}`);
+  return axios.delete(
+    `transactions/delete/${transactionId}/${amount}/${type}/${categoryId}`
+  );
 };
 
 type UseDeleteTransactionOptions = {
@@ -22,25 +30,12 @@ export const useDeleteTransaction = ({
   config,
 }: UseDeleteTransactionOptions = {}) => {
   return useMutation({
-    onMutate: async (deletedTransaction) => {
-      await queryClient.cancelQueries(TRANSACTION_KEYS.fetchTransactions());
-
-      const previousTransactions = queryClient.getQueryData<Transaction[]>(
-        TRANSACTION_KEYS.fetchTransactions()
-      );
-
-      queryClient.setQueryData(
-        TRANSACTION_KEYS.fetchTransactions(),
-        previousTransactions?.filter(
-          (transaction) => transaction.id !== deletedTransaction.transactionId
-        )
-      );
-
-      return { previousTransactions };
-    },
     ...config,
     onSuccess: () => {
-      queryClient.invalidateQueries(TRANSACTION_KEYS.fetchTransactions());
+      queryClient.invalidateQueries([
+        TRANSACTION_KEYS.fetchTransactions(),
+        TRANSACTION_KEYS.sortBy(),
+      ]);
     },
     mutationFn: deleteTransaction,
   });

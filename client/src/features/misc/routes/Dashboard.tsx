@@ -2,27 +2,31 @@ import ContentLayout from "../../../components/Layout/ContentLayout";
 import { OverviewBox } from "../../dashboard/OverviewBox";
 import { TransactionTable } from "../../transactions/components/TransactionTable";
 import { TransactionChart } from "../../charts/TransactionChart";
+import { Spendings } from "../../spendings/component/Spendings";
 
 export const Dashboard = () => {
   return (
-    <div className="text-gray-200 text-xl m-4">
-      <ContentLayout title="SimpleExpense - Dashboard">
-        <div className="flex flex-col min-h-full h-[90vh] justify-between">
-          <p className="mb-4">Overview</p>
-
-          <div className="basis-1/3">
+    <ContentLayout title="SimpleExpense - Dashboard">
+      <div className="container mx-auto px-2">
+        <div className="flex flex-col justify-between">
+          {/* <div className="basis-1/3 flex justify-center">
             <OverviewBox />
-          </div>
-          <div className="flex flex-col md:flex-row justify-around items-center">
+          </div> */}
+          <div className="flex flex-col md:flex-row md:justify-around md:items-center">
             <div className="basis-1/2">
               <TransactionTable />
             </div>
-            <div className="basis-1/2">
-              <TransactionChart />
+            <div className="basis-1/2 flex flex-col gap-12 mt-16 lg:mt-24">
+              <div className="basis-1/2">
+                <TransactionChart />
+              </div>
+              <div className="basis-1/2">
+                <Spendings />
+              </div>
             </div>
           </div>
         </div>
-      </ContentLayout>
-    </div>
+      </div>
+    </ContentLayout>
   );
 };

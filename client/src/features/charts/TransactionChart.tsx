@@ -10,13 +10,13 @@ const data = [
 
 export const TransactionChart = () => {
   return (
-    <div className="flex items-center justify-center">
-      <div className="my-4 ml-8 w-full">
-        <ResponsiveContainer width="85%" height={200}>
+    <div className="flex items-center justify-center container mx-auto md:w-[80%]">
+      <div className="w-full">
+        <ResponsiveContainer width="100%" height={180}>
           <AreaChart data={data}>
             <defs>
               <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#4ECB71" />
+                <stop offset="0%" stopColor="#60a5fa" />
                 <stop offset="100%" stopColor="#000000" />
                 <stop offset="50%" stopColor="#333333" />
               </linearGradient>

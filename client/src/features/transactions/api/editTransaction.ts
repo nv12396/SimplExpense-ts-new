@@ -19,28 +19,12 @@ export const UseEditTransaction = ({
   config,
 }: UseEditTransactionOptions = {}) => {
   return useMutation({
-    onMutate: async (editedTransaction) => {
-      await queryClient.cancelQueries(TRANSACTION_KEYS.fetchTransactions());
-      const previousTransaction = queryClient.getQueryData<Transaction>(
-        TRANSACTION_KEYS.fetchTransactions()
-      );
-
-      queryClient.setQueryData(
-        [TRANSACTION_KEYS.fetchTransactions(), editedTransaction.id],
-        {
-          ...previousTransaction,
-          ...editedTransaction.transaction,
-          id: editedTransaction.id,
-        }
-      );
-
-      return { previousTransaction };
-    },
     ...config,
     onSuccess: () =>
-      queryClient.invalidateQueries(TRANSACTION_KEYS.fetchTransactions()),
+      queryClient.invalidateQueries([
+        TRANSACTION_KEYS.fetchTransactions(),
+        TRANSACTION_KEYS.sortBy(),
+      ]),
     mutationFn: editTransaction,
   });
 };
-
-/// go add edit functionality to component

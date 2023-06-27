@@ -4,6 +4,8 @@ import { Outlet } from "react-router-dom";
 import { MainLayout } from "../components/Layout/MainLayout";
 import { Dashboard } from "../features/misc/routes/Dashboard";
 import { Proba } from "../features/misc/routes/Proba";
+import { Transactions } from "../features/transactions/page/Transactions";
+import { Budget } from "../features/budget/pages/Budget";
 
 const App = () => {
   return (
@@ -33,6 +35,14 @@ export const protectedRoutes = [
       {
         path: "/proba",
         element: <Proba />,
+      },
+      {
+        path: "/transactions",
+        element: <Transactions />,
+      },
+      {
+        path: "/budget",
+        element: <Budget />,
       },
     ],
   },

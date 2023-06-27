@@ -1,3 +1,5 @@
+import ContentLayout from "../../../components/Layout/ContentLayout";
+
 export const Proba = () => {
-  return <div>Proba</div>;
+  return <ContentLayout title={"idemoo"}>Proba</ContentLayout>;
 };

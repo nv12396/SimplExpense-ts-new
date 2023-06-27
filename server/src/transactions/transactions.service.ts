@@ -1,16 +1,24 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 
 import { TransactionsDocument } from './transactions.schema';
-import { TransactionsDTO, TransactionDetailsDTO } from './transactions.dto';
+import {
+  TransactionsDTO,
+  TransactionDetailsDTO,
+  deleteTransactionDTO,
+} from './transactions.dto';
 import { MongoIdDTO } from 'src/dtos/dtos';
+import { BudgetService } from 'src/budget/budget.service';
+import { TotalAmountService } from 'src/total-amount/total-amount.service';
 
 @Injectable()
 export class TransactionsService {
   constructor(
     @InjectModel('Transactions')
     private transactionsModel: Model<TransactionsDocument>,
+    private budgetService: BudgetService,
+    private totalAmountService: TotalAmountService,
   ) {}
 
   getTransactionDetails(
@@ -34,14 +42,79 @@ export class TransactionsService {
 
   async findAllTransactions(
     userId: MongoIdDTO,
+    sortBy: string,
   ): Promise<TransactionDetailsDTO[]> {
+    let sortOptions = {};
+    if (sortBy === 'highestAmount') {
+      sortOptions = { amount: -1 };
+    } else if (sortBy === 'lowestAmount') {
+      sortOptions = { amount: 1 };
+    } else if (sortBy === 'oldest') {
+      sortOptions = { date: 1 };
+    } else if (sortBy === 'newest') {
+      sortOptions = { date: -1 };
+    }
+
     const transactions = await this.transactionsModel
       .find({ user: userId })
       .populate('category')
-      .exec();
+      .sort(sortOptions);
     return transactions.map((transaction) =>
       this.getTransactionDetails(transaction),
     );
+  }
+
+  async findAllExpensesCurrentMonth(userId: string): Promise<number> {
+    const type = 'EXPENSE';
+    const today = new Date();
+    const startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+    const user = new mongoose.Types.ObjectId(userId);
+
+    const pipeline = [
+      {
+        $match: {
+          user,
+          type,
+          date: { $gte: startDate, $lt: endDate },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          total: { $sum: '$amount' },
+        },
+      },
+    ];
+    const expenses = await this.transactionsModel.aggregate(pipeline).exec();
+    return expenses[0]?.total;
+  }
+  async findAllIncomeCurrentMonth(userId: string): Promise<number> {
+    const type = 'INCOME';
+    const today = new Date();
+    const startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+    const user = new mongoose.Types.ObjectId(userId);
+
+    const pipeline = [
+      {
+        $match: {
+          user,
+          type,
+          date: { $gte: startDate, $lt: endDate },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          total: { $sum: '$amount' },
+        },
+      },
+    ];
+    const incomes = await this.transactionsModel.aggregate(pipeline).exec();
+    return incomes[0]?.total;
   }
 
   async createTransaction(
@@ -57,16 +130,36 @@ export class TransactionsService {
       type,
       date,
     });
+    const updatedBudget = await this.budgetService.updateBudgetCurrentAmount({
+      amount,
+      categoryId: category,
+      type,
+    });
     return await newTransaction.save();
   }
 
-  async deleteTransaction(
-    transactionId: MongoIdDTO,
-  ): Promise<TransactionDetailsDTO> {
-    const { id } = transactionId;
+  async deleteTransaction({
+    id,
+    amount,
+    categoryId,
+    type,
+    userId,
+  }: deleteTransactionDTO): Promise<TransactionDetailsDTO> {
+    const amountToDetract = type === 'EXPENSE' ? amount : -+amount;
     const transactionCategory = await this.transactionsModel.findByIdAndDelete(
       id,
     );
+    const updatedBudget = await this.budgetService.updateBudgetCurrentAmount({
+      amount: -+amount,
+      categoryId,
+      type,
+    });
+    const deletedAmount =
+      await this.totalAmountService.updateTotalAmountOnTransactionDelete(
+        userId,
+        amountToDetract,
+      );
+
     return this.getTransactionDetails(transactionCategory);
   }
 
@@ -76,6 +169,7 @@ export class TransactionsService {
   ): Promise<TransactionDetailsDTO> {
     const { id } = transactionsId;
     const { name, amount, type, user, category } = transaction;
+    const date = new Date();
     const updatedTransaction = await this.transactionsModel.findByIdAndUpdate(
       id,
       {
@@ -83,6 +177,7 @@ export class TransactionsService {
         amount,
         type,
         user,
+        date,
         category,
       },
       { new: true },

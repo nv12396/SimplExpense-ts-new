@@ -37,7 +37,6 @@ export const LoginForm = () => {
           <div className="flex flex-col gap-4 mt-12">
             <Form<LoginValues, typeof schema>
               onSubmit={(values) => {
-                console.log(values);
                 login(values, {
                   onSuccess: () => {
                     navigate("/");

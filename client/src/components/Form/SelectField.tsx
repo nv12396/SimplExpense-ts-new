@@ -30,16 +30,31 @@ export const SelectField = (props: SelectFieldProps) => {
         placeholder={placeholder}
         name="category"
         className={clsx(
-          "mt-1 block w-full pl-3 pr-10 py-2 text-base h-11 bg-secondaryGreen text-black focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
+          "select max-w-xs mt-1 block w-full pl-3 pr-10 py-2 text-base h-11 text-black focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
           className
         )}
         defaultValue={defaultValue}
         {...registration}
       >
         {options?.map(({ _id, name }) => (
-          <option key={_id} value={type === "CATEGORY" ? _id : name}>
-            {name}
-          </option>
+          <>
+            <option value="" disabled selected>
+              {defaultValue
+                ? defaultValue
+                : type === "CATEGORY"
+                ? "Select category"
+                : "Select type"}
+            </option>
+
+            <option
+              className="bg-white"
+              key={_id}
+              value={defaultValue || type === "CATEGORY" ? _id : name}
+              placeholder={defaultValue}
+            >
+              {name}
+            </option>
+          </>
         ))}
       </select>
       {error?.message && (

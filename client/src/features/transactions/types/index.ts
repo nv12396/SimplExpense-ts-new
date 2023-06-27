@@ -36,3 +36,23 @@ export type UpdateTransactionDTO = {
   id: string | undefined;
   transaction: EditTransactionDTO;
 };
+
+export type TransactionTableProps = {
+  className?: string;
+};
+
+export type AddTransactionsValues = {
+  id?: string | undefined;
+  name: string;
+  amount: number;
+  category: Category;
+  date: string;
+};
+export type ExistingTransactionDTO = {
+  id?: string | undefined;
+  name: string;
+  amount: number;
+  category: Category;
+  date: string;
+  type: "INCOME" | "EXPENSE";
+};

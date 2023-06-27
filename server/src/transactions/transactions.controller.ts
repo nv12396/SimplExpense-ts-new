@@ -22,10 +22,26 @@ export class TransactionsController {
   constructor(private transactionsService: TransactionsService) {}
 
   @UseGuards(JwtGuard)
-  @Get('/')
-  findAllTransactions(@Request() req): Promise<TransactionDetailsDTO[]> {
+  @Get('/get-transactions/:sortBy')
+  findAllTransactions(
+    @Request() req,
+    @Param('sortBy') sortBy: string,
+  ): Promise<TransactionDetailsDTO[]> {
     const { id: userId } = req.user;
-    return this.transactionsService.findAllTransactions(userId);
+    return this.transactionsService.findAllTransactions(userId, sortBy);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('/expenses/')
+  findAllExpenses(@Request() req): Promise<number> {
+    const { id: userId } = req.user;
+    return this.transactionsService.findAllExpensesCurrentMonth(userId);
+  }
+  @UseGuards(JwtGuard)
+  @Get('/income/')
+  findAllIncome(@Request() req): Promise<number> {
+    const { id: userId } = req.user;
+    return this.transactionsService.findAllIncomeCurrentMonth(userId);
   }
 
   @UseGuards(JwtGuard)
@@ -39,9 +55,22 @@ export class TransactionsController {
   }
 
   @UseGuards(JwtGuard)
-  @Delete('/delete/:id')
-  deleteTransaction(@Param() id: MongoIdDTO): Promise<TransactionDetailsDTO> {
-    return this.transactionsService.deleteTransaction(id);
+  @Delete('/delete/:id/:amount/:type/:categoryId')
+  deleteTransaction(
+    @Param('id') id: MongoIdDTO,
+    @Param('amount') amount: number,
+    @Param('type') type: 'EXPENSE' | 'INCOME',
+    @Param('categoryId') categoryId: MongoIdDTO,
+    @Request() req,
+  ): Promise<TransactionDetailsDTO> {
+    const { id: userId } = req.user;
+    return this.transactionsService.deleteTransaction({
+      id,
+      amount,
+      categoryId,
+      type,
+      userId,
+    });
   }
 
   @UseGuards(JwtGuard)

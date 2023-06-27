@@ -16,7 +16,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         <ToastContainer
           toastStyle={{ backgroundColor: "#272638", color: "white" }}
         />
-        <Router>{children}</Router>;
+        <Router>{children}</Router>
       </QueryClientProvider>
     </HelmetProvider>
   );

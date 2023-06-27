@@ -21,11 +21,14 @@ export const InputField = (props: InputFieldProps) => {
   } = props;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex">
       <input
         placeholder={placeholder}
         type={type}
-        className={clsx("input input-bordered mb-2", className)}
+        className={clsx(
+          "input input-bordered mb-2 bg-white text-black",
+          className
+        )}
         {...registration}
         defaultValue={defaultValue}
       />
