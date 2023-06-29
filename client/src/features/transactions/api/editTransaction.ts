@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { MutationConfig, queryClient } from "./../../../lib/react-query";
-import { Transaction, UpdateTransactionDTO } from "./../types/index";
+import { MutationConfig, queryClient } from "../../../lib/react-query";
+import { Transaction, UpdateTransactionDTO } from "../types/index";
 import { axios } from "../../../lib/axios";
 import { TRANSACTION_KEYS } from "./getTransactions";
 

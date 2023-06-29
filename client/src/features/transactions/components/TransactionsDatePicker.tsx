@@ -5,6 +5,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import "./CustomCalendar.css";
 import { useDateRangeStore } from "../../../stores/date-range";
+import { useDateRangeFilterStore } from "../../../stores/date-range-filter";
 
 export const TransactionsDatePicker = () => {
   const { setStartDate, setEndDate } = useDateRangeStore();
@@ -16,10 +17,16 @@ export const TransactionsDatePicker = () => {
     },
   ]);
 
+  const { setStartFilterDate, setEndFilterDate } = useDateRangeFilterStore();
+
   const handleSelect = (ranges: any) => {
     setDateRange([ranges.selection]);
     setStartDate(ranges.selection.startDate);
+    setStartFilterDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
+    setEndFilterDate(ranges.selection.endDate);
+    // console.log(typeof moment(ranges.selection.startDate).format("MMM Do YY"));
+    // console.log(typeof new Date(ranges.selection.startDate));
   };
 
   return (

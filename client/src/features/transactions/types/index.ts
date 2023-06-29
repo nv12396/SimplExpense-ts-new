@@ -56,3 +56,12 @@ export type ExistingTransactionDTO = {
   date: string;
   type: "INCOME" | "EXPENSE";
 };
+
+export type TransactionDateDTO = {
+  startDateYear: number | undefined;
+  startDateMonth: number | undefined;
+  startDateDay: number | undefined;
+  endDateYear: number | undefined;
+  endDateMonth: number | undefined;
+  endDateDay: number | undefined;
+};

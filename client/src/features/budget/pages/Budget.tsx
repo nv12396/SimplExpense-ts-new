@@ -16,8 +16,8 @@ export const Budget = () => {
   const { data: budgets } = useGetBudget();
   return (
     <ContentLayout title="Budget">
-      <div className="flex flex-col container md:mx-auto gap-6 md:w-[50vw]">
-        <div className="mt-20 px-6 md:px-0 md:grid md:grid-cols-2 md:gap-8 flex flex-col gap-4 overflow-y-scroll max-h-[55vh]">
+      <div className="flex flex-col container md:mx-auto gap-6 md:w-[75vw]">
+        <div className="mt-20 px-6 md:px-0 md:grid md:grid-cols-3 md:gap-8 flex flex-col gap-4 overflow-y-scroll max-h-[55vh]">
           {budgets?.map((budget: BudgetDTO) => (
             <div onClick={() => setBudgetToEdit(budget)}>
               <BudgetCard

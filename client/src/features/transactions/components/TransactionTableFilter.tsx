@@ -11,7 +11,10 @@ import { findTransactionsWithinDateRange } from "../api/findTransactionsWithinDa
 import { useQuery } from "@tanstack/react-query";
 import { useDateRangeStore } from "../../../stores/date-range";
 
-export const TransactionTable = ({ className }: TransactionTableProps) => {
+export const TransactionTableFilter = ({
+  className,
+}: TransactionTableProps) => {
+  const { startDate, endDate } = useDateRangeStore();
   const [sort, setSort] = useState("newest");
   const [addTransactionModalIsOpen, setAddTransactionModalIsOpen] =
     useState(false);
@@ -26,9 +29,33 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
     setAddTransactionModalIsOpen(false);
   };
 
+  const dates = {
+    startDateYear: startDate?.getFullYear(),
+    startDateMonth: startDate?.getMonth(),
+    startDateDay: startDate?.getDate(),
+    endDateYear: endDate?.getFullYear(),
+    endDateMonth: endDate?.getMonth(),
+    endDateDay: endDate?.getDate(),
+  };
+
   const { data: transactions } = useGetTransactions({
     sortBy: sort,
   });
+
+  const { data: filteredTransactions } = useQuery(
+    [
+      TRANSACTION_KEYS.fetchTransactions(),
+      TRANSACTION_KEYS.sortBy(),
+      dates.startDateDay,
+    ],
+    () => {
+      if (dates.startDateDay !== undefined) {
+        return findTransactionsWithinDateRange(dates);
+      } else {
+        return transactions;
+      }
+    }
+  );
 
   return (
     <div className="flex items-center justify-center mt-16 md:mt-12">
@@ -94,7 +121,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
             className
           )}
         >
-          {transactions?.map((transaction: Transaction) => (
+          {filteredTransactions?.map((transaction: Transaction) => (
             <div onClick={() => setTransactionToEdit(transaction)}>
               <TransactionsCard
                 key={transaction.id}

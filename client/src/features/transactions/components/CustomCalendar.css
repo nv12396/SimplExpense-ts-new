@@ -13,6 +13,22 @@
   color: #afd2fc;
   border: 0px;
 }
+.rdrDateDisplayWrapper {
+  display: none;
+}
+/* .rdrDateDisplayWrapper {
+  width: 500px;
+}
+.rdrMonthsVertical {
+  width: 500px;
+}
+.rdrMonth {
+  width: 500px;
+  height: 300px;
+}
+.rdrDays {
+  height: 300px;
+} */
 
 @media screen and (max-width: 390px) {
   .rdrMonthsVertical {

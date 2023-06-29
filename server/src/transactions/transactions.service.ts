@@ -7,6 +7,8 @@ import {
   TransactionsDTO,
   TransactionDetailsDTO,
   deleteTransactionDTO,
+  SpendingsDTO,
+  TransactionWithinDateRangeDTO,
 } from './transactions.dto';
 import { MongoIdDTO } from 'src/dtos/dtos';
 import { BudgetService } from 'src/budget/budget.service';
@@ -115,6 +117,100 @@ export class TransactionsService {
     ];
     const incomes = await this.transactionsModel.aggregate(pipeline).exec();
     return incomes[0]?.total;
+  }
+
+  async findTopSpendings(userId: string): Promise<SpendingsDTO[]> {
+    const type = 'EXPENSE';
+    const today = new Date();
+    const startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+    const user = new mongoose.Types.ObjectId(userId);
+
+    const pipeline = [
+      {
+        $match: {
+          user,
+          type,
+          date: { $gte: startDate, $lt: endDate },
+        },
+      },
+      {
+        $group: {
+          _id: '$category',
+          total: { $sum: '$amount' },
+        },
+      },
+      {
+        $sort: {
+          total: -1 as -1,
+        },
+      },
+      {
+        $limit: 3,
+      },
+      {
+        $lookup: {
+          from: 'categories',
+          localField: '_id',
+          foreignField: '_id',
+          as: 'category',
+        },
+      },
+      {
+        $unwind: '$category',
+      },
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'category._id',
+          foreignField: '_id',
+          as: 'categoryDetails',
+        },
+      },
+      {
+        $unwind: '$categoryDetails',
+      },
+      {
+        $project: {
+          total: 1,
+          category: {
+            _id: '$category._id',
+            name: '$categoryDetails.name',
+          },
+        },
+      },
+    ];
+    const spendings = await this.transactionsModel.aggregate(pipeline).exec();
+
+    return spendings;
+  }
+
+  async findAllTransactionsWithinDateRange(
+    userId: string,
+    startDateYear: number,
+    startDateMonth: number,
+    startDateDay: number,
+    endDateYear: number,
+    endDateMonth: number,
+    endDateDay: number,
+  ): Promise<TransactionDetailsDTO[]> {
+    const startDate = new Date(startDateYear, startDateMonth, startDateDay);
+    const endDate = new Date(endDateYear, endDateMonth, endDateDay);
+
+    console.log(startDate, endDate);
+
+    const transactions = await this.transactionsModel
+      .find({
+        user: userId,
+        date: { $gte: startDate, $lt: endDate },
+      })
+      .populate('category')
+      .sort({ date: -1 });
+
+    return transactions.map((transaction) =>
+      this.getTransactionDetails(transaction),
+    );
   }
 
   async createTransaction(

@@ -5,7 +5,7 @@ import storage from "../utils/storage";
 import { API_URL } from "../config";
 
 export const axios = Axios.create({
-  baseURL: API_URL,
+  baseURL: "http://localhost:3000/api/",
 });
 
 axios.interceptors.request.use(

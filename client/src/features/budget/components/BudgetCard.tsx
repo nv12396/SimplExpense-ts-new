@@ -6,8 +6,8 @@ import { useAddBudgetModal } from "../../../stores/budgetModal";
 
 const BudgetCard = ({ name, category, amount, limit }: BudgetDTO) => {
   const menuStyle = clsx({
-    ["radial-progress text-blue-400"]: amount / limit < 0.4,
-    ["radial-progress text-red-400"]: amount / limit > 0.4,
+    ["radial-progress text-blue-400"]: amount / limit < 0.8,
+    ["radial-progress text-red-400"]: amount / limit > 0.8,
   });
   const { addBudgetOpenModal } = useAddBudgetModal();
   return (
@@ -21,7 +21,6 @@ const BudgetCard = ({ name, category, amount, limit }: BudgetDTO) => {
             </p>
           </div>
           <div className="flex gap-4">
-            <div className="flex items-center">{limit} RSD</div>
             <div
               className="flex justify-center items-center cursor-pointer"
               onClick={addBudgetOpenModal}
@@ -37,6 +36,10 @@ const BudgetCard = ({ name, category, amount, limit }: BudgetDTO) => {
           >
             {Math.round((amount / limit) * 100)} %
           </div>
+        </div>
+        <div className="flex justify-between">
+          <p className="m-2">Amount: {amount}</p>
+          <p className="m-2">Limit: {limit}</p>
         </div>
       </div>
     </div>

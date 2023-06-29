@@ -14,7 +14,11 @@ import { TransactionsService } from './transactions.service';
 import { TransactionsDocument } from './transactions.schema';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 
-import { TransactionsDTO, TransactionDetailsDTO } from './transactions.dto';
+import {
+  TransactionsDTO,
+  TransactionDetailsDTO,
+  SpendingsDTO,
+} from './transactions.dto';
 import { MongoIdDTO } from 'src/dtos/dtos';
 
 @Controller('transactions')
@@ -42,6 +46,38 @@ export class TransactionsController {
   findAllIncome(@Request() req): Promise<number> {
     const { id: userId } = req.user;
     return this.transactionsService.findAllIncomeCurrentMonth(userId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('/spendings/')
+  findTopSpendings(@Request() req): Promise<SpendingsDTO[]> {
+    const { id: userId } = req.user;
+    return this.transactionsService.findTopSpendings(userId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get(
+    '/dateRange/:startDateYear/:startDateMonth/:startDateDay/:endDateYear/:endDateMonth/:endDateDay',
+  )
+  findAllTransactionsWithinDateRange(
+    @Request() req,
+    @Param('startDateYear') startDateYear: number,
+    @Param('startDateMonth') startDateMonth: number,
+    @Param('startDateDay') startDateDay: number,
+    @Param('endDateYear') endDateYear: number,
+    @Param('endDateMonth') endDateMonth: number,
+    @Param('endDateDay') endDateDay: number,
+  ): Promise<TransactionDetailsDTO[]> {
+    const { id: userId } = req.user;
+    return this.transactionsService.findAllTransactionsWithinDateRange(
+      userId,
+      startDateYear,
+      startDateMonth,
+      startDateDay,
+      endDateYear,
+      endDateMonth,
+      endDateDay,
+    );
   }
 
   @UseGuards(JwtGuard)

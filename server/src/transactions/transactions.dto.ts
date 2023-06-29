@@ -33,3 +33,14 @@ export class deleteTransactionDTO {
   type: 'INCOME' | 'EXPENSE';
   userId?: MongoIdDTO;
 }
+
+export class SpendingsDTO {
+  category: MongoIdDTO;
+  total: number;
+}
+
+export class TransactionWithinDateRangeDTO {
+  startDate: Date;
+  endDate: Date;
+  userId: string;
+}
