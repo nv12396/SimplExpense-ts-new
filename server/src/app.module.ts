@@ -11,9 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { TransactionsModule } from './transactions/transactions.module';
 import { CategoriesModule } from './categories/categories.module';
-import { BudgetController } from './budget/budget.controller';
 import { BudgetModule } from './budget/budget.module';
-import { BudgetService } from './budget/budget.service';
 import { TotalAmountModule } from './total-amount/total-amount.module';
 
 @Module({

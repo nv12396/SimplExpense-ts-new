@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
 
@@ -8,7 +8,6 @@ import {
   TransactionDetailsDTO,
   deleteTransactionDTO,
   SpendingsDTO,
-  TransactionWithinDateRangeDTO,
 } from './transactions.dto';
 import { MongoIdDTO } from 'src/dtos/dtos';
 import { BudgetService } from 'src/budget/budget.service';
@@ -197,8 +196,6 @@ export class TransactionsService {
   ): Promise<TransactionDetailsDTO[]> {
     const startDate = new Date(startDateYear, startDateMonth, startDateDay);
     const endDate = new Date(endDateYear, endDateMonth, endDateDay);
-
-    console.log(startDate, endDate);
 
     const transactions = await this.transactionsModel
       .find({

@@ -2,7 +2,7 @@ import Axios from "axios";
 import { toast } from "react-toastify";
 
 import storage from "../utils/storage";
-import { API_URL } from "../config";
+// import { API_URL } from "../config";
 
 export const axios = Axios.create({
   baseURL: "http://localhost:3000/api/",

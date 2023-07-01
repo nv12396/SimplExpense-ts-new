@@ -7,10 +7,11 @@ import { SelectField } from "../../../components/Form/SelectField";
 import { useGetCategories } from "../../categories/api/getCategories";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-import { AddBudgetDTO, BudgetDTO, CreateBudgetDTO } from "../type";
+import { BudgetDTO, CreateBudgetDTO } from "../type";
 import { useCreateBudget } from "../api/createBudget";
 import { useUpdateBudget } from "../api/updateBudget";
 import { useDeleteBudget } from "../api/deleteBudget";
+import { Dispatch, SetStateAction } from "react";
 
 const customStyles = {
   overlay: {
@@ -38,6 +39,7 @@ type AddBudgetModalPropsType = {
   addBudgetModalIsOpen: boolean;
   AddBudgetCloseModal: () => void;
   existingBudget?: BudgetDTO | null;
+  setBudgetToEdit?: Dispatch<SetStateAction<BudgetDTO | null>>;
 };
 
 export const AddBudgetModal = ({
@@ -87,6 +89,7 @@ export const AddBudgetModal = ({
                 data: { limit: values.limit },
               });
               AddBudgetCloseModal();
+              // setBudgetToEdit(null);
             }
           }}
           schema={schema}

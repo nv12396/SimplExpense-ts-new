@@ -1,5 +1,4 @@
 import ContentLayout from "../../../components/Layout/ContentLayout";
-import { TransactionTable } from "../components/TransactionTable";
 import { TransactionTableFilter } from "../components/TransactionTableFilter";
 import { TransactionsDatePicker } from "../components/TransactionsDatePicker";
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 export const OverviewBoxDemo = () => {
   return (
     <div className="stats shadow">

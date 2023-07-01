@@ -1,8 +1,5 @@
-import { UserResponse } from "../features/auth/types";
-import {
-  LoginCredentialsDTO,
-  loginWithEmailAndPassword,
-} from "../features/auth/api/login";
+import { LoginCredentialsDTO, UserResponse } from "../features/auth/types";
+import { loginWithEmailAndPassword } from "../features/auth/api/login";
 import {
   RegisterCredentialsDTO,
   registerWithEmailAndPassword,

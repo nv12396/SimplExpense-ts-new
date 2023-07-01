@@ -4,8 +4,6 @@ import { axios } from "../../../lib/axios";
 import { MutationConfig, queryClient } from "../../../lib/react-query";
 import { TRANSACTION_KEYS } from "./getTransactions";
 
-import { Transaction } from "./../types/index";
-
 const deleteTransaction = ({
   transactionId,
   amount,

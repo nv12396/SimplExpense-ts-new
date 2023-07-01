@@ -20,9 +20,9 @@ export class TotalAmountService {
       amount: totalAmount.amount,
     };
   }
-  async getTotalAmount(user: MongoIdDTO): Promise<TotalAmountDTO> {
+  async getTotalAmount(user: MongoIdDTO): Promise<TotalAmountDocument> {
     const totalAmount = await this.totalAmountModel.findOne({ user });
-    return this.getTotalAmountDetails(totalAmount);
+    return totalAmount;
   }
 
   async createTotalAmount(
@@ -37,12 +37,11 @@ export class TotalAmountService {
   }
 
   async updateTotalAmount(
-    id: MongoIdDTO,
+    user: MongoIdDTO,
     amount: number,
   ): Promise<TotalAmountDTO> {
-    console.log(id, amount);
-    const totalAmount = await this.totalAmountModel.findByIdAndUpdate(
-      id,
+    const totalAmount = await this.totalAmountModel.findOneAndUpdate(
+      { user },
       {
         amount,
       },
@@ -55,7 +54,6 @@ export class TotalAmountService {
     userId: MongoIdDTO,
     amount: number,
   ): Promise<TotalAmountDocument> {
-    console.log(userId, amount);
     const totalAmount = await this.totalAmountModel.findOneAndUpdate(
       {
         user: userId,

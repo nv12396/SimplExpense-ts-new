@@ -10,6 +10,12 @@ const BudgetCard = ({ name, category, amount, limit }: BudgetDTO) => {
     ["radial-progress text-red-400"]: amount / limit > 0.8,
   });
   const { addBudgetOpenModal } = useAddBudgetModal();
+
+  const style = {
+    "--value": (amount / limit) * 100,
+    "--size": "8rem",
+  } as React.CSSProperties;
+
   return (
     <div className="flex justify-between gap-20 text-black bg-white shadow-md rounded-xl p-4">
       <div className="flex flex-col w-full ">
@@ -30,10 +36,7 @@ const BudgetCard = ({ name, category, amount, limit }: BudgetDTO) => {
           </div>
         </div>
         <div className="w-full mb-4 flex items-center justify-center">
-          <div
-            className={menuStyle}
-            style={{ "--value": (amount / limit) * 100, "--size": "8rem" }}
-          >
+          <div className={menuStyle} style={style}>
             {Math.round((amount / limit) * 100)} %
           </div>
         </div>

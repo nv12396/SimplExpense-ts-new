@@ -3,7 +3,6 @@ import { useMutation } from "@tanstack/react-query";
 
 import { axios } from "../../../lib/axios";
 import { MutationConfig, queryClient } from "../../../lib/react-query";
-import { TOTAL_AMOUNT_KEYS } from "./getTotalAmount";
 
 import { TotalAmountDTO, UpdateTotalAmountDTO } from "../type";
 

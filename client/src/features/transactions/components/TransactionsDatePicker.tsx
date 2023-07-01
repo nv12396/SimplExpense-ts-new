@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
@@ -25,8 +25,6 @@ export const TransactionsDatePicker = () => {
     setStartFilterDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
     setEndFilterDate(ranges.selection.endDate);
-    // console.log(typeof moment(ranges.selection.startDate).format("MMM Do YY"));
-    // console.log(typeof new Date(ranges.selection.startDate));
   };
 
   return (

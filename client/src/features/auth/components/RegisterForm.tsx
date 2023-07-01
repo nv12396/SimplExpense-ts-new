@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { GrFacebook } from "react-icons/gr";
 import { toast } from "react-toastify";
@@ -38,7 +38,6 @@ export const RegisterForm = () => {
           <div className="flex flex-col gap-4 mt-12">
             <Form<RegisterValues, typeof schema>
               onSubmit={(values) => {
-                console.log(values);
                 register(values, {
                   onSuccess: () => {
                     navigate("/");

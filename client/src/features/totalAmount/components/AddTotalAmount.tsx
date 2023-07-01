@@ -4,7 +4,6 @@ import Modal from "react-modal";
 import { Form } from "../../../components/Form/Form";
 import { InputField } from "../../../components/Form/InputField";
 import { useCreateTotalAmount } from "../api/createTotalAmount";
-import { useGetTotalAmount } from "../api/getTotalAmount";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import { CreateTotalAmountDTO, TotalAmountDTO } from "../type";

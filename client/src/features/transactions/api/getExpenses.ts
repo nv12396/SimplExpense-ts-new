@@ -15,7 +15,7 @@ type UseGetExpenses = {
   config?: QueryConfig<QueryFnType>;
 };
 
-export const UseGetExpenses = ({ config }: UseGetExpenses = {}) => {
+export const useGetExpenses = ({ config }: UseGetExpenses = {}) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
     queryKey: [

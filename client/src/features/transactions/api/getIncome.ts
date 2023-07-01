@@ -15,7 +15,7 @@ type UseGetIncomeOptions = {
   config?: QueryConfig<QueryFnType>;
 };
 
-export const UseGetIncome = ({ config }: UseGetIncomeOptions = {}) => {
+export const useGetIncome = ({ config }: UseGetIncomeOptions = {}) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
     queryKey: [

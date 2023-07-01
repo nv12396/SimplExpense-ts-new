@@ -4,8 +4,8 @@ import { OverviewCard } from "./OverviewCard";
 import { useGetTotalAmount } from "../totalAmount/api/getTotalAmount";
 import { AddTotalAmount } from "../totalAmount/components/AddTotalAmount";
 import { useAddTotalAmountModal } from "../../stores/totalAmountModal";
-import { UseGetExpenses } from "../transactions/api/getExpenses";
-import { UseGetIncome } from "../transactions/api/getIncome";
+import { useGetExpenses } from "../transactions/api/getExpenses";
+import { useGetIncome } from "../transactions/api/getIncome";
 
 import { TotalAmountDTO } from "../totalAmount/type";
 
@@ -21,8 +21,8 @@ export const OverviewBox = () => {
 
   const { data: totalAmount } = useGetTotalAmount({});
 
-  const { data: totalIncome } = UseGetIncome();
-  const { data: totalExpenses } = UseGetExpenses();
+  const { data: totalIncome } = useGetIncome();
+  const { data: totalExpenses } = useGetExpenses();
 
   return (
     <div className="md:w-full w-[90%] flex h-32 rounded-box font-extrabold gap-4 md:gap-12 items-center justify-center md:justify-center absolute top-[-60px] container mx-auto md:px-2">

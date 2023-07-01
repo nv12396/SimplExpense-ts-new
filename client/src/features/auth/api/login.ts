@@ -1,7 +1,6 @@
 import { axios } from "../../../lib/axios";
 
-import { UserResponse } from "../types";
-import { LoginCredentialsDTO } from "../types";
+import { LoginCredentialsDTO, UserResponse } from "../types";
 
 export const loginWithEmailAndPassword = (
   data: LoginCredentialsDTO

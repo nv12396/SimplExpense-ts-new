@@ -10,7 +10,12 @@ export class TotalAmount {
   @Prop({ required: true })
   amount: number;
 
-  @Prop({ required: true, type: SchemaTypes.ObjectId, ref: User.name })
+  @Prop({
+    required: true,
+    unique: true,
+    type: SchemaTypes.ObjectId,
+    ref: User.name,
+  })
   user: Types.ObjectId;
 }
 

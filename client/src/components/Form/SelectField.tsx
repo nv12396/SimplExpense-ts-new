@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { UseFormRegisterReturn, FieldError } from "react-hook-form";
 
 import { Category } from "../../features/categories/types";
-import { TransactionType } from "../../features/transactions/types";
 
 type SelectFieldProps = {
   options: Category[] | undefined;

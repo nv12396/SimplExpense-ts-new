@@ -1,4 +1,4 @@
-import { NavLink, useLocation, useSearchParams } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import { useAddTransactionModal } from "../../stores/transactionModal";
 import { AddTransactionModal } from "../../features/transactions/modals/AddTransactionModal";

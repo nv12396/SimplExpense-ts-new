@@ -62,57 +62,59 @@ export const TransactionTableFilter = ({
       <div className="min-w-full w-full flex flex-col md:mt-8 md:h-[60vh] md:min-h-[60vh]">
         <div className="flex justify-between">
           <div className="flex gap-2 cursor-pointer items-center justify-center">
-            <div className="dropdown">
-              <label
-                tabIndex={0}
-                className="btn m-1 bg-[#f7f7f7] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f7f7f7]"
-              >
-                <div className="w-5 text-blue-400">
-                  <FunnelIcon />
-                </div>
-                <p className="text-sm md:text-base text-gray-500">FILTERS</p>
-              </label>
-              <ul className="p-2 shadow-xl menu dropdown-content bg-white rounded-box w-52 text-blue-400 text-sm md:text-base">
-                <li>
-                  <button
-                    className="text-start"
-                    onClick={() => {
-                      setSort("lowestAmount");
-                    }}
-                  >
-                    <p>Amount Lowest to Highest</p>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="text-start"
-                    onClick={() => {
-                      setSort("highestAmount");
-                    }}
-                  >
-                    Amount Highest to Lowest
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => {
-                      setSort("oldest");
-                    }}
-                  >
-                    Oldest
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => {
-                      setSort("newest");
-                    }}
-                  >
-                    Newest
-                  </button>
-                </li>
-              </ul>
-            </div>
+            {(filteredTransactions ?? [])?.length > 0 && (
+              <div className="dropdown">
+                <label
+                  tabIndex={0}
+                  className="btn m-1 bg-[#f7f7f7] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f7f7f7]"
+                >
+                  <div className="w-5 text-blue-400">
+                    <FunnelIcon />
+                  </div>
+                  <p className="text-sm md:text-base text-gray-500">FILTERS</p>
+                </label>
+                <ul className="p-2 shadow-xl menu dropdown-content bg-white rounded-box w-52 text-blue-400 text-sm md:text-base">
+                  <li>
+                    <button
+                      className="text-start"
+                      onClick={() => {
+                        setSort("lowestAmount");
+                      }}
+                    >
+                      <p>Amount Lowest to Highest</p>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="text-start"
+                      onClick={() => {
+                        setSort("highestAmount");
+                      }}
+                    >
+                      Amount Highest to Lowest
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => {
+                        setSort("oldest");
+                      }}
+                    >
+                      Oldest
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => {
+                        setSort("newest");
+                      }}
+                    >
+                      Newest
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
         <div
@@ -121,6 +123,13 @@ export const TransactionTableFilter = ({
             className
           )}
         >
+          {(filteredTransactions ?? [])?.length === 0 && (
+            <div className="flex flex-col justify-center items-center">
+              <p className="text-xl text-center mt-20 mb-8 text-gray-500">
+                There is no transactions in selected period.
+              </p>
+            </div>
+          )}
           {filteredTransactions?.map((transaction: Transaction) => (
             <div onClick={() => setTransactionToEdit(transaction)}>
               <TransactionsCard

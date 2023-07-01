@@ -6,7 +6,7 @@ import { TRANSACTION_KEYS } from "../../../transactions/api/getTransactions";
 
 import { SpendingsDTO } from "../../type";
 
-export const getTopSpendings = (): Promise<SpendingsDTO> => {
+export const getTopSpendings = (): Promise<SpendingsDTO[]> => {
   return axios.get("/transactions/spendings");
 };
 

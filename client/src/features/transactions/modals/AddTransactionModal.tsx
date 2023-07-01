@@ -10,11 +10,7 @@ import { useDeleteTransaction } from "../api/deleteTransaction";
 import { UseEditTransaction } from "../api/editTransaction";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-import {
-  AddTransactionsValues,
-  CreateTransactionDTO,
-  ExistingTransactionDTO,
-} from "../types";
+import { CreateTransactionDTO, ExistingTransactionDTO } from "../types";
 import moment from "moment";
 import { useUpdateTotalAmount } from "../../totalAmount/api/updateTotalAmount";
 import { useGetTotalAmount } from "../../totalAmount/api/getTotalAmount";
@@ -118,7 +114,6 @@ export const AddTransactionModal = ({
                 transaction: values,
               });
               AddTransactionCloseModal();
-              console.log("edittt", values);
             }
           }}
           schema={schema}
