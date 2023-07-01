@@ -31,7 +31,7 @@ export const Budget = () => {
           ))}
         </div>
         <div
-          className="btn w-32 border-blue-400 text-blue-400 hover:bg-[#eff6ff] hover:border-blue-400 bg-white mx-auto"
+          className="hidden md:block btn w-32 border-blue-400 text-blue-400 hover:bg-[#eff6ff] hover:border-blue-400 bg-white mx-auto"
           onClick={() => {
             setBudgetToEdit(null);
             addBudgetOpenModal();

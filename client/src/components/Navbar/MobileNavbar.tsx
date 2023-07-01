@@ -1,7 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 
 import { useAddTransactionModal } from "../../stores/transactionModal";
 import { AddTransactionModal } from "../../features/transactions/modals/AddTransactionModal";
+import { useAddBudgetModal } from "../../stores/budgetModal";
+import { AddBudgetModal } from "../../features/budget/components/AddBudgetModal";
 
 export const MobileNavbar = () => {
   const {
@@ -9,6 +11,12 @@ export const MobileNavbar = () => {
     addTransactionCloseModal,
     addTransactionOpenModal,
   } = useAddTransactionModal();
+
+  const { addBudgetModalIsOpen, addBudgetCloseModal, addBudgetOpenModal } =
+    useAddBudgetModal();
+
+  const search = useLocation();
+  console.log(search.pathname);
   return (
     <div className="block md:hidden fixed z-50 w-full h-20 max-w-lg -translate-x-1/2 bg-[#f7f7f7] bottom-0 left-1/2 shadow-md">
       <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
@@ -82,7 +90,13 @@ export const MobileNavbar = () => {
         </div>
         <div className="flex items-center justify-center">
           <button
-            onClick={addTransactionOpenModal}
+            onClick={() => {
+              if (search.pathname === "/budget") {
+                addBudgetOpenModal();
+              } else {
+                addTransactionOpenModal();
+              }
+            }}
             data-tooltip-target="tooltip-new"
             type="button"
             className="inline-flex items-center justify-center w-14 shadow-xl h-14 font-medium bg-[#292d32] rounded-full "
@@ -182,6 +196,10 @@ export const MobileNavbar = () => {
         <AddTransactionModal
           AddTransactionCloseModal={addTransactionCloseModal}
           addTransactionModalIsOpen={addTransactionModalIsOpen}
+        />
+        <AddBudgetModal
+          AddBudgetCloseModal={addBudgetCloseModal}
+          addBudgetModalIsOpen={addBudgetModalIsOpen}
         />
       </div>
     </div>
