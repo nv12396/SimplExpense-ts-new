@@ -54,12 +54,12 @@ export const OverviewBox = () => {
         amount={totalIncome || 0}
         iconClasses="bg-[#eff6ff] text-[#4688f6]"
       />
-      <OverviewCard
+      {/* <OverviewCard
         title="SAVINGS"
         className="hidden md:flex basis-1/4"
         amount={498}
         iconClasses="bg-[#eff6ff] text-[#4688f6]"
-      />
+      /> */}
       <AddTotalAmount
         AddTotalAmountCloseModal={addTotalAmountCloseModal}
         addTotalAmountModalIsOpen={addTotalAmountModalIsOpen}

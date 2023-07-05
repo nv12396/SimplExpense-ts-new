@@ -1,22 +1,22 @@
 import moment from "moment";
 
 export const Hero = () => {
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  // const monthNames = [
+  //   "January",
+  //   "February",
+  //   "March",
+  //   "April",
+  //   "May",
+  //   "June",
+  //   "July",
+  //   "August",
+  //   "September",
+  //   "October",
+  //   "November",
+  //   "December",
+  // ];
 
-  const currentMonth = new Date().getMonth();
+  // const currentMonth = new Date().getMonth();
   const currentDate = moment(new Date()).format("Do MMMM YYYY");
   return (
     <div className="container mx-auto px-4 flex flex-col">
@@ -29,9 +29,9 @@ export const Hero = () => {
         </h1>
         <p className="text-white text-sm pt-2 md:text-lg">{currentDate}</p>
       </div>
-      <h1 className="hidden md:block mt-12 text-2xl font-bold text-white">
+      {/* <h1 className="hidden md:block mt-12 text-2xl font-bold text-white">
         Overview for month {monthNames[currentMonth]}
-      </h1>
+      </h1> */}
     </div>
   );
 };

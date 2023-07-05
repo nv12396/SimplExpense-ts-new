@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { BudgetDTO, EditBudgetDTO } from "../features/budget/type";
+import { EditBudgetDTO } from "../features/budget/type";
 
 type TModal = {
   addBudgetModalIsOpen: boolean;

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { useGetBudget } from "../api/getBudget";
 import BudgetCard from "./BudgetCard";
 import { AddBudgetModal } from "./AddBudgetModal";
