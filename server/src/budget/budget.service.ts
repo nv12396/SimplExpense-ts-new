@@ -84,11 +84,16 @@ export class BudgetService {
     return await newBudget.save();
   }
 
-  async updateBudget(budgetId: MongoIdDTO, limit: number): Promise<BudgetDTO> {
+  async updateBudget(
+    budgetId: MongoIdDTO,
+    limit: number,
+    category: MongoIdDTO,
+  ): Promise<BudgetDTO> {
     const updatedBudget = await this.budgetModel.findByIdAndUpdate(
       budgetId,
       {
         limit,
+        category,
       },
       { new: true },
     );

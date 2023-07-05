@@ -56,6 +56,7 @@ export const LoginForm = () => {
                     className="w-full max-w-xs"
                     registration={register("email")}
                     error={formState.errors["email"]}
+                    iconClass="fa-solid fa-user left-5"
                   />
                   <InputField
                     type="password"
@@ -63,6 +64,7 @@ export const LoginForm = () => {
                     className="w-full max-w-xs"
                     registration={register("password")}
                     error={formState.errors["password"]}
+                    iconClass="fa-solid fa-unlock-keyhole left-5"
                   />
                   <p className="text-end text-sm font-bold text-secondaryGreen mt-2 cursor-pointer">
                     Forgot password?

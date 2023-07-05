@@ -43,7 +43,10 @@ export const AddTotalAmount = ({
   const createTotalAmountMutation = useCreateTotalAmount();
 
   const { mutateAsync: updateTotalAmountMutation } = useUpdateTotalAmount();
-
+  console.log(
+    "from mobile, total amount to edit je",
+    existingTotalAmount?.amount
+  );
   return (
     <Modal
       isOpen={addTotalAmountModalIsOpen}
@@ -71,7 +74,7 @@ export const AddTotalAmount = ({
               await createTotalAmountMutation.mutateAsync({ data: values });
               AddTotalAmountCloseModal();
             } else {
-              updateTotalAmountMutation({
+              await updateTotalAmountMutation({
                 id: existingTotalAmount.id,
                 data: values,
               });
@@ -91,6 +94,7 @@ export const AddTotalAmount = ({
                     registration={register("amount", { valueAsNumber: true })}
                     error={formState.errors["amount"]}
                     defaultValue={existingTotalAmount?.amount}
+                    iconClass="fa-solid fa-coins left-5"
                   />
                 </div>
               </div>

@@ -39,3 +39,6 @@ option[value=""][disabled] {
 option {
   color: black;
 }
+.chart path {
+  stroke: none;
+}

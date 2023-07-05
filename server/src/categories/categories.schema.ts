@@ -8,6 +8,9 @@ export type CategoriesDocument = Categories & Document;
 export class Categories {
   @Prop({ required: true })
   name: string;
+
+  @Prop({ required: true })
+  icon: string;
 }
 
 export const CategoriesSchema = SchemaFactory.createForClass(Categories);

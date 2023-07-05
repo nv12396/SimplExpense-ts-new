@@ -7,7 +7,7 @@ import { SelectField } from "../../../components/Form/SelectField";
 import { useGetCategories } from "../../categories/api/getCategories";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-import { BudgetDTO, CreateBudgetDTO } from "../type";
+import { BudgetDTO, CreateBudgetDTO, EditBudgetDTO } from "../type";
 import { useCreateBudget } from "../api/createBudget";
 import { useUpdateBudget } from "../api/updateBudget";
 import { useDeleteBudget } from "../api/deleteBudget";
@@ -39,13 +39,14 @@ type AddBudgetModalPropsType = {
   addBudgetModalIsOpen: boolean;
   AddBudgetCloseModal: () => void;
   existingBudget?: BudgetDTO | null;
-  setBudgetToEdit?: Dispatch<SetStateAction<BudgetDTO | null>>;
+  addBudgetToEdit: (budget: EditBudgetDTO) => void;
 };
 
 export const AddBudgetModal = ({
   addBudgetModalIsOpen,
   AddBudgetCloseModal,
   existingBudget,
+  addBudgetToEdit,
 }: AddBudgetModalPropsType) => {
   const { data: categories } = useGetCategories();
 
@@ -65,10 +66,25 @@ export const AddBudgetModal = ({
       <div className="flex justify-between items-center mb-4 border-round text-black">
         {existingBudget ? <p>Edit Budget</p> : <p>Add Budget</p>}
         <div
-          className="w-5 cursor-pointer text-black"
+          className="w-5 cursor-pointer text-black mr-6"
           onClick={AddBudgetCloseModal}
         >
-          <XMarkIcon />
+          <button className="btn btn-square text-black bg-[#f7f7f7] border-none border-thin] hover:bg-gray-200">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         </div>
       </div>
       <div>
@@ -83,19 +99,22 @@ export const AddBudgetModal = ({
                 },
               });
               AddBudgetCloseModal();
+              addBudgetToEdit(null);
             } else {
               await editBudget({
                 id: existingBudget.id,
-                data: { limit: values.limit },
+                data: {
+                  limit: values.limit,
+                  category: values.category,
+                },
               });
               AddBudgetCloseModal();
-              // setBudgetToEdit(null);
             }
           }}
           schema={schema}
         >
           {({ register, formState }) => (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               <InputField
                 type="text"
                 placeholder="Please enter budget name"
@@ -103,6 +122,7 @@ export const AddBudgetModal = ({
                 registration={register("name")}
                 error={formState.errors["name"]}
                 defaultValue={existingBudget?.name}
+                iconClass="fa-sharp fa-solid fa-file-signature left-5"
               />
 
               <div className="flex justify-between w-full min-w-full gap-4 items-center">
@@ -115,18 +135,21 @@ export const AddBudgetModal = ({
                     className="mb-3 h-[45px] basis-1/2 bg-blue-400 text-white"
                     type="CATEGORY"
                     defaultValue={existingBudget?.category.name}
+                    errorClass="bottom-[-30px]"
                   />
                 </div>
                 <div className="basis-1/2">
                   <InputField
                     type="tel"
                     placeholder="Limit"
-                    className="w-full"
+                    className="w-full top-0"
                     registration={register("limit", {
                       valueAsNumber: true,
                     })}
                     error={formState.errors["limit"]}
                     defaultValue={existingBudget?.limit}
+                    iconClass="fa-solid fa-coins left-5"
+                    errorClass="bottom-[-35px]"
                   />
                 </div>
               </div>

@@ -1,7 +1,7 @@
 export type TotalAmountDTO = {
   id: string;
   amount: number;
-};
+} | null;
 
 export type CreateTotalAmountDTO = {
   data: {

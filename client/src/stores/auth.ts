@@ -7,5 +7,9 @@ type AuthStore = {
 };
 
 export const useAuthStore = create<AuthStore>(() => ({
-  useAuth: () => storage.getToken(),
+  useAuth: () => {
+    const token = storage.getToken();
+
+    return token;
+  },
 }));

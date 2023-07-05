@@ -7,7 +7,6 @@ export class BudgetDTO {
   amount?: number;
   limit: number;
   category: Types.ObjectId;
-  //   user: Types.ObjectId;
 }
 
 export class AddBudgetDTO {

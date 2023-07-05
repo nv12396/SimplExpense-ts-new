@@ -2,7 +2,6 @@ import { useState } from "react";
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 
-import { TransactionsCard } from "./TransactionsCard";
 import { AddTransactionModal } from "../modals/AddTransactionModal";
 import { TRANSACTION_KEYS, useGetTransactions } from "../api/getTransactions";
 
@@ -10,6 +9,8 @@ import { Transaction, TransactionTableProps } from "../types";
 import { findTransactionsWithinDateRange } from "../api/findTransactionsWithinDateRange";
 import { useQuery } from "@tanstack/react-query";
 import { useDateRangeStore } from "../../../stores/date-range";
+import { Spinner } from "../../../components/Elements/Spinner/Spinner";
+import { TransactionsCard } from "./TransactionCard";
 
 export const TransactionTableFilter = ({
   className,
@@ -42,14 +43,14 @@ export const TransactionTableFilter = ({
     sortBy: sort,
   });
 
-  const { data: filteredTransactions } = useQuery(
+  const { data: filteredTransactions, isLoading } = useQuery(
     [
       TRANSACTION_KEYS.fetchTransactions(),
       TRANSACTION_KEYS.sortBy(),
       dates.startDateDay,
     ],
     () => {
-      if (dates.startDateDay !== undefined) {
+      if (dates.startDateDay) {
         return findTransactionsWithinDateRange(dates);
       } else {
         return transactions;
@@ -119,30 +120,39 @@ export const TransactionTableFilter = ({
         </div>
         <div
           className={clsx(
-            "md:min-h-[50vh] md:h-[50vh] md:max-h-[50vh] min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto md:items-stretch",
+            "md:min-h-[40vh] md:h-[40vh] md:max-h-[40vh] min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto",
             className
           )}
         >
-          {(filteredTransactions ?? [])?.length === 0 && (
+          {!filteredTransactions?.length && !isLoading && (
             <div className="flex flex-col justify-center items-center">
               <p className="text-xl text-center mt-20 mb-8 text-gray-500">
                 There is no transactions in selected period.
               </p>
             </div>
           )}
-          {filteredTransactions?.map((transaction: Transaction) => (
-            <div onClick={() => setTransactionToEdit(transaction)}>
-              <TransactionsCard
-                key={transaction.id}
-                name={transaction.name}
-                amount={transaction.amount}
-                category={transaction.category.name}
-                date={transaction.date}
-                type={transaction.type}
-                AddTransactionModalIsOpen={AddTransactionModalIsOpen}
-              />
+          {isLoading && (
+            <div className="w-full h-48 flex justify-center items-center">
+              <Spinner size="lg" />
             </div>
-          ))}
+          )}
+          {!isLoading &&
+            filteredTransactions?.map((transaction: Transaction) => (
+              <div
+                onClick={() => setTransactionToEdit(transaction)}
+                key={transaction.id}
+              >
+                <TransactionsCard
+                  name={transaction.name}
+                  amount={transaction.amount}
+                  category={transaction.category.name}
+                  date={transaction.date}
+                  type={transaction.type}
+                  icon={transaction.category.icon}
+                  AddTransactionModalIsOpen={AddTransactionModalIsOpen}
+                />
+              </div>
+            ))}
         </div>
         <div>
           <AddTransactionModal

@@ -31,8 +31,9 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 };
 
 const MobileTotalBalance = () => {
-  const [totalAmountToEdit, setTotalAmountToEdit] =
-    useState<TotalAmountDTO | null>(null);
+  const [totalAmountToEdit, setTotalAmountToEdit] = useState<
+    TotalAmountDTO | undefined
+  >(null);
 
   const {
     addTotalAmountOpenModal,
@@ -42,24 +43,28 @@ const MobileTotalBalance = () => {
   const { data: totalAmount } = useGetTotalAmount();
 
   return (
-    <div className="flex flex-col p-8">
+    <div className="flex flex-col p-8 items-center justify-center">
       <p className="text-gray-400 text-lg">TOTAL BALANCE</p>
       <div
         className="flex gap-4"
         onClick={() => {
           if (totalAmount?.amount !== 0) {
-            setTotalAmountToEdit(totalAmount!);
-            console.log("ovo se nalayi u komponenti", totalAmountToEdit);
+            setTotalAmountToEdit(totalAmount);
           } else {
             setTotalAmountToEdit(null);
           }
         }}
       >
-        <p className="text-white text-xl font-bold">$ {totalAmount?.amount}</p>
+        <p className="text-white text-2xl font-bold">$ {totalAmount?.amount}</p>
         <div
           className="w-4 mt-1 cursor-pointer"
           onClick={() => {
-            addTotalAmountOpenModal();
+            if (totalAmount?.amount !== 0) {
+              setTotalAmountToEdit(totalAmount);
+              addTotalAmountOpenModal();
+            } else {
+              setTotalAmountToEdit(null);
+            }
           }}
         >
           {totalAmount?.amount === 0 ? (
@@ -72,7 +77,7 @@ const MobileTotalBalance = () => {
       <AddTotalAmount
         AddTotalAmountCloseModal={addTotalAmountCloseModal}
         addTotalAmountModalIsOpen={addTotalAmountModalIsOpen}
-        existingTotalAmount={totalAmountToEdit!}
+        existingTotalAmount={totalAmountToEdit}
       />
     </div>
   );

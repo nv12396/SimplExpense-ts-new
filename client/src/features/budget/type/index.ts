@@ -7,6 +7,13 @@ export type BudgetDTO = {
   limit: number;
   amount: number;
 };
+export type EditBudgetDTO = {
+  id: string;
+  name: string;
+  category: Category;
+  limit: number;
+  amount: number;
+} | null;
 
 export type AddBudgetDTO = {
   name: string;
@@ -26,5 +33,6 @@ export type UpdateBudgetDTO = {
   id: string;
   data: {
     limit: number;
+    category: string;
   };
 };

@@ -8,7 +8,6 @@ import { useGetCategories } from "../../categories/api/getCategories";
 import { useCreateTransaction } from "../api/createTransaction";
 import { useDeleteTransaction } from "../api/deleteTransaction";
 import { UseEditTransaction } from "../api/editTransaction";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import { CreateTransactionDTO, ExistingTransactionDTO } from "../types";
 import moment from "moment";
@@ -29,11 +28,14 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     background: "#1f1f2c",
     backgroundColor: "#f7f7f7",
+    borderRadius: "10px",
+    maxWidth: "450px",
   },
 };
+
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
-  type: z.string().min(1, "Name is required"),
+  type: z.string().min(1, "Type is required"),
   amount: z.number().min(1, "Please enter amount"),
   category: z.string().min(1, "Category is required"),
   date: z.date({ required_error: "Date is required" }),
@@ -66,10 +68,12 @@ export const AddTransactionModal = ({
     {
       _id: "EXPENSE",
       name: "EXPENSE",
+      icon: "",
     },
     {
       _id: "INCOME",
       name: "INCOME",
+      icon: "",
     },
   ];
 
@@ -83,10 +87,25 @@ export const AddTransactionModal = ({
       <div className="flex justify-between items-center mb-4 border-round text-black">
         {existingTransaction ? <p>Edit Transaction</p> : <p>Add Transaction</p>}
         <div
-          className="w-5 cursor-pointer text-black"
+          className="w-2 cursor-pointer text-black mr-8"
           onClick={AddTransactionCloseModal}
         >
-          <XMarkIcon />
+          <button className="btn btn-square text-black bg-[#f7f7f7] border-none border-thin] hover:bg-gray-200">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         </div>
       </div>
       <div>
@@ -119,7 +138,7 @@ export const AddTransactionModal = ({
           schema={schema}
         >
           {({ register, formState }) => (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               <InputField
                 type="text"
                 placeholder="Please enter transaction name"
@@ -127,6 +146,7 @@ export const AddTransactionModal = ({
                 registration={register("name")}
                 error={formState.errors["name"]}
                 defaultValue={existingTransaction?.name}
+                iconClass="fa-sharp fa-solid fa-file-signature left-5"
               />
 
               <div className="flex justify-between w-full min-w-full gap-4 items-center">
@@ -139,6 +159,7 @@ export const AddTransactionModal = ({
                     className="mb-3 h-[45px] basis-1/2 bg-blue-400 text-white"
                     type="CATEGORY"
                     defaultValue={existingTransaction?.category.name}
+                    errorClass="bottom-[-28px]"
                   />
                 </div>
                 <div className="basis-1/2">
@@ -150,11 +171,12 @@ export const AddTransactionModal = ({
                     className="mb-3 h-[45px] basis-1/2 bg-blue-400 text-white"
                     type="TYPE"
                     defaultValue={existingTransaction?.type}
+                    errorClass="bottom-[-28px]"
                   />
                 </div>
               </div>
-              <div className="flex justify-between items-center gap-4">
-                <div className="basis-1/2">
+              <div className="grid grid-cols-2 justify-between items-center gap-4">
+                <div className="basis-1/2 col-span-1">
                   <InputField
                     type="tel"
                     placeholder="Amount"
@@ -162,20 +184,23 @@ export const AddTransactionModal = ({
                     registration={register("amount", { valueAsNumber: true })}
                     error={formState.errors["amount"]}
                     defaultValue={existingTransaction?.amount}
+                    iconClass="fa-solid fa-coins left-5"
+                    errorClass="bottom-[-35px]"
                   />
                 </div>
 
-                <div className="basis-1/2">
+                <div className="basis-1/2 col-span-1">
                   <InputField
                     type="date"
                     placeholder="Date"
-                    className="w-full"
+                    className="w-full pl-2 text-center"
                     registration={register("date", { valueAsDate: true })}
                     error={formState.errors["date"]}
                     defaultValue={
                       existingTransaction?.date.slice(0, 10) ||
                       moment(new Date()).format("YYYY-MM-DD")
                     }
+                    iconClass="fa-regular fa-calendar right-5"
                   />
                 </div>
               </div>

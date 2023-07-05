@@ -11,6 +11,7 @@ type SelectFieldProps = {
   error: FieldError | undefined;
   registration: Partial<UseFormRegisterReturn>;
   type?: string;
+  errorClass?: string;
 };
 
 export const SelectField = (props: SelectFieldProps) => {
@@ -22,9 +23,10 @@ export const SelectField = (props: SelectFieldProps) => {
     registration,
     error,
     type,
+    errorClass,
   } = props;
   return (
-    <div>
+    <div className="relative">
       <select
         placeholder={placeholder}
         name="category"
@@ -60,7 +62,10 @@ export const SelectField = (props: SelectFieldProps) => {
         <div
           role="alert"
           aria-label={error.message}
-          className="text-sm font-semibold text-red-500"
+          className={clsx(
+            "text-sm font-semibold text-red-500 absolute bottom-[-15px]",
+            errorClass
+          )}
         >
           {error.message}
         </div>

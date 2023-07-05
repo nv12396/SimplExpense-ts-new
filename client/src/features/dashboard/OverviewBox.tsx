@@ -10,8 +10,9 @@ import { useGetIncome } from "../transactions/api/getIncome";
 import { TotalAmountDTO } from "../totalAmount/type";
 
 export const OverviewBox = () => {
-  const [totalAmountToEdit, setTotalAmountToEdit] =
-    useState<TotalAmountDTO | null>(null);
+  const [totalAmountToEdit, setTotalAmountToEdit] = useState<
+    TotalAmountDTO | undefined
+  >(null);
 
   const {
     addTotalAmountModalIsOpen,
@@ -22,6 +23,7 @@ export const OverviewBox = () => {
   const { data: totalAmount } = useGetTotalAmount({});
 
   const { data: totalIncome } = useGetIncome();
+
   const { data: totalExpenses } = useGetExpenses();
 
   return (
@@ -29,7 +31,7 @@ export const OverviewBox = () => {
       <OverviewCard
         onClick={() => {
           if (totalAmount?.amount !== 0) {
-            setTotalAmountToEdit(totalAmount!);
+            setTotalAmountToEdit(totalAmount);
           } else {
             setTotalAmountToEdit(null);
           }
@@ -58,7 +60,6 @@ export const OverviewBox = () => {
         amount={498}
         iconClasses="bg-[#eff6ff] text-[#4688f6]"
       />
-      {/* <OverviewCard title="INCOME" amount={498} /> */}
       <AddTotalAmount
         AddTotalAmountCloseModal={addTotalAmountCloseModal}
         addTotalAmountModalIsOpen={addTotalAmountModalIsOpen}

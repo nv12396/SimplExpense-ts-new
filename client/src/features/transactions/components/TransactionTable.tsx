@@ -3,11 +3,12 @@ import { FunnelIcon } from "@heroicons/react/24/outline";
 // import { MdPlaylistAdd } from "react-icons/md";
 import clsx from "clsx";
 
-import { TransactionsCard } from "./TransactionsCard";
 import { AddTransactionModal } from "../modals/AddTransactionModal";
 import { useGetTransactions } from "../api/getTransactions";
 
 import { Transaction, TransactionTableProps } from "../types";
+import { Spinner } from "../../../components/Elements/Spinner/Spinner";
+import { TransactionsCard } from "./TransactionCard";
 
 export const TransactionTable = ({ className }: TransactionTableProps) => {
   const [sort, setSort] = useState("newest");
@@ -24,7 +25,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
     setAddTransactionModalIsOpen(false);
   };
 
-  const { data: transactions } = useGetTransactions({
+  const { data: transactions, isLoading } = useGetTransactions({
     sortBy: sort,
   });
 
@@ -33,7 +34,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
       <div className="min-w-full w-full flex flex-col md:mt-8 md:h-[60vh] md:min-h-[60vh]">
         <div className="flex justify-between">
           <div className="flex gap-2 cursor-pointer items-center justify-center">
-            {(transactions ?? [])?.length > 0 && (
+            {transactions?.length && (
               <div className="dropdown">
                 <label
                   tabIndex={0}
@@ -91,31 +92,39 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
         </div>
         <div
           className={clsx(
-            "md:min-h-[50vh] md:h-[50vh] md:max-h-[50vh] min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto md:items-stretch",
+            "md:min-h-[40vh] md:h-[40vh] md:max-h-[40vh] min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto md:items-stretch",
             className
           )}
         >
-          {(transactions ?? [])?.length === 0 && (
+          {!transactions?.length && !isLoading && (
             <div className="flex flex-col justify-center items-center">
               <p className="text-xl text-center mt-20 mb-8 text-gray-500">
                 Please add some transactions
               </p>
-              {/* <MdPlaylistAdd size={40} /> */}
             </div>
           )}
-          {transactions?.map((transaction: Transaction) => (
-            <div onClick={() => setTransactionToEdit(transaction)}>
-              <TransactionsCard
-                key={transaction.id}
-                name={transaction.name}
-                amount={transaction.amount}
-                category={transaction.category.name}
-                date={transaction.date}
-                type={transaction.type}
-                AddTransactionModalIsOpen={AddTransactionModalIsOpen}
-              />
+          {isLoading && (
+            <div className="w-full h-48 flex justify-center items-center">
+              <Spinner size="lg" />
             </div>
-          ))}
+          )}
+          {!isLoading &&
+            transactions?.map((transaction: Transaction) => (
+              <div
+                onClick={() => setTransactionToEdit(transaction)}
+                key={transaction.id}
+              >
+                <TransactionsCard
+                  name={transaction.name}
+                  amount={transaction.amount}
+                  category={transaction?.category?.name}
+                  date={transaction.date}
+                  type={transaction.type}
+                  icon={transaction.category.icon}
+                  AddTransactionModalIsOpen={AddTransactionModalIsOpen}
+                />
+              </div>
+            ))}
         </div>
         <div>
           <AddTransactionModal

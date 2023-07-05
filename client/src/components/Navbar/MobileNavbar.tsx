@@ -12,11 +12,14 @@ export const MobileNavbar = () => {
     addTransactionOpenModal,
   } = useAddTransactionModal();
 
-  const { addBudgetModalIsOpen, addBudgetCloseModal, addBudgetOpenModal } =
-    useAddBudgetModal();
+  const {
+    addBudgetModalIsOpen,
+    addBudgetCloseModal,
+    addBudgetOpenModal,
+    addBudgetToEdit,
+  } = useAddBudgetModal();
 
   const search = useLocation();
-  console.log(search.pathname);
   return (
     <div className="block md:hidden fixed z-50 w-full h-20 max-w-lg -translate-x-1/2 bg-[#f7f7f7] bottom-0 left-1/2 shadow-md">
       <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
@@ -92,6 +95,7 @@ export const MobileNavbar = () => {
           <button
             onClick={() => {
               if (search.pathname === "/budget") {
+                addBudgetToEdit(null);
                 addBudgetOpenModal();
               } else {
                 addTransactionOpenModal();
@@ -200,6 +204,7 @@ export const MobileNavbar = () => {
         <AddBudgetModal
           AddBudgetCloseModal={addBudgetCloseModal}
           addBudgetModalIsOpen={addBudgetModalIsOpen}
+          addBudgetToEdit={addBudgetToEdit}
         />
       </div>
     </div>

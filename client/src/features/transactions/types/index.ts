@@ -65,3 +65,8 @@ export type TransactionDateDTO = {
   endDateMonth: number | undefined;
   endDateDay: number | undefined;
 };
+
+export type ChartDataDTO = {
+  _id: Date;
+  totalAmount: number;
+};

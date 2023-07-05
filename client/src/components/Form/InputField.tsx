@@ -8,6 +8,8 @@ type InputFieldProps = {
   error: FieldError | undefined;
   registration: Partial<UseFormRegisterReturn>;
   defaultValue?: string | number | readonly string[] | undefined;
+  iconClass?: string;
+  errorClass?: string;
 };
 
 export const InputField = (props: InputFieldProps) => {
@@ -18,15 +20,23 @@ export const InputField = (props: InputFieldProps) => {
     placeholder,
     error,
     defaultValue,
+    iconClass,
+    errorClass,
   } = props;
 
   return (
-    <div className="flex">
+    <div className="flex relative">
+      <i
+        className={clsx(
+          "absolute top-1/2 transform -translate-y-1/2 pb-2 pointer-events-none",
+          iconClass
+        )}
+      ></i>
       <input
         placeholder={placeholder}
         type={type}
         className={clsx(
-          "input input-bordered mb-2 bg-white text-black",
+          "input mb-2 bg-white text-black pl-12 input-bordered border-gray-400",
           className
         )}
         {...registration}
@@ -37,7 +47,10 @@ export const InputField = (props: InputFieldProps) => {
         <div
           role="alert"
           aria-label={error.message}
-          className="text-sm font-semibold text-red-500"
+          className={clsx(
+            "text-sm font-semibold text-red-500 absolute bottom-[-15px]",
+            errorClass
+          )}
         >
           {error.message}
         </div>

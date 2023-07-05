@@ -1,6 +1,5 @@
 import { MongoIdDTO } from 'src/dtos/dtos';
 import { Date, Types } from 'mongoose';
-import { IsEnum } from 'class-validator';
 
 export class TransactionsDTO {
   name: string;
@@ -43,4 +42,9 @@ export class TransactionWithinDateRangeDTO {
   startDate: Date;
   endDate: Date;
   userId: string;
+}
+
+export class CharDataDTO {
+  date: Date;
+  totalAmount: number;
 }

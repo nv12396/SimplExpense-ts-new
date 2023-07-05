@@ -1,6 +1,8 @@
+import * as moment from 'moment';
+import _ from 'lodash';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import mongoose, { Model } from 'mongoose';
+import mongoose, { Model, PipelineStage } from 'mongoose';
 
 import { TransactionsDocument } from './transactions.schema';
 import {
@@ -8,6 +10,7 @@ import {
   TransactionDetailsDTO,
   deleteTransactionDTO,
   SpendingsDTO,
+  CharDataDTO,
 } from './transactions.dto';
 import { MongoIdDTO } from 'src/dtos/dtos';
 import { BudgetService } from 'src/budget/budget.service';
@@ -35,6 +38,10 @@ export class TransactionsService {
       date: transaction.date,
     };
   }
+
+  // getChartDataDetails(chartData: CharDataDTO) {
+  //   return
+  // }
 
   async findTransactionsById(id: MongoIdDTO): Promise<TransactionDetailsDTO> {
     const transactions = await this.transactionsModel.findById(id);
@@ -115,6 +122,7 @@ export class TransactionsService {
       },
     ];
     const incomes = await this.transactionsModel.aggregate(pipeline).exec();
+
     return incomes[0]?.total;
   }
 
@@ -176,6 +184,7 @@ export class TransactionsService {
           category: {
             _id: '$category._id',
             name: '$categoryDetails.name',
+            icon: '$categoryDetails.icon',
           },
         },
       },
@@ -210,6 +219,63 @@ export class TransactionsService {
     );
   }
 
+  async getChartData(userId: string): Promise<CharDataDTO[]> {
+    const currentDate = new Date();
+    const pastDate = new Date();
+    pastDate.setDate(currentDate.getDate() - 7);
+
+    const pastSevenDays: Date[] = [...Array(7)]
+      .map((_, i) => moment().subtract(i, 'days').startOf('day').toDate())
+      .reverse();
+
+    const user = new mongoose.Types.ObjectId(userId);
+    const type = 'EXPENSE';
+    const pipeline: PipelineStage[] = [
+      {
+        $match: {
+          user,
+          type,
+          date: {
+            $gte: pastDate,
+            $lt: currentDate,
+          },
+        },
+      },
+      {
+        $group: {
+          _id: '$date',
+          totalAmount: { $sum: '$amount' },
+        },
+      },
+      {
+        $sort: {
+          _id: 1,
+        },
+      },
+      {
+        $limit: 7,
+      },
+    ];
+
+    const chartData = await this.transactionsModel.aggregate(pipeline).exec();
+
+    const result = pastSevenDays.map((date) => {
+      const summaryForDate = chartData.find((summary) =>
+        moment(summary._id).isSame(date, 'day'),
+      );
+      if (summaryForDate) {
+        return summaryForDate;
+      } else {
+        return {
+          _id: date,
+          totalAmount: 0,
+        };
+      }
+    });
+
+    return result;
+  }
+
   async createTransaction(
     transactions: TransactionsDTO,
     userId,
@@ -228,6 +294,7 @@ export class TransactionsService {
       categoryId: category,
       type,
     });
+
     return await newTransaction.save();
   }
 

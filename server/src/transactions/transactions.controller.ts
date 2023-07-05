@@ -18,6 +18,7 @@ import {
   TransactionsDTO,
   TransactionDetailsDTO,
   SpendingsDTO,
+  CharDataDTO,
 } from './transactions.dto';
 import { MongoIdDTO } from 'src/dtos/dtos';
 
@@ -41,6 +42,14 @@ export class TransactionsController {
     const { id: userId } = req.user;
     return this.transactionsService.findAllExpensesCurrentMonth(userId);
   }
+
+  @UseGuards(JwtGuard)
+  @Get('/chart-data/')
+  getChartData(@Request() req): Promise<CharDataDTO[]> {
+    const { id: userId } = req.user;
+    return this.transactionsService.getChartData(userId);
+  }
+
   @UseGuards(JwtGuard)
   @Get('/income/')
   findAllIncome(@Request() req): Promise<number> {

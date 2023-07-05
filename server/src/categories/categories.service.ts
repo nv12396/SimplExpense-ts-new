@@ -17,6 +17,7 @@ export class CategoriesService {
     return {
       _id: category._id,
       name: category.name,
+      icon: category.icon,
     };
   }
 

@@ -1,9 +1,18 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 
 import { ExistingUserDTO } from 'src/user/dtos/existing-user.dto';
 import { NewUserDTO } from 'src/user/dtos/new-user.dto';
 import { AuthService } from './auth.service';
-import { AuthUserDTO, AuthUserWithTokenDTO } from './auth-user.dto';
+import { AuthUserWithTokenDTO } from './auth-user.dto';
+import { JwtGuard } from './guards/jwt.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -19,5 +28,12 @@ export class AuthController {
   @HttpCode(HttpStatus.CREATED)
   login(@Body() user: ExistingUserDTO): Promise<AuthUserWithTokenDTO> {
     return this.authService.login(user);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('validate')
+  validateUser(): boolean {
+    const userExist = true;
+    return userExist;
   }
 }

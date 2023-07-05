@@ -32,8 +32,12 @@ export class BudgetController {
 
   @UseGuards(JwtGuard)
   @Patch('/update/:id')
-  updateBudget(@Body('limit') limit: number, @Param('id') budgetId) {
-    return this.budgetService.updateBudget(budgetId, limit);
+  updateBudget(
+    @Body('limit') limit: number,
+    @Param('id') budgetId,
+    @Body('category') category: MongoIdDTO,
+  ) {
+    return this.budgetService.updateBudget(budgetId, limit, category);
   }
 
   @UseGuards(JwtGuard)
