@@ -7,6 +7,7 @@ export const axios = Axios.create({
   baseURL: "https://simplexpense-ts-new-production.up.railway.app/api",
 });
 
+console.log();
 axios.interceptors.request.use(
   (config) => {
     const token = storage.getToken();
