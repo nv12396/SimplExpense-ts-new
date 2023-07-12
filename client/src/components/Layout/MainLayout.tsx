@@ -7,6 +7,7 @@ import { Navbar } from "../Navbar/Navbar";
 import { useState } from "react";
 import { TotalAmountDTO } from "../../features/totalAmount/type";
 import { AddTotalAmount } from "../../features/totalAmount/components/AddTotalAmount";
+import { Sidebar } from "../Navbar/Sidebar";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -14,21 +15,32 @@ type MainLayoutProps = {
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <div className="flex min-h-screen bg-white md:h-screen flex-col">
-      <div className="min-h-[25vh] h-[25vh] w-full min-w-full bg-[#1f2124]">
-        <Navbar />
-        <Hero />
-        <div className="md:hidden block">
-          <MobileTotalBalance />
-        </div>
+    <div className="grid grid-cols-6 bg-white min-h-screen md:h-screen">
+      <div className="col-span-1">
+        <Sidebar />
       </div>
-      <div className="h-full md:min-h-[75vh] md:h-[70vh] w-full bg-[#f7f7f7] relative min-w-full">
-        {children}
-      </div>
+      <div className="col-span-5 bg-white">{children}</div>
       <MobileNavbar />
     </div>
   );
 };
+// export const MainLayout = ({ children }: MainLayoutProps) => {
+//   return (
+//     <div className="flex min-h-screen bg-white md:h-screen flex-col">
+//       <div className="min-h-[25vh] h-[25vh] w-full min-w-full bg-[#1f2124]">
+//         <Navbar />
+//         <Hero />
+//         <div className="md:hidden block">
+//           <MobileTotalBalance />
+//         </div>
+//       </div>
+//       <div className="h-full md:min-h-[75vh] md:h-[70vh] w-full bg-[#f7f7f7] relative min-w-full">
+//         {children}
+//       </div>
+//       <MobileNavbar />
+//     </div>
+//   );
+// };
 
 const MobileTotalBalance = () => {
   const [totalAmountToEdit, setTotalAmountToEdit] = useState<

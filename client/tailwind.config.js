@@ -22,6 +22,12 @@ export default {
         "2xl": "1536px",
         "3xl": "2000px",
       },
+      gridTemplateRows: {
+        12: "repeat(12, minmax(0, 1fr))",
+      },
+      gridRow: {
+        "span-10": "span 10 / span 10",
+      },
     },
   },
   plugins: [daisyui],
