@@ -39,10 +39,6 @@ export class TransactionsService {
     };
   }
 
-  // getChartDataDetails(chartData: CharDataDTO) {
-  //   return
-  // }
-
   async findTransactionsById(id: MongoIdDTO): Promise<TransactionDetailsDTO> {
     const transactions = await this.transactionsModel.findById(id);
     return this.getTransactionDetails(transactions);

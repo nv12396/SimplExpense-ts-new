@@ -27,7 +27,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     background: "#1f1f2c",
-    backgroundColor: "#f7f7f7",
+    backgroundColor: "#f5f7fd",
     borderRadius: "10px",
     maxWidth: "450px",
   },
@@ -117,7 +117,9 @@ export const AddTransactionModal = ({
               if (values.type === "EXPENSE" && totalAmount) {
                 await editTotalAmount({
                   id: totalAmount?.id,
-                  data: { amount: totalAmount.amount - values.amount },
+                  data: {
+                    amount: totalAmount.amount - values.amount,
+                  },
                 });
               }
               if (values.type === "INCOME" && totalAmount) {

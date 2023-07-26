@@ -8,6 +8,7 @@ import { useGetExpenses } from "../transactions/api/getExpenses";
 import { useGetIncome } from "../transactions/api/getIncome";
 
 import { TotalAmountDTO } from "../totalAmount/type";
+import { OverviewCardDemo } from "./OverviewCardDemo";
 
 export const OverviewBox = () => {
   const [totalAmountToEdit, setTotalAmountToEdit] = useState<
@@ -26,9 +27,10 @@ export const OverviewBox = () => {
 
   const { data: totalExpenses } = useGetExpenses();
 
+  const month = new Date().toLocaleString("default", { month: "long" });
   return (
-    <div className="md:w-full w-[90%] flex h-32 rounded-box font-extrabold gap-4 md:gap-12 items-center justify-center md:justify-center absolute top-[-60px] container mx-auto md:px-2">
-      <OverviewCard
+    <div className="md:w-full mt-4 w-[90%] flex h-48 rounded-box gap-4 md:gap-12 items-center justify-center md:justify-center container mx-auto md:px-2">
+      <OverviewCardDemo
         onClick={() => {
           if (totalAmount?.amount !== 0) {
             setTotalAmountToEdit(totalAmount);
@@ -42,17 +44,19 @@ export const OverviewBox = () => {
         iconClasses="bg-[#ecfdf5] text-[#54ca9f]"
         AddTotalAmountModalIsOpen={addTotalAmountOpenModal}
       />
-      <OverviewCard
+      <OverviewCardDemo
         iconClasses="bg-[#fef2f2] text-[#f2605f]"
         title="EXPENSES"
         amount={totalExpenses || 0}
         className="basis-1/2 md:basis-1/4"
+        date={`Overview for ${month}`}
       />
-      <OverviewCard
+      <OverviewCardDemo
         title="INCOME"
         className="basis-1/2 md:basis-1/4"
         amount={totalIncome || 0}
         iconClasses="bg-[#eff6ff] text-[#4688f6]"
+        date={`Overview for ${month}`}
       />
       {/* <OverviewCard
         title="SAVINGS"

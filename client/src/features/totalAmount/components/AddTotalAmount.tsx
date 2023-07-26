@@ -22,7 +22,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     background: "#1f1f2c",
-    backgroundColor: "#f7f7f7",
+    backgroundColor: "#f5f7fd",
   },
 };
 const schema = z.object({

@@ -79,7 +79,7 @@ export const TransactionsCard = ({
         </p>
       </div>
 
-      <div className="hidden md:block col-span-2 px-4 text-center">
+      <div className="hidden md:block col-span-2 text-center">
         <p className="text-black mt-3 text-sm">
           {moment(date).format("D. MMMM YYYY.")}
         </p>

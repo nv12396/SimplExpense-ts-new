@@ -16,10 +16,10 @@ type MainLayoutProps = {
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="grid grid-cols-6 bg-white min-h-screen md:h-screen">
-      <div className="col-span-1">
+      <div className="col-span-1 hidden md:block">
         <Sidebar />
       </div>
-      <div className="col-span-5 bg-white">{children}</div>
+      <div className="md:col-span-5 col-span-6 bg-[#f5f7fd]">{children}</div>
       <MobileNavbar />
     </div>
   );

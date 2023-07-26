@@ -6,6 +6,7 @@ import { Dashboard } from "../features/misc/routes/Dashboard";
 import { Proba } from "../features/misc/routes/Proba";
 import { Transactions } from "../features/transactions/page/Transactions";
 import { Budget } from "../features/budget/pages/Budget";
+import { Settings } from "../features/settings/page/Settings";
 
 const App = () => {
   return (
@@ -43,6 +44,10 @@ export const protectedRoutes = [
       {
         path: "/budget",
         element: <Budget />,
+      },
+      {
+        path: "/settings",
+        element: <Settings />,
       },
     ],
   },

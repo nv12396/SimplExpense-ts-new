@@ -20,3 +20,10 @@ export class TotalAmount {
 }
 
 export const TotalAmountSchema = SchemaFactory.createForClass(TotalAmount);
+
+TotalAmountSchema.pre('save', function (next) {
+  if (this.isModified('amount') && this.amount < 0) {
+    this.amount = 0;
+  }
+  next();
+});

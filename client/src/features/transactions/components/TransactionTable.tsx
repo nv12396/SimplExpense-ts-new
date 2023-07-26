@@ -30,15 +30,15 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
   });
 
   return (
-    <div className="flex items-center justify-center mt-16 md:mt-12">
-      <div className="min-w-full w-full flex flex-col md:mt-8 md:h-[60vh] md:min-h-[60vh]">
+    <div className="flex items-center justify-center">
+      <div className="min-w-full w-full flex flex-col md:h-[60vh] md:min-h-[60vh]">
         <div className="flex justify-between">
           <div className="flex gap-2 cursor-pointer items-center justify-center">
             {transactions?.length && (
               <div className="dropdown">
                 <label
                   tabIndex={0}
-                  className="btn m-1 bg-[#f7f7f7] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f7f7f7]"
+                  className="btn m-1 bg-[#f5f7fd] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f7f7f7]"
                 >
                   <div className="w-5 text-blue-400">
                     <FunnelIcon />
@@ -92,7 +92,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
         </div>
         <div
           className={clsx(
-            "md:min-h-[40vh] md:h-[40vh] md:max-h-[40vh] min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto md:items-stretch",
+            "md:min-h-[44vh] md:h-[44vh] md:max-h-[44vh] min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto md:items-stretch",
             className
           )}
         >
