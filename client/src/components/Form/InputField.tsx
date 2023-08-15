@@ -33,7 +33,6 @@ export const InputField = (props: InputFieldProps) => {
         )}
       ></i>
       <input
-        maxLength={12}
         placeholder={placeholder}
         type={type}
         className={clsx(
