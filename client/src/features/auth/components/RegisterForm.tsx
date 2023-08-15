@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { Form } from "../../../components/Form/Form";
 import { InputField } from "../../../components/Form/InputField";
 import { useRegister } from "../hooks/auth";
+import Button from "../../../components/ui/Button";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -80,9 +81,7 @@ export const RegisterForm = () => {
                     Already have an account?<span> Log in</span>
                   </p>
                   <div>
-                    <button className="btn w-full bg-secondaryGreen text-black hover:bg-primaryGreen my-4">
-                      REGISTER
-                    </button>
+                    <Button type="submit">REGISTER</Button>
                   </div>
                 </div>
               )}

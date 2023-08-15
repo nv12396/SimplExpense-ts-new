@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useDateRangeStore } from "../../../stores/date-range";
 import { Spinner } from "../../../components/Elements/Spinner/Spinner";
 import { TransactionsCard } from "./TransactionCard";
+import Button from "../../../components/ui/Button";
 
 export const TransactionTableFilter = ({
   className,
@@ -58,11 +59,11 @@ export const TransactionTableFilter = ({
 
   return (
     <div className="flex items-center justify-center mt-8">
-      <div className="min-w-full w-full flex flex-col md:mt-8 md:h-[60vh] md:min-h-[60vh]">
+      <div className="min-w-full w-full flex flex-col md:mt-8">
         <div className="flex justify-between"></div>
         <div
           className={clsx(
-            "md:min-h-[44h] md:h-[44vh] md:max-h-[44vh] min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto",
+            "overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto",
             className
           )}
         >
@@ -75,7 +76,7 @@ export const TransactionTableFilter = ({
           )}
           {isLoading && (
             <div className="w-full h-48 flex justify-center items-center">
-              <Spinner size="lg" />
+              <Spinner size="sm" />
             </div>
           )}
           {!isLoading &&
@@ -83,6 +84,7 @@ export const TransactionTableFilter = ({
               <div
                 onClick={() => setTransactionToEdit(transaction)}
                 key={transaction.id}
+                className="w-full"
               >
                 <TransactionsCard
                   name={transaction.name}
@@ -104,15 +106,15 @@ export const TransactionTableFilter = ({
           />
         </div>
         <div className="items-center justify-center mt-6 hidden md:flex">
-          <div
+          <Button
             onClick={() => {
               setTransactionToEdit(null);
               AddTransactionModalIsOpen();
             }}
-            className="btn w-28 border-blue-400 text-blue-400 hover:bg-[#eff6ff] hover:border-blue-400 bg-white"
+            className="hidden md:flex w-24 mx-auto items-center justify-center"
           >
             + ADD
-          </div>
+          </Button>
         </div>
       </div>
     </div>

@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 import storage from "../utils/storage";
 
 export const axios = Axios.create({
-  baseURL: "https://simplexpense-ts-new-production.up.railway.app/api",
+  // baseURL: "https://simplexpense-ts-new-production.up.railway.app/api",
+  baseURL: "http://localhost:3000/api",
 });
 
 console.log();

@@ -4,6 +4,7 @@ import ContentLayout from "../../../components/Layout/ContentLayout";
 import { Form } from "../../../components/Form/Form";
 import { CreateBudgetDTO } from "../../budget/type";
 import { InputField } from "../../../components/Form/InputField";
+import Button from "../../../components/ui/Button";
 
 export const Settings = () => {
   const schema = z.object({
@@ -50,12 +51,9 @@ export const Settings = () => {
                 />
               </div>
 
-              <button
-                className="btn bg-blue-400 text-white hover:bg-blue-500 my-4 w-16 border-blue-400 hover:border-blue-400"
-                type="submit"
-              >
+              <Button type="submit" className="w-28">
                 Edit
-              </button>
+              </Button>
             </div>
           )}
         </Form>

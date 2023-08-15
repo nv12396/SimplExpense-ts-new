@@ -11,7 +11,7 @@ export default {
       colors: {
         primary: "#1f1f2c",
         secondary: "#272638",
-        primaryGreen: "#78ED92",
+        primaryGreen: "#4ac5b6",
         secondaryGreen: "#4ECB71",
       },
       screens: {

@@ -31,7 +31,7 @@ export const SelectField = (props: SelectFieldProps) => {
         placeholder={placeholder}
         name="category"
         className={clsx(
-          "select max-w-xs mt-1 block w-full pl-3 pr-10 py-2 text-base h-11 text-black focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
+          "select select-sm bg-[#4ac5b6] max-w-xs mt-1 block w-full pl-3 pr-10 py-2 text-base h-11 text-black focus:outline-none sm:text-sm rounded-md",
           className
         )}
         defaultValue={defaultValue}

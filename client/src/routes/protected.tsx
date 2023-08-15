@@ -7,6 +7,7 @@ import { Proba } from "../features/misc/routes/Proba";
 import { Transactions } from "../features/transactions/page/Transactions";
 import { Budget } from "../features/budget/pages/Budget";
 import { Settings } from "../features/settings/page/Settings";
+import { Spinner } from "../components/Elements/Spinner/Spinner";
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
       <Suspense
         fallback={
           <div className="h-full w-full flex items-center justify-center">
-            {/* <Spinner size="xl" /> */}
+            <Spinner size="xl" />
           </div>
         }
       >

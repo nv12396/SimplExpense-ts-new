@@ -8,6 +8,7 @@ import { Form } from "../../../components/Form/Form";
 import { InputField } from "../../../components/Form/InputField";
 import { useLogin } from "../hooks/auth";
 import "react-toastify/dist/ReactToastify.css";
+import Button from "../../../components/ui/Button";
 
 const schema = z.object({
   email: z.string().min(1, "Email is required").email(),
@@ -70,9 +71,7 @@ export const LoginForm = () => {
                     Forgot password?
                   </p>
                   <div>
-                    <button className="btn w-full bg-secondaryGreen text-black hover:bg-green-400 my-4">
-                      LOG IN
-                    </button>
+                    <Button type="submit">LOG IN</Button>
                   </div>
                 </div>
               )}

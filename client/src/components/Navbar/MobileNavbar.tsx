@@ -21,7 +21,7 @@ export const MobileNavbar = () => {
 
   const search = useLocation();
   return (
-    <div className="block md:hidden fixed z-50 w-full h-20 max-w-lg -translate-x-1/2 bg-[#f7f7f7] bottom-0 left-1/2 shadow-md">
+    <div className="block md:hidden fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-[#013736] bottom-0 left-1/2 shadow-md">
       <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
         <button
           data-tooltip-target="tooltip-home"
@@ -31,7 +31,7 @@ export const MobileNavbar = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive ? "text-[#292c30]" : "text-[#c5c5c7]"
+              isActive ? "text-primaryGreen" : "text-[#c5c5c7]"
             }
           >
             <svg
@@ -63,7 +63,7 @@ export const MobileNavbar = () => {
           <NavLink
             to="/transactions"
             className={({ isActive }) =>
-              isActive ? "text-[#292c30]" : "text-[#c5c5c7]"
+              isActive ? "text-primaryGreen" : "text-[#c5c5c7]"
             }
           >
             <svg
@@ -103,7 +103,7 @@ export const MobileNavbar = () => {
             }}
             data-tooltip-target="tooltip-new"
             type="button"
-            className="inline-flex items-center justify-center w-14 shadow-xl h-14 font-medium bg-[#292d32] rounded-full "
+            className="bg-gradient-to-r from-cyan-700 to-primaryGreen inline-flex items-center justify-center w-16 absolute bottom-6 overflow-auto shadow-xl h-16 font-medium bg-[#292d32] rounded-full "
           >
             <svg
               className="w-6 h-6 text-white"
@@ -137,7 +137,7 @@ export const MobileNavbar = () => {
           <NavLink
             to="/budget"
             className={({ isActive }) =>
-              isActive ? "text-[#292c30]" : "text-[#c5c5c7]"
+              isActive ? "text-primaryGreen" : "text-[#c5c5c7]"
             }
           >
             <svg
@@ -168,7 +168,7 @@ export const MobileNavbar = () => {
           <NavLink
             to="/add-later"
             className={({ isActive }) =>
-              isActive ? "text-[#292c30]" : "text-[#c5c5c7]"
+              isActive ? "text-primaryGreen" : "text-[#c5c5c7]"
             }
           >
             <svg

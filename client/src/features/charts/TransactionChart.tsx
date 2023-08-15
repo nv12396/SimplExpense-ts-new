@@ -21,7 +21,7 @@ export const TransactionChart = () => {
   if (isLoading) {
     return (
       <div className="w-full h-48 flex justify-center items-center">
-        <Spinner size="lg" />
+        <Spinner size="sm" />
       </div>
     );
   }
@@ -33,8 +33,8 @@ export const TransactionChart = () => {
           <AreaChart data={chartData}>
             <defs>
               <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#82ccdd" />
-                <stop offset="100%" stopColor="#60a5fa" />
+                <stop offset="40%" stopColor="#4ac5b6" />
+                <stop offset="100%" stopColor="#013736" />
               </linearGradient>
             </defs>
             <XAxis

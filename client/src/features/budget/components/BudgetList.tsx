@@ -23,7 +23,7 @@ export const BudgetList = () => {
   if (isLoading) {
     return (
       <div className="w-full h-48 flex justify-center items-center">
-        <Spinner size="lg" />
+        <Spinner size="sm" />
       </div>
     );
   }

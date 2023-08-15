@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { OverviewCard } from "./OverviewCard";
+import { OverviewCardDemo } from "./OverviewCardDemo";
 import { useGetTotalAmount } from "../totalAmount/api/getTotalAmount";
 import { AddTotalAmount } from "../totalAmount/components/AddTotalAmount";
 import { useAddTotalAmountModal } from "../../stores/totalAmountModal";
@@ -8,7 +8,6 @@ import { useGetExpenses } from "../transactions/api/getExpenses";
 import { useGetIncome } from "../transactions/api/getIncome";
 
 import { TotalAmountDTO } from "../totalAmount/type";
-import { OverviewCardDemo } from "./OverviewCardDemo";
 
 export const OverviewBox = () => {
   const [totalAmountToEdit, setTotalAmountToEdit] = useState<
@@ -58,12 +57,7 @@ export const OverviewBox = () => {
         iconClasses="bg-[#eff6ff] text-[#4688f6]"
         date={`Overview for ${month}`}
       />
-      {/* <OverviewCard
-        title="SAVINGS"
-        className="hidden md:flex basis-1/4"
-        amount={498}
-        iconClasses="bg-[#eff6ff] text-[#4688f6]"
-      /> */}
+
       <AddTotalAmount
         AddTotalAmountCloseModal={addTotalAmountCloseModal}
         addTotalAmountModalIsOpen={addTotalAmountModalIsOpen}

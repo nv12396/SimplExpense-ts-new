@@ -9,13 +9,15 @@
 .rdrInRange,
 .rdrStartEdge,
 .rdrEndEdge {
-  background-color: #afd2fc;
-  color: #afd2fc;
-  border: 0px;
+  background-color: #4ac5b6;
+  color: #4ac5b6;
+  border: 0;
 }
 .rdrDateDisplayWrapper {
   display: none;
+  border-color: #4ac5b6;
 }
+
 /* .rdrDateDisplayWrapper {
   width: 500px;
 }

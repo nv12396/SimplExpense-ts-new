@@ -5,6 +5,7 @@ import {
   PlusCircleIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
+
 import { useGetTotalAmount } from "../totalAmount/api/getTotalAmount";
 
 type OverviewCardPropsType = {
@@ -49,7 +50,7 @@ export const OverviewCard = ({
           </p>
           {title === "TOTAL AMOUNT" && (
             <div
-              className="w-6 flex items-center justify-center ml-2 text-black mt-1 cursor-pointer"
+              className="w-4 flex items-center justify-center ml-2 text-gray-400 mt-1 cursor-pointer"
               onClick={AddTotalAmountModalIsOpen}
             >
               {totalAmount?.amount === 0 ? (

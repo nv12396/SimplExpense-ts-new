@@ -33,10 +33,11 @@ export const InputField = (props: InputFieldProps) => {
         )}
       ></i>
       <input
+        maxLength={12}
         placeholder={placeholder}
         type={type}
         className={clsx(
-          "input mb-2 bg-white text-black pl-12 input-bordered border-gray-400",
+          "input input-md mb-2 bg-white text-black pl-12 border-1 border-gray-200",
           className
         )}
         {...registration}

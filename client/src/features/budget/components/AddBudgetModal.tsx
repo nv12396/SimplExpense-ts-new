@@ -10,6 +10,7 @@ import { BudgetDTO, CreateBudgetDTO, EditBudgetDTO } from "../type";
 import { useCreateBudget } from "../api/createBudget";
 import { useUpdateBudget } from "../api/updateBudget";
 import { useDeleteBudget } from "../api/deleteBudget";
+import Button from "../../../components/ui/Button";
 
 const customStyles = {
   overlay: {
@@ -61,28 +62,26 @@ export const AddBudgetModal = ({
       style={customStyles}
       ariaHideApp={false}
     >
-      <div className="flex justify-between items-center mb-4 border-round text-black">
+      <div className="flex justify-between items-center mb-4 border-round text-gray-500">
         {existingBudget ? <p>Edit Budget</p> : <p>Add Budget</p>}
         <div
-          className="w-5 cursor-pointer text-black mr-6"
+          className="cursor-pointer text-gray-500 p-2 rounded-xl bg-[#f7f7f7] border-none hover:bg-gray-200"
           onClick={AddBudgetCloseModal}
         >
-          <button className="btn btn-square text-black bg-[#f7f7f7] border-none border-thin] hover:bg-gray-200">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
         </div>
       </div>
       <div>
@@ -130,7 +129,7 @@ export const AddBudgetModal = ({
                     placeholder="Category"
                     error={formState.errors["category"]}
                     registration={register("category")}
-                    className="mb-3 h-[45px] basis-1/2 bg-blue-400 text-white"
+                    className="mb-3 h-[45px] basis-1/2 text-white"
                     type="CATEGORY"
                     defaultValue={existingBudget?.category.name}
                     errorClass="bottom-[-30px]"
@@ -153,15 +152,12 @@ export const AddBudgetModal = ({
               </div>
 
               <div className="flex items-center justify-around gap-4">
-                <button
-                  className="btn bg-blue-400 text-white hover:bg-blue-500 my-4 basis-2/5 border-blue-400 hover:border-blue-400"
-                  type="submit"
-                >
+                <Button className="basis-2/5" type="submit">
                   {existingBudget ? <p>Edit</p> : <p>Add</p>}
-                </button>
+                </Button>
                 {existingBudget && (
-                  <button
-                    className="btn bg-red-400 border-red-400 hover:bg-red-500 my-4 basis-2/5 text-white hover:border-red-400"
+                  <Button
+                    className="basis-2/5"
                     onClick={() =>
                       deleteBudget({
                         budgetId: existingBudget.id,
@@ -169,7 +165,7 @@ export const AddBudgetModal = ({
                     }
                   >
                     DELETE
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>

@@ -10,13 +10,13 @@ export const Spendings = () => {
       </p>
       {isLoading && (
         <div className="w-full h-48 flex justify-center items-center">
-          <Spinner size="lg" />
+          <Spinner size="sm" />
         </div>
       )}
       {!isLoading && (
         <div className="flex gap-6 md:h-48 justify-center mb-16 h-40">
           {(spendings ?? [])?.length > 0 && (
-            <div className="basis-1/3 bg-[#1f2124] text-white flex justify-start rounded-md flex-col gap-4 pl-3 md:pl-4 shadow-md text-sm md:text-xl">
+            <div className="basis-1/3 bg-[#49c5b6] text-white flex justify-start rounded-md flex-col gap-4 pl-3 md:pl-4 shadow-md text-sm md:text-xl">
               <p className="font-bold mt-4">
                 {(spendings ?? [])[0]?.category?.name || "cat"}
               </p>
@@ -27,7 +27,7 @@ export const Spendings = () => {
             </div>
           )}
           {(spendings ?? [])?.length > 1 && (
-            <div className="basis-1/3 bg-blue-400 text-white flex justify-start rounded-md flex-col gap-4 pl-3 md:pl-4 shadow-md text-base md:text-xl">
+            <div className="basis-1/3 bg-[#DF6C4F] text-white flex justify-start rounded-md flex-col gap-4 pl-3 md:pl-4 shadow-md text-base md:text-xl">
               <p className="font-bold mt-4">
                 {(spendings ?? [])[1]?.category.name}
               </p>
@@ -38,7 +38,7 @@ export const Spendings = () => {
             </div>
           )}
           {(spendings ?? [])?.length > 2 && (
-            <div className="basis-1/3 bg-[#54ca9f] text-white flex justify-start rounded-md flex-col gap-4 pl-3 md:pl-4 shadow-md text-base md:text-xl">
+            <div className="basis-1/3 bg-[#9F9FD4] text-white flex justify-start rounded-md flex-col gap-4 pl-3 md:pl-4 shadow-md text-base md:text-xl">
               <p className="font-bold mt-4">
                 {(spendings ?? [])[2]?.category.name}
               </p>

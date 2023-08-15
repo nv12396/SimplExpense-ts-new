@@ -15,7 +15,7 @@ const ContentLayout = ({ children, title }: ContentLayoutProps) => {
         <meta charSet="utf-8" />
         <title>{title}</title>
       </Helmet>
-      <div className="flex justify-center">
+      <div className="hidden md:flex justify-center">
         <OverviewBox />
       </div>
       <div>{children}</div>

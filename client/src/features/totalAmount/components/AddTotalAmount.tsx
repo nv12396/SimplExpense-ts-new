@@ -8,6 +8,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import { CreateTotalAmountDTO, TotalAmountDTO } from "../type";
 import { useUpdateTotalAmount } from "../api/updateTotalAmount";
+import Button from "../../../components/ui/Button";
 
 const customStyles = {
   overlay: {
@@ -100,12 +101,9 @@ export const AddTotalAmount = ({
               </div>
 
               <div className="flex items-center justify-around gap-4">
-                <button
-                  className="btn bg-blue-400 text-white hover:bg-blue-500 my-2 basis-2/5 border-blue-400 hover:border-blue-400"
-                  type="submit"
-                >
+                <Button className="basis-2/5" type="submit">
                   {existingTotalAmount ? <p>Edit</p> : <p>Add</p>}
-                </button>
+                </Button>
               </div>
             </div>
           )}

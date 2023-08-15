@@ -9,6 +9,7 @@ import { useGetTransactions } from "../api/getTransactions";
 import { Transaction, TransactionTableProps } from "../types";
 import { Spinner } from "../../../components/Elements/Spinner/Spinner";
 import { TransactionsCard } from "./TransactionCard";
+import Button from "../../../components/ui/Button";
 
 export const TransactionTable = ({ className }: TransactionTableProps) => {
   const [sort, setSort] = useState("newest");
@@ -38,15 +39,15 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
               <div className="dropdown">
                 <label
                   tabIndex={0}
-                  className="btn m-1 bg-[#f5f7fd] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f7f7f7]"
+                  className="btn m-1 bg-[#f5f7fd] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f5f7fd]"
                 >
-                  <div className="w-5 text-blue-400">
+                  <div className="w-5 text-primaryGreen">
                     <FunnelIcon />
                   </div>
 
                   <p className="text-sm md:text-base text-gray-500">FILTERS</p>
                 </label>
-                <ul className="p-2 shadow-xl menu dropdown-content bg-white rounded-box w-52 text-blue-400 text-sm md:text-base">
+                <ul className="p-2 shadow-xl menu dropdown-content bg-white rounded-box w-72 text-primaryGreen text-sm md:text-base">
                   <li>
                     <button
                       className="text-start"
@@ -89,6 +90,17 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
               </div>
             )}
           </div>
+          <div className="items-center justify-center mt-6 hidden md:flex mb-2">
+            <Button
+              onClick={() => {
+                setTransactionToEdit(null);
+                AddTransactionModalIsOpen();
+              }}
+              className="hidden md:flex w-24 mx-auto items-center justify-center"
+            >
+              + ADD
+            </Button>
+          </div>
         </div>
         <div
           className={clsx(
@@ -105,7 +117,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
           )}
           {isLoading && (
             <div className="w-full h-48 flex justify-center items-center">
-              <Spinner size="lg" />
+              <Spinner size="sm" />
             </div>
           )}
           {!isLoading &&
@@ -132,17 +144,6 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
             addTransactionModalIsOpen={addTransactionModalIsOpen}
             existingTransaction={transactionToEdit}
           />
-        </div>
-        <div className="items-center justify-center mt-6 hidden md:flex">
-          <div
-            onClick={() => {
-              setTransactionToEdit(null);
-              AddTransactionModalIsOpen();
-            }}
-            className="btn w-28 border-blue-400 text-blue-400 hover:bg-[#eff6ff] hover:border-blue-400 bg-white"
-          >
-            + ADD
-          </div>
         </div>
       </div>
     </div>
