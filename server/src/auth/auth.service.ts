@@ -20,7 +20,9 @@ export class AuthService {
   }
 
   async register(user: Readonly<NewUserDTO>): Promise<AuthUserWithTokenDTO> {
-    const { name, email, password } = user;
+    const { name, email, currency, password } = user;
+
+    console.log('currency', currency);
 
     const existingUser = await this.userService.findByEmail(email);
 
@@ -30,7 +32,12 @@ export class AuthService {
 
     const hashedPassword = await this.hashPassword(password);
 
-    const newUser = await this.userService.create(name, email, hashedPassword);
+    const newUser = await this.userService.create(
+      name,
+      email,
+      currency,
+      hashedPassword,
+    );
 
     const jwt = await this.jwtService.signAsync(user, {
       secret: process.env.JWT_SECRET,

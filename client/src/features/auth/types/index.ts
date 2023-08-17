@@ -7,7 +7,11 @@ export type AuthUser = {
 
 export type UserResponse = {
   token: string;
-  email: UserEmail;
+  registredUser: {
+    id: string;
+    name: string;
+    email: string;
+  };
 };
 
 export type UserEmail = {

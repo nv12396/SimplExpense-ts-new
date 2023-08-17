@@ -4,6 +4,7 @@ import { FaCog } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 import { TbArrowsRightLeft } from "react-icons/tb";
 import logo from "./../../assets/logo_transparent.png";
+import { logoutFn } from "../../lib/auth";
 
 export const Sidebar = () => {
   return (
@@ -76,7 +77,10 @@ export const Sidebar = () => {
             </li>
           </NavLink>
         </ul>
-        <div className="flex gap-2 items-center ml-16 mb-8 cursor-pointer text-white">
+        <div
+          className="flex gap-2 items-center ml-16 mb-8 cursor-pointer text-white"
+          onClick={logoutFn}
+        >
           <BiLogOutCircle style={{ fontWeight: "900" }} />
           <p className="font-bold">Logout</p>
         </div>

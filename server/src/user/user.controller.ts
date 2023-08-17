@@ -15,4 +15,13 @@ export class UserController {
   ): Promise<any> {
     return this.userService.updateEmail(id, email);
   }
+
+  @UseGuards(JwtGuard)
+  @Patch('/update-name/:id')
+  updateName(
+    @Param('id') id: string,
+    @Body('name') email: string,
+  ): Promise<any> {
+    return this.userService.updateEmail(id, email);
+  }
 }

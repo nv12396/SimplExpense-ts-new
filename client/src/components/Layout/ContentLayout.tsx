@@ -18,7 +18,7 @@ const ContentLayout = ({ children, title }: ContentLayoutProps) => {
       <div className="hidden md:flex justify-center">
         <OverviewBox />
       </div>
-      <div>{children}</div>
+      <div className="container mx-auto md:px-6">{children}</div>
     </>
   );
 };

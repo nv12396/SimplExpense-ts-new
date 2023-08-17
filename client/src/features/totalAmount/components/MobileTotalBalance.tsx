@@ -25,9 +25,8 @@ export const MobileTotalBalance = () => {
   const { data: totalIncome } = useGetIncome();
 
   return (
-    // <div className="bg-gradient-to-r from-cyan-700 to-primaryGreen w-full flex flex-col p-8 h-[22vh]">
     <div className="bg-[#013736] w-full flex flex-col pt-4 h-[20vh]">
-      <p className="text-sm font-thin text-gray-400 text-center mb-2">
+      <p className="text-sm font-thin text-gray-200 text-center mb-2">
         Total Balance
       </p>
       <div
@@ -56,7 +55,7 @@ export const MobileTotalBalance = () => {
             }}
           >
             {totalAmount?.amount === 0 ? (
-              <PlusCircleIcon className="text-gray-600" />
+              <PlusCircleIcon className="text-gray-200" />
             ) : (
               <PencilSquareIcon />
             )}
@@ -65,13 +64,13 @@ export const MobileTotalBalance = () => {
       </div>
       <div className="flex justify-between mt-4 px-20">
         <div className="flex flex-col items-center justify-center">
-          <p className="text-sm">Income</p>
+          <p className="text-sm text-gray-200">Income</p>
           <p className="text-xl font-bold text-primaryGreen">
             $ {totalIncome || 0}
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">
-          <p className="text-sm">Expenses</p>
+          <p className="text-sm text-gray-200">Expenses</p>
           <p className="text-xl font-bold text-rose-400">
             $ {totalExpenses || 0}
           </p>

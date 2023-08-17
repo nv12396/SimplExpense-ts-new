@@ -32,7 +32,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="min-w-full w-full flex flex-col md:h-[60vh] md:min-h-[60vh]">
+      <div className="min-w-full w-full flex flex-col">
         <div className="flex justify-between">
           <div className="flex gap-2 cursor-pointer items-center justify-center">
             {transactions?.length && (
@@ -104,7 +104,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
         </div>
         <div
           className={clsx(
-            "md:min-h-[44vh] md:h-[44vh] md:max-h-[44vh] min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto md:items-stretch",
+            "3xl:min-h-[58vh] 3xl:h-[58vh] 3xl:max-h-[58vh] lg:min-h-[44vh] lg:h-[44vh] lg:max-h-[44vh]  min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto md:items-stretch",
             className
           )}
         >

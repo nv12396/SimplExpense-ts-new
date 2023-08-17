@@ -9,7 +9,7 @@ type MainLayoutProps = {
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <div className="flex flex-col md:grid md:grid-cols-6 bg-white min-h-screen md:h-screen">
+    <div className="flex flex-col md:grid md:grid-cols-6 bg-white min-h-screen h-screen">
       <div className="col-span-1 hidden md:block">
         <Sidebar />
       </div>

@@ -13,6 +13,7 @@ export class UserService {
     return {
       id: user.id,
       name: user.name,
+      currency: user.currency,
       email: user.email,
     };
   }
@@ -28,9 +29,15 @@ export class UserService {
   async create(
     name: string,
     email: string,
+    currency: string,
     password: string,
   ): Promise<UserDocument> {
-    const newUser = await this.userModel.create({ name, email, password });
+    const newUser = await this.userModel.create({
+      name,
+      email,
+      currency,
+      password,
+    });
 
     return await newUser.save();
   }
@@ -51,5 +58,23 @@ export class UserService {
       )
       .exec();
     return updatedEmail;
+  }
+
+  async updateName(id: string, name: string): Promise<any> {
+    const user = await this.findById(id);
+
+    if (!user) {
+      throw new NotFoundException('User does not exist');
+    }
+    const updatedName = await this.userModel
+      .findOneAndUpdate(
+        { _id: id },
+        {
+          name,
+        },
+        { new: true },
+      )
+      .exec();
+    return updatedName;
   }
 }

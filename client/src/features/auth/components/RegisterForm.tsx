@@ -8,20 +8,39 @@ import { Form } from "../../../components/Form/Form";
 import { InputField } from "../../../components/Form/InputField";
 import { useRegister } from "../hooks/auth";
 import Button from "../../../components/ui/Button";
+import { SelectField } from "../../../components/Form/SelectField";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().min(1, "Email is required").email(),
+  currency: z.string().min(1, "Currency is required"),
   password: z
     .string({ required_error: "Password is required" })
     .min(8, "Password must be 8 characters long"),
 });
 
+export type Currency = {
+  _id: string;
+  name: string;
+};
+
 type RegisterValues = {
   name: string;
   email: string;
+  currency: string;
   password: string;
 };
+
+const currencies = [
+  {
+    _id: "USD",
+    name: "USD",
+  },
+  {
+    _id: "EUR",
+    name: "EUR",
+  },
+];
 
 export const RegisterForm = () => {
   const navigate = useNavigate();
@@ -72,6 +91,15 @@ export const RegisterForm = () => {
                     className="w-full max-w-xs"
                     registration={register("password")}
                     error={formState.errors["password"]}
+                  />
+                  <SelectField
+                    options={currencies}
+                    placeholder="Currency"
+                    error={formState.errors["currency"]}
+                    registration={register("currency")}
+                    className="mb-3 h-[45px] basis-1/2 text-white"
+                    defaultValue="Please chose currency"
+                    errorClass="bottom-[-30px]"
                   />
 
                   <p

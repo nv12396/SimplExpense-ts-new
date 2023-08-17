@@ -7,11 +7,12 @@ import {
 import storage from "../utils/storage";
 
 const handleUserResponse = async (data: UserResponse) => {
-  const { token, email } = data;
+  const { token, registredUser } = data;
 
   storage.setToken(token);
-  storage.setUser(email);
-  return email;
+  storage.setUser(registredUser);
+
+  return registredUser;
 };
 
 export const loginFn = async (data: LoginCredentialsDTO) => {

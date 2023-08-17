@@ -9,6 +9,9 @@ export class NewUserDTO {
   @IsString()
   email: string;
 
+  @IsString()
+  currency: string;
+
   @MinLength(6)
   @IsString()
   password: string;
