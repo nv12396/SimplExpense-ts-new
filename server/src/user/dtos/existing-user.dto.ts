@@ -7,8 +7,5 @@ export class ExistingUserDTO {
   @MinLength(6)
   password: string;
 
-  @MinLength(1)
-  currency: string;
-
   isAdmin: boolean;
 }

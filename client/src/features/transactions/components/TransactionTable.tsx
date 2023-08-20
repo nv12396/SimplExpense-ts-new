@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FunnelIcon } from "@heroicons/react/24/outline";
-// import { MdPlaylistAdd } from "react-icons/md";
 import clsx from "clsx";
 
 import { AddTransactionModal } from "../modals/AddTransactionModal";

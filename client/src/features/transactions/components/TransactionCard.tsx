@@ -1,6 +1,7 @@
 import moment from "moment";
 
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import { getCurrency } from "../../../utils/format-currency";
 
 type TransactionsCardTypeProps = {
   name: string;
@@ -46,7 +47,7 @@ export const TransactionsCard = ({
               : "text-rose-400 font-bold"
           }`}
         >
-          {type === "INCOME" ? "+$" : "-$"}
+          {type === "INCOME" ? `+ ${getCurrency()}` : `- ${getCurrency()}`}
         </p>
         <p
           className={`${
@@ -67,13 +68,13 @@ export const TransactionsCard = ({
               : "text-rose-400 font-bold"
           }`}
         >
-          {type === "INCOME" ? "+$" : "-$"}
+          {type === "INCOME" ? `+${getCurrency()} ` : `-${getCurrency()} `}
         </p>
         <p
           className={`${
             type === "INCOME"
-              ? "text-secondaryGreen font-bold"
-              : "text-rose-400 font-bold"
+              ? "text-secondaryGreen font-bold p-1"
+              : "text-rose-400 font-bold p-1"
           }`}
         >
           {amount}

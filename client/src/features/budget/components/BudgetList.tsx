@@ -37,7 +37,8 @@ export const BudgetList = () => {
   }
 
   return (
-    <div className="mt-20 px-6 md:px-0 md:grid md:grid-cols-3 gap-6 flex flex-col md:gap-8 overflow-y-scroll min-h-[50vh] max-h-[50vh]">
+    // <div className="carousel rounded-box mt-12 md:mt-0 px-6 md:px-0 md:grid md:grid-cols-3 gap-6 flex flex-col md:gap-8 md:overflow-y-scroll md:min-h-[44vh] m:max-h-[44vh] overflow-auto mb-24 md:mb-0">
+    <div className="md:carousel md:rounded-box mt-12 md:mt-0 px-6 md:px-0 flex flex-col items-center jutistify-center gap-6 md:flex-row md:gap-8 md:overflow-y-scroll md:min-h-[44vh] m:max-h-[44vh] mb-24 md:mb-0">
       {budgets?.map((budget: BudgetDTO) => (
         <div onClick={() => addBudgetToEdit(budget)} key={budget.id}>
           <BudgetCard

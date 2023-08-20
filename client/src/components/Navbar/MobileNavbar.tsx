@@ -166,7 +166,7 @@ export const MobileNavbar = () => {
           className="inline-flex flex-col items-center justify-center px-5"
         >
           <NavLink
-            to="/add-later"
+            to="/settings"
             className={({ isActive }) =>
               isActive ? "text-primaryGreen" : "text-[#c5c5c7]"
             }

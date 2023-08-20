@@ -6,20 +6,62 @@ import { InputField } from "../../../components/Form/InputField";
 import Button from "../../../components/ui/Button";
 import { SettingsDTO } from "../types";
 import storage from "../../../utils/storage";
+import { SelectField } from "../../../components/Form/SelectField";
+import { useUpdateSettings } from "../api/updateSettings";
+import { toast } from "react-toastify";
+
+const currencies = [
+  {
+    _id: "USD",
+    name: "USD",
+  },
+  {
+    _id: "EUR",
+    name: "EUR",
+  },
+];
 
 export const Settings = () => {
   const schema = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().min(1, "Email is required"),
-    currency: z.string().min(1, "Category is required"),
+    currency: z.string().min(1, "Currency is required"),
   });
+
+  const { mutateAsync: updateSettings } = useUpdateSettings();
 
   return (
     <ContentLayout title="Settings">
-      <div className="flex flex-col container mx-auto px-12 w-[90%]">
-        <h1 className="text-2xl text-black py-6">Settings</h1>
+      <div className="flex flex-col container mx-auto px-4 md:px-12 md:w-[90%] h-screen pt-12 md:pt-2">
+        <h1 className="text-2xl text-black py-6 font-bold">Settings</h1>
         <Form<SettingsDTO["data"], typeof schema>
-          onSubmit={() => console.log()}
+          onSubmit={(values) => {
+            updateSettings(
+              {
+                id: storage.getUser().id,
+                data: {
+                  name: values.name,
+                  email: values.email,
+                  currency: values.currency,
+                },
+              },
+              {
+                onSuccess: () => {
+                  toast.success("Successfuly updated user settins", {
+                    position: toast.POSITION.BOTTOM_CENTER,
+                  });
+                  const user = {
+                    id: storage.getUser().id,
+                    name: values.name,
+                    email: values.email,
+                    currency: values.currency,
+                  };
+                  storage.setUser(user);
+                },
+              }
+            );
+            console.log(values);
+          }}
           schema={schema}
         >
           {({ register, formState }) => (
@@ -52,23 +94,22 @@ export const Settings = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <p className="text-black">Chosen currency</p>
-                <InputField
-                  type="text"
-                  placeholder="Please enter currency"
-                  className="w-96"
-                  registration={register("currency")}
+                <p className="text-black">Change currency</p>
+                <SelectField
+                  options={currencies}
+                  placeholder="Category"
                   error={formState.errors["currency"]}
-                  defaultValue="$"
-                  // defaultValue={existingBudget?.limit}
-                  iconClass="fa-solid fa-coins left-5"
-                  errorClass="bottom-[-35px]"
+                  registration={register("currency")}
+                  className="text-white w-full md:max-w-96 md:w-96"
+                  type="currency"
+                  errorClass="bottom-[-30px]"
                 />
               </div>
-
-              <Button type="submit" className="w-28">
-                Edit
-              </Button>
+              <div className="flex items-center justify-center md:justify-start">
+                <Button type="submit" className="w-28 mt-3">
+                  Edit
+                </Button>
+              </div>
             </div>
           )}
         </Form>

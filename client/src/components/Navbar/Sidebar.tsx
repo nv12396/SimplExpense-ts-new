@@ -28,7 +28,7 @@ export const Sidebar = () => {
                 <MdSpaceDashboard />
               </div>
 
-              <p>Dashboard</p>
+              <p className="font-semibold">Dashboard</p>
             </li>
           </NavLink>
           <NavLink
@@ -43,7 +43,7 @@ export const Sidebar = () => {
               <div className="pl-2">
                 <TbArrowsRightLeft />
               </div>
-              <p>Transactions</p>
+              <p className="font-semibold">Transactions</p>
             </li>
           </NavLink>
           <NavLink
@@ -58,7 +58,7 @@ export const Sidebar = () => {
               <div className="pl-2">
                 <MdSavings />
               </div>
-              <p>Budget</p>
+              <p className="font-semibold">Budget</p>
             </li>
           </NavLink>
           <NavLink
@@ -73,7 +73,7 @@ export const Sidebar = () => {
               <div className="pl-2">
                 <FaCog />
               </div>
-              <p>Settings</p>
+              <p className="font-semibold">Settings</p>
             </li>
           </NavLink>
         </ul>

@@ -129,7 +129,7 @@ export const AddBudgetModal = ({
                     placeholder="Category"
                     error={formState.errors["category"]}
                     registration={register("category")}
-                    className="mb-3 h-[45px] basis-1/2 text-white"
+                    className="text-sm md:text-md mb-3 h-[45px] basis-1/2 text-white"
                     type="CATEGORY"
                     defaultValue={existingBudget?.category.name}
                     errorClass="bottom-[-30px]"
@@ -158,10 +158,14 @@ export const AddBudgetModal = ({
                 {existingBudget && (
                   <Button
                     className="basis-2/5"
+                    variant="destructive"
                     onClick={() =>
-                      deleteBudget({
-                        budgetId: existingBudget.id,
-                      })
+                      deleteBudget(
+                        {
+                          budgetId: existingBudget.id,
+                        },
+                        { onSuccess: () => AddBudgetCloseModal() }
+                      )
                     }
                   >
                     DELETE

@@ -42,7 +42,7 @@ export class UserService {
     return await newUser.save();
   }
 
-  async updateEmail(id: string, email: string): Promise<any> {
+  async updateEmail(id: string, email: string): Promise<UserDocument> {
     const user = await this.findById(id);
 
     if (!user) {
@@ -60,7 +60,7 @@ export class UserService {
     return updatedEmail;
   }
 
-  async updateName(id: string, name: string): Promise<any> {
+  async updateName(id: string, name: string): Promise<UserDocument> {
     const user = await this.findById(id);
 
     if (!user) {
@@ -76,5 +76,20 @@ export class UserService {
       )
       .exec();
     return updatedName;
+  }
+
+  async updateUserDetails(
+    id: string,
+    newUserDetails: UserDetails,
+  ): Promise<UserDocument> {
+    const { name, email, currency } = newUserDetails;
+
+    const updatedUserDetails = this.userModel.findByIdAndUpdate(id, {
+      name,
+      email,
+      currency,
+    });
+
+    return updatedUserDetails;
   }
 }

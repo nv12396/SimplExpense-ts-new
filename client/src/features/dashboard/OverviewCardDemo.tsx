@@ -8,6 +8,7 @@ import {
 import { FcComboChart } from "react-icons/fc";
 
 import { useGetTotalAmount } from "../totalAmount/api/getTotalAmount";
+import { getCurrency } from "../../utils/format-currency";
 
 type OverviewCardPropsType = {
   title: string;
@@ -39,7 +40,7 @@ export const OverviewCardDemo = ({
           <h1 className="stat-title text-black md:text-lg font-bold">
             {title}
           </h1>
-          <p className="">{date}</p>
+          <p>{date}</p>
         </div>
         <div
           className={clsx(
@@ -55,7 +56,7 @@ export const OverviewCardDemo = ({
       <div className="flex pb-4 pl-2 justify-between">
         <div className="flex gap-2">
           <p className="text-black font-bold text-xl md:text-2xl text-start">
-            $
+            {getCurrency()}
           </p>
           <p className="text-3xl font-bold text-black">{amount}</p>
 

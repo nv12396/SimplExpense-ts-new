@@ -9,6 +9,7 @@ import { AddTotalAmount } from "./AddTotalAmount";
 
 import { TotalAmountDTO } from "../type";
 import { formatNumber } from "../../../utils/format-number";
+import { getCurrency } from "../../../utils/format-currency";
 
 export const MobileTotalBalance = () => {
   const [totalAmountToEdit, setTotalAmountToEdit] = useState<
@@ -40,9 +41,12 @@ export const MobileTotalBalance = () => {
         }}
       >
         <div className="flex gap-2">
-          <p className="text-white text-3xl font-bold text-center">
-            $ {formatNumber(totalAmount?.amount)}
-          </p>
+          <div className="flex">
+            <p className="text-white text-2xl pr-1">{getCurrency()}</p>
+            <p className="text-white text-3xl font-bold text-center">
+              {formatNumber(totalAmount?.amount)}
+            </p>
+          </div>
           <div
             className="w-4 mt-1 cursor-pointer text-white"
             onClick={() => {
@@ -65,15 +69,21 @@ export const MobileTotalBalance = () => {
       <div className="flex justify-between mt-4 px-20">
         <div className="flex flex-col items-center justify-center">
           <p className="text-sm text-gray-200">Income</p>
-          <p className="text-xl font-bold text-primaryGreen">
-            $ {totalIncome || 0}
-          </p>
+          <div className="flex">
+            <p className="text-primaryGreen pr-1">{getCurrency()}</p>
+            <p className="text-xl font-bold text-primaryGreen">
+              {totalIncome || 0}
+            </p>
+          </div>
         </div>
         <div className="flex flex-col items-center justify-center">
           <p className="text-sm text-gray-200">Expenses</p>
-          <p className="text-xl font-bold text-rose-400">
-            $ {totalExpenses || 0}
-          </p>
+          <div className="flex">
+            <p className="text-rose-400 pr-1">{getCurrency()}</p>
+            <p className="text-xl font-bold text-rose-400">
+              {totalExpenses || 0}
+            </p>
+          </div>
         </div>
       </div>
       <AddTotalAmount
