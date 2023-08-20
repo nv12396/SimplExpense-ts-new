@@ -1,7 +1,5 @@
 import * as z from "zod";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { GrFacebook } from "react-icons/gr";
 import { toast } from "react-toastify";
 
 import { Form } from "../../../components/Form/Form";
@@ -9,6 +7,7 @@ import { InputField } from "../../../components/Form/InputField";
 import { useRegister } from "../hooks/auth";
 import Button from "../../../components/ui/Button";
 import { SelectField } from "../../../components/Form/SelectField";
+import Logo from "../../../assets/logo1.png";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -47,13 +46,16 @@ export const RegisterForm = () => {
   const { mutate: register } = useRegister();
   return (
     <div>
-      <div className="flex flex-col">
-        <div className=" flex flex-col gap">
-          <div className="text-secondaryGreen flex flex-col gap-2">
-            <h1 className="font-bold text-3xl">Hi there!</h1>
-            <p className="font-thin">
-              Start managing your finance faster and better
-            </p>
+      <div className="flex flex-col w-full md:items-center md:justify-center">
+        <div className="md:hidden h-[20vh] bg-[#013736] flex items-center w-full">
+          <div className="w-72 ml-12 mt-4">
+            <img src={Logo} alt="" />
+          </div>
+        </div>
+        <div className="px-6 mt-16 md:mt-44">
+          <div className="text-black flex flex-col gap-2">
+            <h1 className="font-bold text-3xl text-center">Create Account</h1>
+            <p>Start managing your finance faster and better!</p>
           </div>
           <div className="flex flex-col gap-4 mt-12">
             <Form<RegisterValues, typeof schema>
@@ -70,27 +72,30 @@ export const RegisterForm = () => {
               schema={schema}
             >
               {({ register, formState }) => (
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 text-black">
                   <InputField
                     type="text"
                     placeholder="Please enter your name"
-                    className="w-full max-w-xs"
+                    className="w-full"
                     registration={register("name")}
                     error={formState.errors["name"]}
+                    iconClass="fa-solid fa-user left-5 text-gray-400"
                   />
                   <InputField
                     type="text"
                     placeholder="Please enter your email"
-                    className="w-full max-w-xs"
+                    className="w-full"
                     registration={register("email")}
                     error={formState.errors["email"]}
+                    iconClass="fa-solid fa-envelope left-5 text-gray-400"
                   />
                   <InputField
                     type="password"
                     placeholder="Please enter your password"
-                    className="w-full max-w-xs"
+                    className="w-full"
                     registration={register("password")}
                     error={formState.errors["password"]}
+                    iconClass="fa-solid fa-unlock-keyhole left-5 text-gray-400"
                   />
                   <SelectField
                     options={currencies}
@@ -104,18 +109,18 @@ export const RegisterForm = () => {
 
                   <p
                     onClick={() => navigate("/auth/login")}
-                    className="text-end text-sm font-bold text-secondaryGreen mt-2 cursor-pointer"
+                    className="text-end text-sm font-bold text-primaryGreen mt-2 cursor-pointer"
                   >
                     Already have an account?<span> Log in</span>
                   </p>
-                  <div>
+                  <div className="mx-auto">
                     <Button type="submit">REGISTER</Button>
                   </div>
                 </div>
               )}
             </Form>
 
-            <div className="divider my-4">OR</div>
+            {/* <div className="divider my-4">OR</div>
             <div className="flex gap-4 w-full justify-around">
               <div className="btn flex gap-2 w-[140px]">
                 <div className="text-lg">
@@ -129,7 +134,7 @@ export const RegisterForm = () => {
                 </div>
                 <p>Facebook</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

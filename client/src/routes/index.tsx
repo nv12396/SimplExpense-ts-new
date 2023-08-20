@@ -2,11 +2,11 @@ import { useRoutes } from "react-router-dom";
 
 import { protectedRoutes } from "./protected";
 import { publicRoutes } from "./public";
-import { Landing } from "../features/misc/routes/Landing";
 import { useAuthStore } from "../stores/auth";
+import { Login } from "../features/auth/routes/Login";
 
 export const AppRoutes = () => {
-  const commonRoutes = [{ path: "/", element: <Landing /> }];
+  const commonRoutes = [{ path: "/", element: <Login /> }];
 
   const isAuth = useAuthStore((state) => state.useAuth());
 

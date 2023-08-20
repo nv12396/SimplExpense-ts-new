@@ -21,7 +21,7 @@ const BudgetCard = ({ name, category, amount, limit }: BudgetDTO) => {
 
   return (
     <div className="md:carousel-item">
-      <div className="grid grid-rows-8 border rounded-xl bg-white shadow w-[350px] md:w-[410px] md:min-w-[410px] md:max-w-[410px]">
+      <div className="grid grid-rows-8 border rounded-xl bg-white shadow w-[350px] md:w-[380px] md:min-w-[380px] md:max-w-[380px]">
         <div className="flex justify-between">
           <div className="flex flex-col p-6">
             <p className="text-black grid-span-1">{name}</p>
