@@ -7,7 +7,6 @@ import { useCreateTotalAmount } from "../api/createTotalAmount";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import { CreateTotalAmountDTO, TotalAmountDTO } from "../type";
-import { useUpdateTotalAmount } from "../api/updateTotalAmount";
 import Button from "../../../components/ui/Button";
 
 const customStyles = {
@@ -43,7 +42,6 @@ export const AddTotalAmount = ({
 }: AddTotalAmountPropsType) => {
   const createTotalAmountMutation = useCreateTotalAmount();
 
-  const { mutateAsync: updateTotalAmountMutation } = useUpdateTotalAmount();
   console.log(
     "from mobile, total amount to edit je",
     existingTotalAmount?.amount
@@ -71,16 +69,8 @@ export const AddTotalAmount = ({
       <div>
         <Form<CreateTotalAmountDTO["data"], typeof schema>
           onSubmit={async (values) => {
-            if (!existingTotalAmount) {
-              await createTotalAmountMutation.mutateAsync({ data: values });
-              AddTotalAmountCloseModal();
-            } else {
-              await updateTotalAmountMutation({
-                id: existingTotalAmount.id,
-                data: values,
-              });
-              AddTotalAmountCloseModal();
-            }
+            await createTotalAmountMutation.mutateAsync({ data: values });
+            AddTotalAmountCloseModal();
           }}
           schema={schema}
         >
