@@ -274,7 +274,7 @@ export class TransactionsService {
 
   async createTransaction(
     transactions: TransactionsDTO,
-    userId,
+    userId: string,
   ): Promise<TransactionsDocument> {
     const { name, amount, category, type, date } = transactions;
     const newTransaction = await this.transactionsModel.create({
@@ -322,9 +322,10 @@ export class TransactionsService {
   async updateTransaction(
     transactionsId: MongoIdDTO,
     transaction: TransactionsDTO,
+    userId: string,
   ): Promise<TransactionDetailsDTO> {
     const { id } = transactionsId;
-    const { name, amount, type, user, category } = transaction;
+    const { name, amount, type, category } = transaction;
     const date = new Date();
     const updatedTransaction = await this.transactionsModel.findByIdAndUpdate(
       id,
@@ -332,7 +333,7 @@ export class TransactionsService {
         name,
         amount,
         type,
-        user,
+        user: userId,
         date,
         category,
       },

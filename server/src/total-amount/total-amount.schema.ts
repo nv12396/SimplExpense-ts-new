@@ -7,7 +7,7 @@ export type TotalAmountDocument = TotalAmount & Document;
 
 @Schema({ timestamps: true })
 export class TotalAmount {
-  @Prop({ required: true })
+  @Prop({ required: true, default: 0, min: 0 })
   amount: number;
 
   @Prop({
@@ -20,10 +20,3 @@ export class TotalAmount {
 }
 
 export const TotalAmountSchema = SchemaFactory.createForClass(TotalAmount);
-
-TotalAmountSchema.pre('save', function (next) {
-  if (this.isModified('amount') && this.amount < 0) {
-    this.amount = 0;
-  }
-  next();
-});

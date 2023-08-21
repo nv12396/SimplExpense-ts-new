@@ -5,7 +5,6 @@ export class TransactionsDTO {
   name: string;
   amount: number;
   category: MongoIdDTO;
-  user: MongoIdDTO;
   type: 'EXPENSE' | 'INCOME';
   date: Date;
 }

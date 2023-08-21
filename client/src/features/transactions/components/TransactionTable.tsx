@@ -34,60 +34,58 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
       <div className="min-w-full w-full flex flex-col">
         <div className="flex justify-between">
           <div className="flex gap-2 cursor-pointer items-center justify-center">
-            {transactions?.length && (
-              <div className="dropdown">
-                <label
-                  tabIndex={0}
-                  className="btn m-1 bg-[#f5f7fd] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f5f7fd]"
-                >
-                  <div className="w-5 text-primaryGreen">
-                    <FunnelIcon />
-                  </div>
+            <div className="dropdown">
+              <label
+                // tabIndex={0}
+                className="btn m-1 bg-[#f5f7fd] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f5f7fd]"
+              >
+                <div className="w-5 text-primaryGreen">
+                  <FunnelIcon />
+                </div>
 
-                  <p className="text-sm md:text-base text-gray-500">FILTERS</p>
-                </label>
-                <ul className="p-2 shadow-xl menu dropdown-content bg-white rounded-box w-72 text-primaryGreen text-sm md:text-base">
-                  <li>
-                    <button
-                      className="text-start"
-                      onClick={() => {
-                        setSort("lowestAmount");
-                      }}
-                    >
-                      <p>Amount Lowest to Highest</p>
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="text-start"
-                      onClick={() => {
-                        setSort("highestAmount");
-                      }}
-                    >
-                      Amount Highest to Lowest
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => {
-                        setSort("oldest");
-                      }}
-                    >
-                      Oldest
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => {
-                        setSort("newest");
-                      }}
-                    >
-                      Newest
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            )}
+                <p className="text-sm md:text-base text-gray-500">FILTERS</p>
+              </label>
+              <ul className="p-2 shadow-xl menu dropdown-content bg-white rounded-box w-72 text-primaryGreen text-sm md:text-base">
+                <li>
+                  <button
+                    className="text-start"
+                    onClick={() => {
+                      setSort("lowestAmount");
+                    }}
+                  >
+                    <p>Amount Lowest to Highest</p>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="text-start"
+                    onClick={() => {
+                      setSort("highestAmount");
+                    }}
+                  >
+                    Amount Highest to Lowest
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      setSort("oldest");
+                    }}
+                  >
+                    Oldest
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      setSort("newest");
+                    }}
+                  >
+                    Newest
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
           <div className="items-center justify-center mt-6 hidden md:flex mb-2">
             <Button

@@ -32,6 +32,7 @@ export class TotalAmountController {
     @Request() req,
     @Body('amount') amount: number,
   ): Promise<TotalAmountDTO> {
+    console.log(req.user);
     const { id: user } = req.user;
     return this.totalAmountService.createTotalAmount(user, amount);
   }
@@ -44,6 +45,7 @@ export class TotalAmountController {
     @Body('amount') amount: number,
   ): Promise<TotalAmountDTO> {
     const { id: user } = req.user;
+    console.log('id je', req.user);
     return this.totalAmountService.updateTotalAmount(user, amount);
   }
 }

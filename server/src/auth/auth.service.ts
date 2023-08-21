@@ -2,12 +2,12 @@ import * as bcrypt from 'bcrypt';
 import { ConflictException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
+import { UserService } from 'src/user/user.service';
+
 import { ExistingUserDTO } from 'src/user/dtos/existing-user.dto';
 import { NewUserDTO } from 'src/user/dtos/new-user.dto';
 import { UserDetails } from 'src/user/user-details.interface';
-import { UserService } from 'src/user/user.service';
-import { AuthUserDTO, AuthUserWithTokenDTO } from './auth-user.dto';
-
+import { AuthUserWithTokenDTO } from './auth-user.dto';
 @Injectable()
 export class AuthService {
   constructor(
@@ -21,8 +21,6 @@ export class AuthService {
 
   async register(user: Readonly<NewUserDTO>): Promise<AuthUserWithTokenDTO> {
     const { name, email, currency, password } = user;
-
-    console.log('currency', currency);
 
     const existingUser = await this.userService.findByEmail(email);
 
@@ -39,11 +37,11 @@ export class AuthService {
       hashedPassword,
     );
 
-    const jwt = await this.jwtService.signAsync(user, {
+    const registredUser = this.userService._getUserDetails(newUser);
+    const jwt = await this.jwtService.signAsync(registredUser, {
       secret: process.env.JWT_SECRET,
     });
 
-    const registredUser = this.userService._getUserDetails(newUser);
     return { registredUser, token: jwt };
   }
 

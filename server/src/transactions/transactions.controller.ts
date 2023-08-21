@@ -121,9 +121,11 @@ export class TransactionsController {
   @UseGuards(JwtGuard)
   @Patch('/update/:id')
   updateTransaction(
+    @Request() req,
     @Param() id: MongoIdDTO,
     @Body() transaction: TransactionsDTO,
   ): Promise<TransactionDetailsDTO> {
-    return this.transactionsService.updateTransaction(id, transaction);
+    const { id: userId } = req.user;
+    return this.transactionsService.updateTransaction(id, transaction, userId);
   }
 }

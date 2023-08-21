@@ -117,7 +117,10 @@ export const AddTransactionModal = ({
                 await editTotalAmount({
                   id: totalAmount?.id,
                   data: {
-                    amount: totalAmount.amount - values.amount,
+                    amount:
+                      totalAmount.amount - values.amount < 0
+                        ? 0
+                        : totalAmount.amount - values.amount,
                   },
                 });
               }
