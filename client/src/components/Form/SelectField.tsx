@@ -1,8 +1,9 @@
 import clsx from "clsx";
 import { UseFormRegisterReturn, FieldError } from "react-hook-form";
 
-import { Category } from "../../features/categories/types";
 import { Currency } from "../../features/auth/components/RegisterForm";
+
+import { Category } from "../../features/categories/types";
 
 type SelectFieldProps = {
   options: Category[] | Currency[] | undefined;
