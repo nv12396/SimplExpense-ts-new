@@ -27,7 +27,7 @@ export const TransactionChart = () => {
   }
 
   return (
-    <div className="flex items-center justify-center container mx-auto md:w-[80%]">
+    <div className="flex items-center justify-center container mx-auto md:w-[50%] lg:w-[80%]">
       <div className="w-full">
         <ResponsiveContainer width="100%" height={180} className="chart">
           <AreaChart data={chartData}>

@@ -36,11 +36,11 @@ export const OverviewCardDemo = ({
       onClick={onClick}
     >
       <div className="flex justify-between items-center">
-        <div className="flex flex-col pl-3 pt-1">
+        <div className="flex flex-col pl-1 lg:pl-3 pt-1">
           <h1 className="stat-title text-black md:text-lg font-bold">
             {title}
           </h1>
-          <p>{date}</p>
+          <p className="text-xs lg:text-base">{date}</p>
         </div>
         <div
           className={clsx(
@@ -58,7 +58,7 @@ export const OverviewCardDemo = ({
           <p className="text-black font-bold text-xl md:text-2xl text-start">
             {getCurrency()}
           </p>
-          <p className="text-3xl font-bold text-black">{amount}</p>
+          <p className="text-xl lg:text-3xl font-bold text-black">{amount}</p>
 
           {title === "TOTAL AMOUNT" && (
             <div

@@ -21,7 +21,7 @@ export const MobileNavbar = () => {
 
   const search = useLocation();
   return (
-    <div className="block md:hidden fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-[#013736] bottom-0 left-1/2 shadow-md">
+    <div className="w-full block md:hidden fixed z-50 h-16 -translate-x-1/2 bg-[#013736] bottom-0 left-1/2 shadow-md">
       <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
         <button
           data-tooltip-target="tooltip-home"

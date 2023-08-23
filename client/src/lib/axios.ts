@@ -5,7 +5,8 @@ import storage from "../utils/storage";
 
 export const axios = Axios.create({
   baseURL: "https://simplexpense-ts-new-production.up.railway.app/api",
-  //baseURL: "http://localhost:3000/api",
+  // baseURL: "http://localhost:3000/api",
+  // baseURL: API_URL,
 });
 
 console.log();

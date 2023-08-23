@@ -21,18 +21,18 @@ const currencies = [
   },
 ];
 
-export const Settings = () => {
-  const schema = z.object({
-    name: z.string().min(1, "Name is required"),
-    email: z.string().min(1, "Email is required"),
-    currency: z.string().min(1, "Currency is required"),
-  });
+const schema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().min(1, "Email is required"),
+  currency: z.string().min(1, "Currency is required"),
+});
 
+export const Settings = () => {
   const { mutateAsync: updateSettings } = useUpdateSettings();
 
   return (
     <ContentLayout title="Settings">
-      <div className="flex flex-col container mx-auto px-4 md:px-12 md:w-[90%] h-screen pt-12 md:pt-2">
+      <div className="flex flex-col container mx-auto px-4 md:px-12 md:w-[90%] h-screen pt-12 md:pt-2 md:mt-2 mt-[22vh]">
         <h1 className="text-2xl text-black py-6 font-bold">Settings</h1>
         <Form<SettingsDTO["data"], typeof schema>
           onSubmit={(values) => {

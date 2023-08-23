@@ -30,20 +30,19 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
   });
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center md:mt-0 mt-[22vh]">
       <div className="min-w-full w-full flex flex-col">
         <div className="flex justify-between">
           <div className="flex gap-2 cursor-pointer items-center justify-center">
             <div className="dropdown">
-              <label
-                // tabIndex={0}
-                className="btn m-1 bg-[#f5f7fd] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f5f7fd]"
-              >
+              <label className="btn m-1 bg-[#f5f7fd] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f5f7fd]">
                 <div className="w-5 text-primaryGreen">
                   <FunnelIcon />
                 </div>
 
-                <p className="text-sm md:text-base text-gray-500">FILTERS</p>
+                <p className="text-sm md:text-xs lg:text-base text-gray-500">
+                  FILTERS
+                </p>
               </label>
               <ul className="p-2 shadow-xl menu dropdown-content bg-white rounded-box w-72 text-primaryGreen text-sm md:text-base">
                 <li>
@@ -87,13 +86,13 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
               </ul>
             </div>
           </div>
-          <div className="items-center justify-center mt-6 hidden md:flex mb-2">
+          <div className="items-center justify-center md:mt-1 lg:mt-6 hidden md:flex lg:mb-2">
             <Button
               onClick={() => {
                 setTransactionToEdit(null);
                 AddTransactionModalIsOpen();
               }}
-              className="hidden md:flex w-24 mx-auto items-center justify-center"
+              className="hidden md:flex md:w-18 md:p-2 md:text-xs lg:text-base lg:w-24 mx-auto items-center justify-center"
             >
               + ADD
             </Button>
@@ -101,7 +100,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
         </div>
         <div
           className={clsx(
-            "3xl:min-h-[58vh] 3xl:h-[58vh] 3xl:max-h-[58vh] lg:min-h-[44vh] lg:h-[44vh] lg:max-h-[44vh]  min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto md:items-stretch",
+            "3xl:min-h-[58vh] 3xl:h-[58vh] 3xl:max-h-[58vh] lg:min-h-[44vh] lg:h-[44vh] lg:max-h-[44vh] md:min-h-[280px] md:h-[280px] md:max-h-[280px] min-h-[340] h-[340px] max-h-[340px] overflow-y-scroll mt-4 gap-4 flex flex-col items-center container mx-auto md:items-stretch",
             className
           )}
         >

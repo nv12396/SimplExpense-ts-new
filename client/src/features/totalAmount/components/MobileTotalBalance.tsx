@@ -26,7 +26,7 @@ export const MobileTotalBalance = () => {
   const { data: totalIncome } = useGetIncome();
 
   return (
-    <div className="bg-[#013736] w-full flex flex-col pt-4 h-[20vh]">
+    <div className="bg-[#013736] w-full flex flex-col pt-4 h-[20vh] fixed z-50">
       <p className="text-sm font-thin text-gray-200 text-center mb-2">
         Total Balance
       </p>

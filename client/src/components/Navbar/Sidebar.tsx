@@ -8,13 +8,12 @@ import { logoutFn } from "../../lib/auth";
 
 export const Sidebar = () => {
   return (
-    // <div className="bg-gradient-to-r from-cyan-700 to-primaryGreen h-screen min-h-screen flex flex-col border-r-2">
     <div className="bg-[#013736] h-screen min-h-screen flex flex-col border-r-2">
       <div className="flex justify-center">
         <img src={logo} alt="logo" className="max-h-60" />
       </div>
-      <div className="mt-8 flex flex-col justify-between mr-12 3xl:ml-8 h-full">
-        <ul className="flex flex-col items-start ml-10 text-white text-lg max-w-[250px]">
+      <div className="mt-8 flex flex-col justify-between lg:mr-12 pr-2 3xl:ml-8 h-full">
+        <ul className="flex flex-col items-start md:ml-2 lg:ml-10 text-white text-sm lg:text-lg max-w-[250px]">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -78,7 +77,7 @@ export const Sidebar = () => {
           </NavLink>
         </ul>
         <div
-          className="flex gap-2 items-center ml-16 mb-8 cursor-pointer text-white"
+          className="flex gap-2 items-center md:ml-6 lg:ml-16 mb-8 cursor-pointer text-white"
           onClick={logoutFn}
         >
           <BiLogOutCircle style={{ fontWeight: "900" }} />

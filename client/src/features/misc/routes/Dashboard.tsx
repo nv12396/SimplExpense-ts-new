@@ -6,11 +6,11 @@ import { Spendings } from "../../spendings/component/Spendings";
 export const Dashboard = () => {
   return (
     <ContentLayout title="SimpleExpense - Dashboard">
-      <div className="flex flex-col md:flex-row md:justify-around md:items-center">
+      <div className="flex flex-col lg:flex-row lg:justify md:items-center">
         <div className="basis-1/2">
           <TransactionTable />
         </div>
-        <div className="basis-1/2 flex flex-col gap-12 mt-16 min-h-[60vh] h-[60vh] justify-around">
+        <div className="basis-1/2 flex mt-12 flex-col md:flex-row lg:flex-col md:gap-4 md:mt-4 lg:gap-12 lg:mt-16 lg:min-h-[60vh] lg:h-[60vh]">
           <TransactionChart />
           <div className="basis-1/2">
             <Spendings />

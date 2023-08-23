@@ -58,7 +58,7 @@ export const TransactionTableFilter = ({
   );
 
   return (
-    <div className="flex items-center justify-center mt-2">
+    <div className="flex items-center justify-center md:mt-2 mt-[22vh]">
       <div className="min-w-full w-full flex flex-col md:mt-8">
         <div className="flex justify-between"></div>
         <div

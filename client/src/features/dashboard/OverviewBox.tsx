@@ -28,7 +28,7 @@ export const OverviewBox = () => {
 
   const month = new Date().toLocaleString("default", { month: "long" });
   return (
-    <div className="md:w-full mt-4 w-[90%] flex h-48 rounded-box gap-4 md:gap-12 items-center justify-center md:justify-center container mx-auto md:px-2">
+    <div className="md:w-full mt-4 w-[90%] flex h-48 rounded-box gap-4 md:gap-6 lg:gap-12 items-center justify-center md:justify-center container mx-auto md:px-2">
       <OverviewCardDemo
         onClick={() => {
           if (totalAmount?.amount !== 0) {
