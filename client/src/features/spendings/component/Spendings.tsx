@@ -11,6 +11,7 @@ export const Spendings = () => {
       {isLoading && (
         <div className="w-full h-48 flex justify-center items-center">
           <Spinner size="sm" />
+          {/* <div></div> */}
         </div>
       )}
       {!isLoading && (
