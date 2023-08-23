@@ -68,8 +68,8 @@ export const TransactionTableFilter = ({
           )}
         >
           {!filteredTransactions?.length && !isLoading && (
-            <div className="flex flex-col justify-center items-center ml-32">
-              <p className="text-xl mt-20 mb-8 text-gray-500">
+            <div className="flex flex-col justify-center items-center ml-2 md:ml-32">
+              <p className="text-xl md:mt-20 mb-8 text-gray-500">
                 There is no transactions in selected period.
               </p>
             </div>

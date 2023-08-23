@@ -1,14 +1,10 @@
 import clsx from "clsx";
 
-import {
-  WalletIcon,
-  PlusCircleIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/24/outline";
+import { PlusCircleIcon, WalletIcon } from "@heroicons/react/24/outline";
 import { FcComboChart } from "react-icons/fc";
 
-import { useGetTotalAmount } from "../totalAmount/api/getTotalAmount";
 import { getCurrency } from "../../utils/format-currency";
+import { useGetTotalAmount } from "../totalAmount/api/getTotalAmount";
 
 type OverviewCardPropsType = {
   title: string;
@@ -55,21 +51,17 @@ export const OverviewCardDemo = ({
 
       <div className="flex pb-4 pl-2 justify-between">
         <div className="flex gap-2">
-          <p className="text-black font-bold text-xl md:text-2xl text-start">
+          <p className="text-black font-bold text-xl md:text-xl lg:text-2xl text-start">
             {getCurrency()}
           </p>
           <p className="text-xl lg:text-3xl font-bold text-black">{amount}</p>
-
           {title === "TOTAL AMOUNT" && (
             <div
-              className="w-6 flex items-center justify-center ml-2 text-black mt-1 cursor-pointer"
+              className="w-4 flex items-center justify-center ml-2 text-gray-400 mt-1 cursor-pointer"
               onClick={AddTotalAmountModalIsOpen}
             >
-              {totalAmount?.amount === 0 ? (
-                <PlusCircleIcon />
-              ) : (
-                <PencilSquareIcon />
-              )}
+              {totalAmount?.amount === 0 ||
+                (!totalAmount && <PlusCircleIcon />)}
             </div>
           )}
         </div>

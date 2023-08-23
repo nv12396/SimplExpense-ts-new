@@ -7,8 +7,6 @@ import { Spinner } from "../../../components/Elements/Spinner/Spinner";
 import { BudgetDTO } from "../type";
 
 export const BudgetList = () => {
-  // const [budgetToEdit, setBudgetToEdit] = useState<BudgetDTO | null>(null);
-
   const { data: budgets, isLoading } = useGetBudget();
 
   const {
@@ -18,8 +16,6 @@ export const BudgetList = () => {
     addBudgetToEdit,
   } = useAddBudgetModal();
 
-  console.log("budgetToEdit", budgetToEdit);
-
   if (isLoading) {
     return (
       <div className="w-full h-48 flex justify-center items-center">
@@ -27,10 +23,9 @@ export const BudgetList = () => {
       </div>
     );
   }
-
   if (!budgets?.length) {
     return (
-      <div className="mt-28 text-lg text-gray-500 mx-auto">
+      <div className="mt-52 md:mt-24 text-lg text-black mx-auto">
         <p>Please add budget.</p>
       </div>
     );

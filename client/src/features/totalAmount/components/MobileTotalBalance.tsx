@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PencilSquareIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
 
 import { useAddTotalAmountModal } from "../../../stores/totalAmountModal";
 import { useGetTotalAmount } from "../api/getTotalAmount";
@@ -16,11 +16,8 @@ export const MobileTotalBalance = () => {
     TotalAmountDTO | undefined
   >(null);
 
-  const {
-    addTotalAmountOpenModal,
-    addTotalAmountCloseModal,
-    addTotalAmountModalIsOpen,
-  } = useAddTotalAmountModal();
+  const { addTotalAmountCloseModal, addTotalAmountModalIsOpen } =
+    useAddTotalAmountModal();
   const { data: totalAmount } = useGetTotalAmount();
   const { data: totalExpenses } = useGetExpenses();
   const { data: totalIncome } = useGetIncome();
@@ -44,7 +41,7 @@ export const MobileTotalBalance = () => {
           <div className="flex">
             <p className="text-white text-2xl pr-1">{getCurrency()}</p>
             <p className="text-white text-3xl font-bold text-center">
-              {formatNumber(totalAmount?.amount)}
+              {formatNumber(totalAmount?.amount) || 0}
             </p>
           </div>
           <div
@@ -52,17 +49,13 @@ export const MobileTotalBalance = () => {
             onClick={() => {
               if (totalAmount?.amount !== 0) {
                 setTotalAmountToEdit(totalAmount);
-                addTotalAmountOpenModal();
               } else {
                 setTotalAmountToEdit(null);
               }
             }}
           >
-            {totalAmount?.amount === 0 ? (
-              <PlusCircleIcon className="text-gray-200" />
-            ) : (
-              <PencilSquareIcon />
-            )}
+            {totalAmount?.amount === 0 ||
+              (!totalAmount && <PlusCircleIcon className="text-gray-200" />)}
           </div>
         </div>
       </div>

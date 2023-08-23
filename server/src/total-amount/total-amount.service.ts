@@ -54,17 +54,19 @@ export class TotalAmountService {
     userId: MongoIdDTO,
     amount: number,
   ): Promise<TotalAmountDocument> {
-    const totalAmount = await this.totalAmountModel.findOneAndUpdate(
+    const totalAmount = await this.totalAmountModel.findOne({ user: userId });
+
+    const totalAmountUpdated = await this.totalAmountModel.findOneAndUpdate(
       {
         user: userId,
       },
       {
         $inc: {
-          amount,
+          amount: totalAmount.amount + amount < 0 ? totalAmount.amount : amount,
         },
       },
       { new: true },
     );
-    return totalAmount;
+    return totalAmountUpdated;
   }
 }

@@ -8,7 +8,7 @@ export const Budget = () => {
 
   return (
     <ContentLayout title="Budget">
-      <div className="flex flex-col gap-6 md:h-[48vh] 3xl:h-[63vh] md:mt-20">
+      <div className="flex flex-col h-full pb-52 gap-6 md:h-[48vh] 3xl:h-[63vh] md:mt-20">
         <BudgetList />
         <Button
           className="hidden md:flex w-[150px] mx-auto items-center justify-center"
