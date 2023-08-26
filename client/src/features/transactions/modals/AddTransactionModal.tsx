@@ -210,7 +210,12 @@ export const AddTransactionModal = ({
               </div>
 
               <div className="flex items-center justify-around gap-4">
-                <Button className="basis-2/5" type="submit" variant="default">
+                <Button
+                  disabled={createTransactionMutation.isLoading}
+                  className="basis-2/5"
+                  type="submit"
+                  variant="default"
+                >
                   {existingTransaction ? <p>Edit</p> : <p>Add</p>}
                 </Button>
                 {existingTransaction && (

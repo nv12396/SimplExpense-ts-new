@@ -39,6 +39,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {children}
+        <span className="loading loading-spinner"></span>
+        {disabled && <span className="loading loading-spinner"></span>}
       </button>
     );
   }

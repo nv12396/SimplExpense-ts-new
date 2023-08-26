@@ -35,7 +35,10 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
         <div className="flex justify-between">
           <div className="flex gap-2 cursor-pointer items-center justify-center">
             <div className="dropdown">
-              <label className="btn m-1 bg-[#f5f7fd] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f5f7fd]">
+              <label
+                tabIndex={0}
+                className="btn m-1 bg-[#f5f7fd] flex w-[120px] justify-start border-none gap-2 hover:bg-[#f5f7fd]"
+              >
                 <div className="w-5 text-primaryGreen">
                   <FunnelIcon />
                 </div>
@@ -44,7 +47,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
                   FILTERS
                 </p>
               </label>
-              <ul className="p-2 shadow-xl menu dropdown-content bg-white rounded-box w-72 text-primaryGreen text-sm md:text-base">
+              <ul className="p-2 shadow-xl menu dropdown-content  z-[1] bg-white rounded-box w-72 text-primaryGreen text-sm md:text-base">
                 <li>
                   <button
                     className="text-start"
