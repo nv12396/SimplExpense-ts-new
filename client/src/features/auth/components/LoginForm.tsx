@@ -31,7 +31,7 @@ export const LoginForm = () => {
           <img src={Logo} alt="" />
         </div>
       </div>
-      <div className="flex flex-col gap px-6 mt-16 md:mx-auto md:mt-44">
+      <div className="flex flex-col gap px-6 mt-16 md:mx-auto md:mt-">
         <div className="text-black flex flex-col gap-2">
           <h1 className="font-bold text-3xl">Welcome back!</h1>
           <p className="text-md">

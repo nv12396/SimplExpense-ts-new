@@ -5,6 +5,7 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 
@@ -13,6 +14,7 @@ import { NewUserDTO } from 'src/user/dtos/new-user.dto';
 import { AuthService } from './auth.service';
 import { AuthUserWithTokenDTO } from './auth-user.dto';
 import { JwtGuard } from './guards/jwt.guard';
+import { UserDetails } from 'src/user/user-details.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -28,6 +30,13 @@ export class AuthController {
   @HttpCode(HttpStatus.CREATED)
   login(@Body() user: ExistingUserDTO): Promise<AuthUserWithTokenDTO> {
     return this.authService.login(user);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('me')
+  getUser(@Request() req): Promise<UserDetails> {
+    const { id: userId } = req.user;
+    return this.authService.getUser(userId);
   }
 
   @UseGuards(JwtGuard)

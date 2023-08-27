@@ -1,5 +1,11 @@
 import * as bcrypt from 'bcrypt';
-import { ConflictException, Injectable } from '@nestjs/common';
+import * as jwt from 'jsonwebtoken';
+
+import {
+  ConflictException,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { UserService } from 'src/user/user.service';
@@ -17,6 +23,11 @@ export class AuthService {
 
   async hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, 12);
+  }
+
+  async getUser(userId: string): Promise<UserDetails> {
+    const user = await this.userService.findById(userId);
+    return this.userService._getUserDetails(user);
   }
 
   async register(user: Readonly<NewUserDTO>): Promise<AuthUserWithTokenDTO> {
