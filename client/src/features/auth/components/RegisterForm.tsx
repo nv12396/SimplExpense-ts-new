@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 
 import { Form } from "../../../components/Form/Form";
 import { InputField } from "../../../components/Form/InputField";
-import { useRegister } from "../hooks/auth";
 import Button from "../../../components/ui/Button";
 import { SelectField } from "../../../components/Form/SelectField";
+import { useRegister } from "../hooks/auth";
 import Logo from "../../../assets/logo1.png";
 
 const schema = z.object({
@@ -44,6 +44,7 @@ const currencies = [
 export const RegisterForm = () => {
   const navigate = useNavigate();
   const { mutate: register } = useRegister();
+
   return (
     <div>
       <div className="flex flex-col w-full md:items-center md:justify-center">
@@ -119,22 +120,6 @@ export const RegisterForm = () => {
                 </div>
               )}
             </Form>
-
-            {/* <div className="divider my-4">OR</div>
-            <div className="flex gap-4 w-full justify-around">
-              <div className="btn flex gap-2 w-[140px]">
-                <div className="text-lg">
-                  <FcGoogle />
-                </div>
-                <p>Google</p>
-              </div>
-              <div className="btn flex gap-2 w-[140px]">
-                <div className="text-sky-600">
-                  <GrFacebook />
-                </div>
-                <p>Facebook</p>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

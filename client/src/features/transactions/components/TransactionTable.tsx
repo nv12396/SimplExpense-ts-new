@@ -30,7 +30,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
   });
 
   return (
-    <div className="flex items-center justify-center md:mt-0 mt-[22vh]">
+    <div className="flex items-center justify-center md:mt-0 mx-0 px-0">
       <div className="min-w-full w-full flex flex-col">
         <div className="flex justify-between">
           <div className="flex gap-2 cursor-pointer items-center justify-center">
@@ -136,6 +136,7 @@ export const TransactionTable = ({ className }: TransactionTableProps) => {
                 />
               </div>
             ))}
+          {/* {!isLoading && <TransactionTableDemo transactions={transactions} />} */}
         </div>
         <div>
           <AddTransactionModal

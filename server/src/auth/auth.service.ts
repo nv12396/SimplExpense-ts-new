@@ -14,11 +14,15 @@ import { ExistingUserDTO } from 'src/user/dtos/existing-user.dto';
 import { NewUserDTO } from 'src/user/dtos/new-user.dto';
 import { UserDetails } from 'src/user/user-details.interface';
 import { AuthUserWithTokenDTO } from './auth-user.dto';
+import { TotalAmountService } from 'src/total-amount/total-amount.service';
+import { MongoIdDTO } from 'src/dtos/dtos';
+import mongoose from 'mongoose';
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
+    private totalAmountService: TotalAmountService,
   ) {}
 
   async hashPassword(password: string): Promise<string> {
@@ -52,6 +56,8 @@ export class AuthService {
     const jwt = await this.jwtService.signAsync(registredUser, {
       secret: process.env.JWT_SECRET,
     });
+    const userIdDto: MongoIdDTO = { id: registredUser.id };
+    await this.totalAmountService.createTotalAmount(userIdDto.id, 0);
 
     return { registredUser, token: jwt };
   }

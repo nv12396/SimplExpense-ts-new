@@ -10,7 +10,6 @@ export const axios = Axios.create({
   baseURL: API_URL,
 });
 
-console.log();
 axios.interceptors.request.use(
   (config) => {
     const token = storage.getToken();

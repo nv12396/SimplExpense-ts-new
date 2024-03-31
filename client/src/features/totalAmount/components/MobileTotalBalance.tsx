@@ -23,8 +23,10 @@ export const MobileTotalBalance = () => {
   const { data: totalIncome } = useGetIncome();
 
   return (
-    <div className="bg-[#013736] w-full flex flex-col pt-4 h-[20vh] fixed z-50">
-      <p className="text-sm font-thin text-gray-200 text-center mb-2">
+    // <div className="bg-gradient-to-tr from-indigo-800 via-teal-800 to-blue-400 w-full flex flex-col pt-4 h-[20vh] fixed z-50">
+    <div className="bg-gradient-to-tr from-pink-800 via-teal-800 to-blue-400 w-full flex flex-col pt-4 h-[22vh] z-50">
+      {/* <div className="bg-gradient-to-tr from-pink-100 via-teal-800 to-blue-400 w-full flex flex-col pt-4 h-[20vh] fixed z-50"> */}
+      <p className="text-md font-bold text-gray-300 text-center mb-2">
         Total Balance
       </p>
       <div
@@ -61,7 +63,7 @@ export const MobileTotalBalance = () => {
       </div>
       <div className="flex justify-between mt-4 px-20">
         <div className="flex flex-col items-center justify-center">
-          <p className="text-sm text-gray-200">Income</p>
+          <p className="text-sm text-gray-200 font-bold">Income</p>
           <div className="flex">
             <p className="text-primaryGreen pr-1">{getCurrency()}</p>
             <p className="text-xl font-bold text-primaryGreen">
@@ -70,7 +72,7 @@ export const MobileTotalBalance = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center">
-          <p className="text-sm text-gray-200">Expenses</p>
+          <p className="text-sm font-bold text-gray-200">Expenses</p>
           <div className="flex">
             <p className="text-rose-400 pr-1">{getCurrency()}</p>
             <p className="text-xl font-bold text-rose-400">

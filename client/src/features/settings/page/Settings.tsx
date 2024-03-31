@@ -32,7 +32,7 @@ export const Settings = () => {
 
   return (
     <ContentLayout title="Settings">
-      <div className="flex flex-col container mx-auto px-4 md:px-12 md:w-[90%] h-screen pt-12 md:pt-2 md:mt-2 mt-[16vh]">
+      <div className="flex flex-col container px-4 md:px-12 md:w-[90%] h-screen pt-12 md:pt-2 md:mt-8 bg-[#f5f7fd] rounded-[1.4em] relative mx-0">
         <h1 className="text-2xl text-black py-6 font-bold">Settings</h1>
         <Form<SettingsDTO["data"], typeof schema>
           onSubmit={(values) => {
@@ -60,7 +60,6 @@ export const Settings = () => {
                 },
               }
             );
-            console.log(values);
           }}
           schema={schema}
         >

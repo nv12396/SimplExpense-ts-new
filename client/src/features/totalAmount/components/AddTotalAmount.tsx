@@ -42,10 +42,6 @@ export const AddTotalAmount = ({
 }: AddTotalAmountPropsType) => {
   const createTotalAmountMutation = useCreateTotalAmount();
 
-  console.log(
-    "from mobile, total amount to edit je",
-    existingTotalAmount?.amount
-  );
   return (
     <Modal
       isOpen={addTotalAmountModalIsOpen}

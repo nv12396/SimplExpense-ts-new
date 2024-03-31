@@ -13,5 +13,5 @@ export type UpdateTotalAmountDTO = {
   data: {
     amount: number;
   };
-  id: string;
+  id: string | undefined;
 };

@@ -103,7 +103,8 @@ export const MobileNavbar = () => {
             }}
             data-tooltip-target="tooltip-new"
             type="button"
-            className="bg-gradient-to-r from-cyan-700 to-primaryGreen inline-flex items-center justify-center w-16 absolute bottom-6 overflow-auto shadow-xl h-16 font-medium bg-[#292d32] rounded-full "
+            className="bg-gradient-to-tr from-pink-800 via-teal-800 to-blue-400 inline-flex items-center justify-center w-16 absolute bottom-6 overflow-auto shadow-xl h-16 font-medium bg-[#292d32] rounded-full "
+            // className="bg-gradient-to-r from-cyan-700 to-primaryGreen inline-flex items-center justify-center w-16 absolute bottom-6 overflow-auto shadow-xl h-16 font-medium bg-[#292d32] rounded-full "
           >
             <svg
               className="w-6 h-6 text-white"

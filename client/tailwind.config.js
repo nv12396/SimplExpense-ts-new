@@ -15,7 +15,7 @@ export default {
         secondaryGreen: "#4ECB71",
       },
       screens: {
-        sm: "640px",
+        sm: "680px",
         md: "1110px",
         lg: "1550px",
         xl: "1280px",

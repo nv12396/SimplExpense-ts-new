@@ -24,18 +24,18 @@ export const TransactionsCard = ({
 }: TransactionsCardTypeProps) => {
   return (
     <div className="md:w-[600px] lg:w-full lg:min-w-full grid py-4 text-base bg-white rounded-xl shadow-md justify-around gap-6 p-4 grid-cols-11">
-      <div className="col-span-1 text-black m-auto">
+      <div className="col-span-1 text-[#49c5b6] m-auto">
         <i className={`${icon}`}></i>
       </div>
-      <div className="md:col-span-4 col-span-5 text-black font-bold ml-4 text-xs md:text-sm lg:text-base break-all flex flex-col">
-        <p className="break-all font-bold">{name}</p>
+      <div className="md:col-span-4 col-span-5 text-[#49c5b6] font-bold ml-4 text-xs md:text-sm lg:text-base break-all flex flex-col">
+        <p className="break-all font-bold ">{name}</p>
         <p className="mt-1 text-xs lg:text-sm text-gray-500">
           {moment(date).format("D. MMMM YYYY.")}
         </p>
       </div>
       <div className="hidden md:block md:col-span-3">
         <div className="mt-3 flex gap-1 text-sm md:text-base">
-          <p className="text-gray-800">{category}</p>
+          <p className="text-[#49c5b6] font-semibold">{category}</p>
         </div>
       </div>
 

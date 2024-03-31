@@ -17,13 +17,13 @@ export const Login = () => {
             <img
               src={Demo}
               alt="demo"
-              className="w-[80%] mx-auto mt-12 border shadow-xl"
+              className="w-[80%] mx-auto mt-12 border border-black shadow-xl"
             />
           </div>
         </div>
       </div>
       <div className="md:p-6 md:basis-1/2 md:bg-[#013736]">
-        <div className="bg-[#f5f7fd] md:w-full md:h-full md:rounded-2xl h-screen w-screen">
+        <div className="bg-[#f5f7fd] md:w-full md:h-full md:rounded-2xl h-screen w-screen pt-36">
           <div className="flex h-full">
             <LoginForm />
           </div>

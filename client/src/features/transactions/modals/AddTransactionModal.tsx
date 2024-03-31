@@ -48,6 +48,19 @@ type AddTransactionModalPropsType = {
   existingTransaction?: ExistingTransactionDTO | null;
 };
 
+const transactionType = [
+  {
+    _id: "EXPENSE",
+    name: "EXPENSE",
+    icon: "",
+  },
+  {
+    _id: "INCOME",
+    name: "INCOME",
+    icon: "",
+  },
+];
+
 export const AddTransactionModal = ({
   addTransactionModalIsOpen,
   AddTransactionCloseModal,
@@ -64,19 +77,6 @@ export const AddTransactionModal = ({
   const { mutateAsync: editTransaction } = UseEditTransaction();
 
   const { mutateAsync: editTotalAmount } = useUpdateTotalAmount();
-
-  const transactionType = [
-    {
-      _id: "EXPENSE",
-      name: "EXPENSE",
-      icon: "",
-    },
-    {
-      _id: "INCOME",
-      name: "INCOME",
-      icon: "",
-    },
-  ];
 
   return (
     <Modal
@@ -127,7 +127,7 @@ export const AddTransactionModal = ({
               if (values.type === "INCOME" && totalAmount) {
                 await editTotalAmount({
                   id: totalAmount?.id,
-                  data: { amount: totalAmount.amount + values.amount },
+                  data: { amount: totalAmount?.amount + values.amount },
                 });
               }
               AddTransactionCloseModal();

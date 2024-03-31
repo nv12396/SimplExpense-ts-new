@@ -36,7 +36,7 @@ export const InputField = (props: InputFieldProps) => {
         placeholder={placeholder}
         type={type}
         className={clsx(
-          "input input-md mb-2 bg-white text-black pl-12 border-1 border-gray-200",
+          "input input-md mb-2 bg-white text-black pl-12 border-1 border-gray-200 shadow-sm",
           className
         )}
         {...registration}

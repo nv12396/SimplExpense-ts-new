@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 
 import { Form } from "../../../components/Form/Form";
 import { InputField } from "../../../components/Form/InputField";
-import { useLogin } from "../hooks/auth";
 import Button from "../../../components/ui/Button";
+import { useLogin } from "../hooks/auth";
 import Logo from "../../../assets/logo1.png";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -24,6 +24,7 @@ type LoginValues = {
 export const LoginForm = () => {
   const navigate = useNavigate();
   const { mutate: login } = useLogin();
+
   return (
     <div className="flex flex-col w-full">
       <div className="md:hidden h-[20vh] bg-[#013736] flex items-center w-full">
@@ -33,7 +34,7 @@ export const LoginForm = () => {
       </div>
       <div className="flex flex-col gap px-6 mt-16 md:mx-auto md:mt-">
         <div className="text-black flex flex-col gap-2">
-          <h1 className="font-bold text-3xl">Welcome back!</h1>
+          <h1 className="font-bold text-center mb-4 text-3xl">Welcome back!</h1>
           <p className="text-md">
             Start managing your finance faster and better!
           </p>
@@ -81,22 +82,6 @@ export const LoginForm = () => {
               </div>
             )}
           </Form>
-
-          {/* <div className="divider my-4">OR</div>
-            <div className="flex gap-4 w-full justify-around">
-              <div className="btn flex gap-2 w-[140px] border-none bg-gray-100 hover:bg-white">
-                <div className="text-lg">
-                  <FcGoogle />
-                </div>
-                <p className="text-black font-semibold">Google</p>
-              </div>
-              <div className="btn flex gap-2 w-[140px]">
-                <div className="text-sky-600">
-                  <GrFacebook />
-                </div>
-                <p>Facebook</p>
-              </div>
-            </div> */}
         </div>
       </div>
     </div>

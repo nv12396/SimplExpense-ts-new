@@ -6,10 +6,12 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtGuard } from './guards/jwt.guard';
 import { JwtStrategy } from './guards/jwt.strategy';
+import { TotalAmountModule } from 'src/total-amount/total-amount.module';
 
 @Module({
   imports: [
     UserModule,
+    TotalAmountModule,
     JwtModule.registerAsync({
       useFactory: () => ({
         secret: process.env.JWT_SECRET,

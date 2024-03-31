@@ -17,7 +17,7 @@ export const Register = () => {
             <img
               src={Demo}
               alt="demo"
-              className="w-[80%] mx-auto mt-12 border shadow-xl"
+              className="w-[80%] mx-auto mt-12 border border-black shadow-xl"
             />
           </div>
         </div>
