@@ -3,8 +3,11 @@ import Button from "../../components/ui/Button";
 import Dashboard from "./../../assets/dashboard.png";
 import Transactions from "./../../assets/transactions.png";
 import Budget from "./../../assets/budget.png";
+import { useNavigate } from "react-router-dom";
 
 const LandingHero = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex md:flex-row-reverse flex-col mt-12">
@@ -21,7 +24,12 @@ const LandingHero = () => {
             Say goodbye to financial stress and hello to simplicity with
             SimplExpense.
           </p>
-          <Button className="w-48 mx-auto">Join Today!</Button>
+          <Button
+            onClick={() => navigate("/auth/register")}
+            className="w-48 mx-auto"
+          >
+            Join Today!
+          </Button>
         </div>
         <div className="basis-1/2 flex items-center justify-center">
           <img
@@ -100,7 +108,6 @@ const LandingHero = () => {
             closely and make informed decisions to achieve your financial goals
             effectively and efficiently.
           </p>
-          <Button className="w-48 mx-auto">Join Today!</Button>
         </div>
         <div className="basis-1/2 flex items-center justify-center">
           <img

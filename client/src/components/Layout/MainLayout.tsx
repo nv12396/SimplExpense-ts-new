@@ -1,5 +1,4 @@
 import { MobileNavbar } from "../Navbar/MobileNavbar";
-import { Sidebar } from "../Navbar/Sidebar";
 import Container from "../ui/Container";
 import { MobileTotalBalance } from "../../features/totalAmount/components/MobileTotalBalance";
 import { SidebarDemo } from "../Navbar/SidebarDemo";

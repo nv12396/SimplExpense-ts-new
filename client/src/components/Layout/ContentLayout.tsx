@@ -1,8 +1,6 @@
 import * as React from "react";
 import { Helmet } from "react-helmet-async";
 
-import { OverviewBox } from "../../features/dashboard/OverviewBox";
-import { OverviewBoxDemo } from "../../features/dashboard/OverviewBoxDemo";
 import { OverviewBoxNew } from "../../features/dashboard/OverviewBoxNew";
 
 type ContentLayoutProps = {
@@ -18,8 +16,6 @@ const ContentLayout = ({ children, title }: ContentLayoutProps) => {
         <title>{title}</title>
       </Helmet>
       <div className="hidden md:block mb-20">
-        {/* <OverviewBox /> */}
-        {/* <OverviewBoxDemo /> */}
         <OverviewBoxNew />
       </div>
       <div className="container mx-auto md:px-6">{children}</div>

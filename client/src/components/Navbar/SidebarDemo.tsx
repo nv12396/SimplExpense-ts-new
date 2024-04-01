@@ -1,8 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { MdSpaceDashboard, MdSavings } from "react-icons/md";
-import { FaCog } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
-import { TbArrowsRightLeft } from "react-icons/tb";
 import logo from "./../../assets/logo_transparent.png";
 import { logoutFn } from "../../lib/auth";
 

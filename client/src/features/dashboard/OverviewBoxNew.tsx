@@ -1,21 +1,10 @@
-import { useState } from "react";
-
-import { OverviewCardDemo } from "./OverviewCardDemo";
 import { useGetTotalAmount } from "../totalAmount/api/getTotalAmount";
-import { AddTotalAmount } from "../totalAmount/components/AddTotalAmount";
-import { useAddTotalAmountModal } from "../../stores/totalAmountModal";
 import { useGetExpenses } from "../transactions/api/getExpenses";
 import { useGetIncome } from "../transactions/api/getIncome";
 
-import { TotalAmountDTO } from "../totalAmount/type";
 import { OverviewBoxDemo } from "./OverviewBoxDemo";
-import { OverviewBox } from "./OverviewBox";
 
 export const OverviewBoxNew = () => {
-  const [totalAmountToEdit, setTotalAmountToEdit] = useState<
-    TotalAmountDTO | undefined
-  >(null);
-
   //   const {
   //     addTotalAmountModalIsOpen,
   //     addTotalAmountCloseModal,

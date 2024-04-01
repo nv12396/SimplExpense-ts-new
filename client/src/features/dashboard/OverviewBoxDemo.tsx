@@ -14,9 +14,6 @@ export const OverviewBoxDemo = ({
   totalAmount,
   expenses,
   income,
-  className,
-  onClick,
-  AddTotalAmountModalIsOpen,
   date,
 }: OverviewBoxDemoT) => {
   return (
