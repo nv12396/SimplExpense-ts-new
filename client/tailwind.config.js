@@ -12,7 +12,7 @@ export default {
         primary: "#1f1f2c",
         secondary: "#272638",
         primaryGreen: "#4ac5b6",
-        secondaryGreen: "#4ECB71",
+        secondaryGreen: "#013736",
       },
       screens: {
         sm: "680px",

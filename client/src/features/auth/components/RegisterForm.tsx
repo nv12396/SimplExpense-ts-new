@@ -49,7 +49,10 @@ export const RegisterForm = () => {
     <div>
       <div className="flex flex-col w-full md:items-center md:justify-center">
         <div className="md:hidden h-[20vh] bg-[#013736] flex items-center w-full">
-          <div className="w-72 ml-12 mt-4">
+          <div
+            className="w-72 ml-12 mt-4 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             <img src={Logo} alt="" />
           </div>
         </div>

@@ -29,7 +29,12 @@ export const LoginForm = () => {
     <div className="flex flex-col w-full">
       <div className="md:hidden h-[20vh] bg-[#013736] flex items-center w-full">
         <div className="w-72 ml-12 mt-4">
-          <img src={Logo} alt="" />
+          <img
+            onClick={() => navigate("/")}
+            src={Logo}
+            alt=""
+            className="cursor-pointer"
+          />
         </div>
       </div>
       <div className="flex flex-col gap px-6 mt-16 md:mx-auto md:mt-">
