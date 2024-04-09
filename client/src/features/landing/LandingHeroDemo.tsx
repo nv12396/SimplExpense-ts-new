@@ -5,9 +5,9 @@ import Dashboard from "./../../assets/dashboard.png";
 import Transactions from "./../../assets/transactions.png";
 import Budget from "./../../assets/budget.png";
 
-import Collage from "./../../assets/collage.jpg";
+import Collage from "./../../assets/collage-removebg.png";
 
-const LandingHero = () => {
+const LandingHeroDemo = () => {
   const navigate = useNavigate();
 
   return (
@@ -41,11 +41,11 @@ const LandingHero = () => {
           />
         </div>
       </div>
-      <div className="w-full mx-auto relative bg-primaryGreen mt-40 md:mt-72 flex flex-col items-center justify-center">
+      <div className="w-full hidden md:flex mx-auto relative bg-primaryGreen mt-40 md:mt-72 flex-col items-center justify-center">
         <img
           src={Collage}
           alt="demo"
-          className="md:w-[70%] w-[90%] absolute left-[50%] translate-x-[-50%] -top-[80px] md:-top-[240px] z-40"
+          className="drop-shadow-2xl md:w-[70%] w-[90%] absolute left-[50%] translate-x-[-50%] -top-[80px] md:-top-[240px] z-40"
         />
         <div className="text-center md:mt-32 py-24">
           <h1 className="md:text-3xl text-2xl text-secondaryGreen font-extrabold">
@@ -76,7 +76,7 @@ const LandingHero = () => {
         </div>
       </div>
 
-      <div className="flex md:flex-row-reverse flex-col mt-12 md:mt-24 pb-20">
+      <div className="hidden md:flex md:flex-row-reverse flex-col mt-12 md:mt-24 pb-20">
         <div className="text-black basis-1/2 flex flex-col gap-y-8 px-4 md:px-16 md:mb-0 mb-10">
           <h1 className="text-3xl text-primaryGreen font-extrabold text-center mt-0 md:mt-16">
             Monitor spendings by setting clear budget!
@@ -119,8 +119,29 @@ const LandingHero = () => {
           </p>
         </div>
       </div>
+      <div className="flex md:hidden md:flex-row-reverse flex-col mt-12 md:mt-24 pb-20">
+        <div className="text-black basis-1/2 flex flex-col gap-y-8 px-4 md:px-16 md:mb-0 mb-10">
+          <h1 className="text-3xl text-primaryGreen font-extrabold text-center mt-0 md:mt-16">
+            Monitor spendings by setting clear budget!
+          </h1>
+          <p className="text-lg text-center md:text-left">
+            Take control of your finances with ease through our intuitive
+            budgeting feature, enabling you to set clear spending limits and
+            allocate budgets to various categories. Monitor your expenses
+            closely and make informed decisions to achieve your financial goals
+            effectively and efficiently.
+          </p>
+        </div>
+        <div className="basis-1/2 flex items-center justify-center">
+          <img
+            src={Budget}
+            alt="demo"
+            className="w-[90%] border border-gray shadow-xl"
+          />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default LandingHero;
+export default LandingHeroDemo;

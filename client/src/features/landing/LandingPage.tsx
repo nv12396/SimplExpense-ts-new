@@ -1,12 +1,13 @@
 import LandingFooter from "./LandingFooter";
 import LandingHeader from "./LandingHeader";
-import LandingHero from "./LandingHero";
+import LandingHeroDemo from "./LandingHeroDemo";
 
 const LandingPage = () => {
   return (
     <div>
       <LandingHeader />
-      <LandingHero />
+      <LandingHeroDemo />
+      {/* <LandingHero /> */}
       <LandingFooter />
     </div>
   );

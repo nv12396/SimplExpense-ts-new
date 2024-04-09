@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const LandingHeader = () => {
   const navigate = useNavigate();
   return (
-    <div className="h-[15vh] w-full min-w-full  flex justify-end bg-secondaryGreen items-center">
+    <div className="h-[15vh] w-full min-w-full flex justify-end bg-secondaryGreen items-center">
       <img
         src={Logo}
         onClick={() => navigate("/")}
