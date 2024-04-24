@@ -33,7 +33,7 @@ export const SelectField = (props: SelectFieldProps) => {
         placeholder={placeholder}
         name="category"
         className={clsx(
-          "select select-sm bg-[#4ac5b6] mt-1 block w-full pl-3 pr-10 py-2 text-base h-11 text-black focus:outline-none sm:text-sm rounded-md",
+          "select select-sm bg-[#4ac5b6] mt-1 block w-full pl-3 pr-10 py-2 h-11 text-black text-xs focus:outline-none sm:text-sm rounded-md",
           className
         )}
         defaultValue={defaultValue}
@@ -45,10 +45,10 @@ export const SelectField = (props: SelectFieldProps) => {
               {defaultValue
                 ? defaultValue
                 : type === "CATEGORY"
-                ? "Select category"
-                : type === "currency"
-                ? "Select Currency"
-                : "Select type"}
+                  ? "Select category"
+                  : type === "currency"
+                    ? "Select Currency"
+                    : "Select type"}
             </option>
 
             <option

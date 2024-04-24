@@ -24,7 +24,7 @@ export const Spendings = () => {
           <div className="grid grid-cols-3 gap-6 md:h-36 lg:h-48 justify-center mb-16 h-40">
             {(spendings ?? [])?.length > 0 && (
               <div className="col-span-1 bg-[#49c5b6] text-white flex justify-start rounded-md flex-col gap-4 pl-3 md:pl-4 shadow-md text-xs lg:text-lg 3xl:text-xl">
-                <p className="font-bold mt-4">
+                <p className="font-bold mt-4 -ml-2 md:ml-0">
                   {(spendings ?? [])[0]?.category?.name || "cat"}
                 </p>
                 <p className="font-bold ">{(spendings ?? [])[0]?.total || 0}</p>

@@ -37,7 +37,7 @@ export const LoginForm = () => {
           />
         </div>
       </div>
-      <div className="flex flex-col gap px-6 mt-16 md:mx-auto md:mt-">
+      <div className="flex flex-col gap px-6 mt-16 md:mx-auto md:-mt-4">
         <div className="text-black flex flex-col gap-2">
           <h1 className="font-bold text-center mb-4 text-3xl">Welcome back!</h1>
           <p className="text-md">

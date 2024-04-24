@@ -1,22 +1,6 @@
 import moment from "moment";
 
 export const Hero = () => {
-  // const monthNames = [
-  //   "January",
-  //   "February",
-  //   "March",
-  //   "April",
-  //   "May",
-  //   "June",
-  //   "July",
-  //   "August",
-  //   "September",
-  //   "October",
-  //   "November",
-  //   "December",
-  // ];
-
-  // const currentMonth = new Date().getMonth();
   const currentDate = moment(new Date()).format("Do MMMM YYYY");
   return (
     <div className="container mx-auto px-4 flex flex-col">

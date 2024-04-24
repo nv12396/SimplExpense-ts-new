@@ -56,7 +56,7 @@ export const RegisterForm = () => {
             <img src={Logo} alt="" />
           </div>
         </div>
-        <div className="px-6 mt-16 md:mt-44">
+        <div className="px-6 mt-16 md:mt-20">
           <div className="text-black flex flex-col gap-2">
             <h1 className="font-bold text-3xl text-center">Create Account</h1>
             <p>Start managing your finance faster and better!</p>

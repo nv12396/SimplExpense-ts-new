@@ -1,6 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 import Logo from "./../../assets/logo1.png";
 import Button from "../../components/ui/Button";
-import { useNavigate } from "react-router-dom";
 
 const LandingHeader = () => {
   const navigate = useNavigate();
