@@ -23,7 +23,7 @@ export const Login = () => {
         </div>
       </div>
       <div className="md:p-6 md:basis-1/2 md:bg-[#013736]">
-        <div className="bg-[#f5f7fd] md:w-full md:h-full md:rounded-2xl h-screen w-screen pt-36">
+        <div className="bg-[#f5f7fd] md:w-full md:h-full md:rounded-2xl h-screen w-screen md:pt-36">
           <div className="flex h-full">
             <LoginForm />
           </div>
